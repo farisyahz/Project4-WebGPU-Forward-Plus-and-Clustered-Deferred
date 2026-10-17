@@ -1,16 +1,20 @@
-// TODO-2: implement the Forward+ fragment shader
+@group(2) @binding(0) var diffuseTex: texture_2d<f32>;
+@group(2) @binding(1) var diffuseSampler: sampler;
 
-// See naive.fs.wgsl for basic fragment shader setup; this shader should use light clusters instead of looping over all lights
+struct FragmentInput {
+    @builtin(position) pixel: vec4f,
+    @location(0) pos: vec3f,
+    @location(1) nor: vec3f,
+    @location(2) uv: vec2f,
+}
 
-// ------------------------------------
-// Shading process:
-// ------------------------------------
-// Determine which cluster contains the current fragment.
-// Retrieve the number of lights that affect the current fragment from the cluster’s data.
-// Initialize a variable to accumulate the total light contribution for the fragment.
-// For each light in the cluster:
-//     Access the light's properties using its index.
-//     Calculate the contribution of the light based on its position, the fragment’s position, and the surface normal.
-//     Add the calculated contribution to the total light accumulation.
-// Multiply the fragment’s diffuse color by the accumulated light contribution.
-// Return the final color, ensuring that the alpha component is set appropriately (typically to 1).
+@fragment
+fn main(in: FragmentInput) -> @location(0) vec4f {
+    let albedo = textureSample(diffuseTex, diffuseSampler, in.uv);
+    if (albedo.a < 0.5) {
+        discard;
+    }
+
+    // The shared helper locates the cluster, sums its lights, and applies albedo.
+    return vec4f(shadeCluster(in.pixel.xy, in.pos, normalize(in.nor), albedo.rgb), 1.0);
+}

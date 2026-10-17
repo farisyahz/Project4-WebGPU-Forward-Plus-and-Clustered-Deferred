@@ -1,0 +1,20 @@
+{
+  "os": {
+    "Caption": "Microsoft Windows 11 Home Single Language",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "cpu": "AMD Ryzen 7 8845HS w/ Radeon 780M Graphics",
+  "ramGiB": 15.3,
+  "gpus": [
+    {
+      "Name": "NVIDIA GeForce RTX 4050 Laptop GPU",
+      "DriverVersion": "32.0.16.1656"
+    },
+    {
+      "Name": "AMD Radeon 780M Graphics",
+      "DriverVersion": "32.0.11038.5002"
+    }
+  ],
+  "note": "Actual benchmark adapter is recorded in each dataset. Chrome selected the AMD adapter; the NVIDIA adapter is not used in these results."
+}

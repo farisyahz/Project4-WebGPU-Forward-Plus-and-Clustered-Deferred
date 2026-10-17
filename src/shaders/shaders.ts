@@ -1,8 +1,7 @@
 // CHECKITOUT: this file loads all the shaders and preprocesses them with some common code
 
-import { Camera } from '../stage/camera';
-
 import commonRaw from './common.wgsl?raw';
+import clusteredLightingRaw from './clustered_lighting.wgsl?raw';
 
 import naiveVertRaw from './naive.vs.wgsl?raw';
 import naiveFragRaw from './naive.fs.wgsl?raw';
@@ -15,6 +14,11 @@ import clusteredDeferredFullscreenFragRaw from './clustered_deferred_fullscreen.
 
 import moveLightsComputeRaw from './move_lights.cs.wgsl?raw';
 import clusteringComputeRaw from './clustering.cs.wgsl?raw';
+import depthPrepassRaw from './depth_prepass.fs.wgsl?raw';
+import deferredSurfaceRaw from './deferred_surface.wgsl?raw';
+import compactSurfaceRaw from './compact_surface.wgsl?raw';
+import compactGBufferRaw from './compact_gbuffer.fs.wgsl?raw';
+import deferredComputeRaw from './deferred_lighting.cs.wgsl?raw';
 
 // CONSTANTS (for use in shaders)
 // =================================
@@ -30,13 +34,19 @@ export const constants = {
 
     moveLightsWorkgroupSize: 128,
 
-    lightRadius: 2
+    lightRadius: 2,
 };
 
 // =================================
 
 function evalShaderRaw(raw: string) {
-    return eval('`' + raw.replaceAll('${', '${constants.') + '`');
+    return raw.replace(/\$\{(\w+)\}/g, (_match, name: string) => {
+        const value = constants[name as keyof typeof constants];
+        if (value === undefined) {
+            throw new Error(`Unknown shader constant: ${name}`);
+        }
+        return String(value);
+    });
 }
 
 const commonSrc: string = evalShaderRaw(commonRaw);
@@ -48,11 +58,25 @@ function processShaderRaw(raw: string) {
 export const naiveVertSrc: string = processShaderRaw(naiveVertRaw);
 export const naiveFragSrc: string = processShaderRaw(naiveFragRaw);
 
-export const forwardPlusFragSrc: string = processShaderRaw(forwardPlusFragRaw);
+const clusteredLightingSrc = evalShaderRaw(clusteredLightingRaw);
+export const forwardPlusFragSrc: string = processShaderRaw(
+    clusteredLightingSrc + forwardPlusFragRaw
+);
 
 export const clusteredDeferredFragSrc: string = processShaderRaw(clusteredDeferredFragRaw);
-export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(clusteredDeferredFullscreenVertRaw);
-export const clusteredDeferredFullscreenFragSrc: string = processShaderRaw(clusteredDeferredFullscreenFragRaw);
+export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(
+    clusteredDeferredFullscreenVertRaw
+);
+export function deferredLightingSrc(compact: boolean, compute: boolean) {
+    // Each lighting stage shares clustering code but selects its own surface decoder.
+    return processShaderRaw(
+        clusteredLightingSrc +
+            (compact ? compactSurfaceRaw : deferredSurfaceRaw) +
+            (compute ? deferredComputeRaw : clusteredDeferredFullscreenFragRaw)
+    );
+}
+export const compactGBufferSrc = processShaderRaw(compactGBufferRaw);
 
 export const moveLightsComputeSrc: string = processShaderRaw(moveLightsComputeRaw);
 export const clusteringComputeSrc: string = processShaderRaw(clusteringComputeRaw);
+export const depthPrepassSrc: string = processShaderRaw(depthPrepassRaw);

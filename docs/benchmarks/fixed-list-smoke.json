@@ -1,0 +1,6198 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-17T00:13:44.395Z",
+  "environment": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 16,
+    "adapter": {
+      "vendor": "amd",
+      "architecture": "rdna-3",
+      "device": "",
+      "description": ""
+    },
+    "timestampQueries": true,
+    "width": 960,
+    "height": 540,
+    "devicePixelRatio": 1
+  },
+  "camera": {
+    "position": [
+      -7,
+      2,
+      0
+    ],
+    "yaw": 0,
+    "pitch": 0,
+    "near": 0.1,
+    "far": 1000
+  },
+  "settings": {
+    "debugView": 0,
+    "renderWidth": 0,
+    "renderHeight": 0,
+    "clusterX": 16,
+    "clusterY": 12,
+    "clusterZ": 24,
+    "bundles": false,
+    "depthPrepass": false,
+    "computeLighting": false,
+    "compactGBuffer": false,
+    "bloom": false
+  },
+  "methodology": {
+    "warmupFrames": 10,
+    "sampledFrames": 30,
+    "repeats": 1,
+    "animationTimeMs": 0,
+    "lightColorSeed": 5650,
+    "gpuTiming": "Sum of timestamped renderer passes; excludes light animation, presentation/compositor, and readback. CPU measures draw command encoding and submit, excluding camera/light updates."
+  },
+  "runs": [
+    {
+      "mode": "naive",
+      "lights": 100,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.26999999998758234,
+          "median": 0.2999999998137355,
+          "p95": 0.39999999990686774,
+          "min": 0.19999999972060323,
+          "max": 0.5,
+          "standardDeviation": 0.07371114796168922
+        },
+        "gpu": {
+          "mean": 6.208443733333335,
+          "median": 6.029312,
+          "p95": 7.53664,
+          "min": 5.111808,
+          "max": 7.995392,
+          "standardDeviation": 0.8031718366051328
+        },
+        "passes": {
+          "Naive shading": {
+            "mean": 6.208443733333335,
+            "median": 6.029312,
+            "p95": 7.53664,
+            "min": 5.111808,
+            "max": 7.995392,
+            "standardDeviation": 0.8031718366051328
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.815744,
+          "passes": {
+            "Naive shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.5536,
+          "passes": {
+            "Naive shading": 6.5536
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 6.291456,
+          "passes": {
+            "Naive shading": 6.291456
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.029312,
+          "passes": {
+            "Naive shading": 6.029312
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 5.832704,
+          "passes": {
+            "Naive shading": 5.832704
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 5.57056,
+          "passes": {
+            "Naive shading": 5.57056
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 5.439488,
+          "passes": {
+            "Naive shading": 5.439488
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.488064,
+          "passes": {
+            "Naive shading": 6.488064
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 5.24288,
+          "passes": {
+            "Naive shading": 5.24288
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.750208,
+          "passes": {
+            "Naive shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 5.111808,
+          "passes": {
+            "Naive shading": 5.111808
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 5.636096,
+          "passes": {
+            "Naive shading": 5.636096
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.094848,
+          "passes": {
+            "Naive shading": 6.094848
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 5.701632,
+          "passes": {
+            "Naive shading": 5.701632
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.684672,
+          "passes": {
+            "Naive shading": 6.684672
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 6.029312,
+          "passes": {
+            "Naive shading": 6.029312
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 7.274496,
+          "passes": {
+            "Naive shading": 7.274496
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 5.177344,
+          "passes": {
+            "Naive shading": 5.177344
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 7.53664,
+          "passes": {
+            "Naive shading": 7.53664
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 5.24288,
+          "passes": {
+            "Naive shading": 5.24288
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 7.995392,
+          "passes": {
+            "Naive shading": 7.995392
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 5.373952,
+          "passes": {
+            "Naive shading": 5.373952
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 7.143424,
+          "passes": {
+            "Naive shading": 7.143424
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 5.373952,
+          "passes": {
+            "Naive shading": 5.373952
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 7.53664,
+          "passes": {
+            "Naive shading": 7.53664
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 7.077888,
+          "passes": {
+            "Naive shading": 7.077888
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 5.57056,
+          "passes": {
+            "Naive shading": 5.57056
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.22592,
+          "passes": {
+            "Naive shading": 6.22592
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.946816,
+          "passes": {
+            "Naive shading": 6.946816
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 5.505024,
+          "passes": {
+            "Naive shading": 5.505024
+          }
+        }
+      ],
+      "clusters": null
+    },
+    {
+      "mode": "forward+",
+      "lights": 100,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.28333333334885535,
+          "median": 0.2999999998137355,
+          "p95": 0.3000000002793968,
+          "min": 0.10000000009313226,
+          "max": 1.2999999998137355,
+          "standardDeviation": 0.200138840653351
+        },
+        "gpu": {
+          "mean": 4.1331370666666665,
+          "median": 4.456448,
+          "p95": 4.58752,
+          "min": 3.080192,
+          "max": 4.849664,
+          "standardDeviation": 0.5056427898675067
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.06553600000000002,
+            "median": 0.065536,
+            "p95": 0.065536,
+            "min": 0,
+            "max": 0.131072,
+            "standardDeviation": 0.01692132243846995
+          },
+          "Forward+ shading": {
+            "mean": 4.067601066666666,
+            "median": 4.390912,
+            "p95": 4.521984,
+            "min": 3.080192,
+            "max": 4.784128,
+            "standardDeviation": 0.499374954896147
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 1.2999999998137355,
+          "gpuMs": 3.080192,
+          "passes": {
+            "Light clustering": 0,
+            "Forward+ shading": 3.080192
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 3.2767999999999997,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.211264
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 3.342336,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.2768
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 3.342336,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.2768
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 3.407872,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.342336
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 3.407872,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.342336
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 3.6044799999999997,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.538944
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 3.670016,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.60448
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 3.801088,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.735552
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 3.801088,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.735552
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 3.9321599999999997,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 3.866624
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 4.128768,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.063232
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.325375999999999,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.25984
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.58752,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.325376
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.849664,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.784128
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.456448,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.390912
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.58752,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.521984
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.456448
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.58752,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 4.521984
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2463,
+        "overflow": 0,
+        "maximum": 32,
+        "mean": 3.8018663194444446,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 2145,
+          "1": 50,
+          "2": 246,
+          "3": 168,
+          "4": 211,
+          "5": 476,
+          "6": 367,
+          "7": 311,
+          "8": 106,
+          "9": 84,
+          "10": 44,
+          "11": 36,
+          "12": 45,
+          "13": 45,
+          "14": 34,
+          "15": 45,
+          "16": 27,
+          "17": 25,
+          "18": 26,
+          "19": 16,
+          "20": 13,
+          "21": 5,
+          "22": 6,
+          "23": 8,
+          "24": 10,
+          "25": 11,
+          "26": 16,
+          "27": 9,
+          "28": 11,
+          "29": 3,
+          "30": 5,
+          "31": 3,
+          "32": 1
+        }
+      }
+    },
+    {
+      "mode": "clustered deferred",
+      "lights": 100,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.2666666666356226,
+          "median": 0.2999999998137355,
+          "p95": 0.39999999990686774,
+          "min": 0.10000000009313226,
+          "max": 0.5,
+          "standardDeviation": 0.07888106373005858
+        },
+        "gpu": {
+          "mean": 4.2926079999999995,
+          "median": 4.325375999999999,
+          "p95": 4.390912,
+          "min": 4.128768,
+          "max": 4.390912,
+          "standardDeviation": 0.07129079861337898
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.08301226666666667,
+            "median": 0.065536,
+            "p95": 0.131072,
+            "min": 0.065536,
+            "max": 0.131072,
+            "standardDeviation": 0.028981109634764194
+          },
+          "G-buffer geometry": {
+            "mean": 3.5782656000000004,
+            "median": 3.60448,
+            "p95": 3.60448,
+            "min": 3.473408,
+            "max": 3.670016,
+            "standardDeviation": 0.043471664452146376
+          },
+          "Deferred lighting": {
+            "mean": 0.6313301333333335,
+            "median": 0.65536,
+            "p95": 0.65536,
+            "min": 0.589824,
+            "max": 0.65536,
+            "standardDeviation": 0.03158143204240255
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.128768,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.473408,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.670016,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.589824
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.25984,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 0.65536
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.325375999999999,
+          "passes": {
+            "Light clustering": 0.065536,
+            "G-buffer geometry": 3.670016,
+            "Deferred lighting": 0.589824
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2463,
+        "overflow": 0,
+        "maximum": 32,
+        "mean": 3.8018663194444446,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 2145,
+          "1": 50,
+          "2": 246,
+          "3": 168,
+          "4": 211,
+          "5": 476,
+          "6": 367,
+          "7": 311,
+          "8": 106,
+          "9": 84,
+          "10": 44,
+          "11": 36,
+          "12": 45,
+          "13": 45,
+          "14": 34,
+          "15": 45,
+          "16": 27,
+          "17": 25,
+          "18": 26,
+          "19": 16,
+          "20": 13,
+          "21": 5,
+          "22": 6,
+          "23": 8,
+          "24": 10,
+          "25": 11,
+          "26": 16,
+          "27": 9,
+          "28": 11,
+          "29": 3,
+          "30": 5,
+          "31": 3,
+          "32": 1
+        }
+      }
+    },
+    {
+      "mode": "naive",
+      "lights": 500,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.25666666676600774,
+          "median": 0.20000000018626451,
+          "p95": 0.3000000002793968,
+          "min": 0.10000000009313226,
+          "max": 0.7000000001862645,
+          "standardDeviation": 0.10857664983516013
+        },
+        "gpu": {
+          "mean": 25.31874133333333,
+          "median": 25.23136,
+          "p95": 25.88672,
+          "min": 24.576,
+          "max": 26.738688,
+          "standardDeviation": 0.5088603011534263
+        },
+        "passes": {
+          "Naive shading": {
+            "mean": 25.31874133333333,
+            "median": 25.23136,
+            "p95": 25.88672,
+            "min": 24.576,
+            "max": 26.738688,
+            "standardDeviation": 0.5088603011534263
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 25.034752,
+          "passes": {
+            "Naive shading": 25.034752
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.100288,
+          "passes": {
+            "Naive shading": 25.100288
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 25.755648,
+          "passes": {
+            "Naive shading": 25.755648
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 26.738688,
+          "passes": {
+            "Naive shading": 26.738688
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 25.034752,
+          "passes": {
+            "Naive shading": 25.034752
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.969216,
+          "passes": {
+            "Naive shading": 24.969216
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 25.362432,
+          "passes": {
+            "Naive shading": 25.362432
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.362432,
+          "passes": {
+            "Naive shading": 25.362432
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.969216,
+          "passes": {
+            "Naive shading": 24.969216
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.165824,
+          "passes": {
+            "Naive shading": 25.165824
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 25.624576,
+          "passes": {
+            "Naive shading": 25.624576
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 26.607616,
+          "passes": {
+            "Naive shading": 26.607616
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 25.493504,
+          "passes": {
+            "Naive shading": 25.493504
+          }
+        },
+        {
+          "cpuMs": 0.7000000001862645,
+          "gpuMs": 25.427968,
+          "passes": {
+            "Naive shading": 25.427968
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 25.427968,
+          "passes": {
+            "Naive shading": 25.427968
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 25.88672,
+          "passes": {
+            "Naive shading": 25.88672
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 25.88672,
+          "passes": {
+            "Naive shading": 25.88672
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 24.641536,
+          "passes": {
+            "Naive shading": 24.641536
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 24.641536,
+          "passes": {
+            "Naive shading": 24.641536
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.100288,
+          "passes": {
+            "Naive shading": 25.100288
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.362432,
+          "passes": {
+            "Naive shading": 25.362432
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 25.23136,
+          "passes": {
+            "Naive shading": 25.23136
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.838144,
+          "passes": {
+            "Naive shading": 24.838144
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.576,
+          "passes": {
+            "Naive shading": 24.576
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.772608,
+          "passes": {
+            "Naive shading": 24.772608
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 25.88672,
+          "passes": {
+            "Naive shading": 25.88672
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 24.969216,
+          "passes": {
+            "Naive shading": 24.969216
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 24.969216,
+          "passes": {
+            "Naive shading": 24.969216
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 25.362432,
+          "passes": {
+            "Naive shading": 25.362432
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 25.362432,
+          "passes": {
+            "Naive shading": 25.362432
+          }
+        }
+      ],
+      "clusters": null
+    },
+    {
+      "mode": "forward+",
+      "lights": 500,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.29666666669460634,
+          "median": 0.2999999998137355,
+          "p95": 0.5,
+          "min": 0.10000000009313226,
+          "max": 0.6000000000931323,
+          "standardDeviation": 0.11967548711494627
+        },
+        "gpu": {
+          "mean": 6.684672000000002,
+          "median": 6.881279999999999,
+          "p95": 7.077888,
+          "min": 5.177344,
+          "max": 7.1434239999999996,
+          "standardDeviation": 0.5324169808862224
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.11796480000000004,
+            "median": 0.131072,
+            "p95": 0.131072,
+            "min": 0.065536,
+            "max": 0.131072,
+            "standardDeviation": 0.026214400000000006
+          },
+          "Forward+ shading": {
+            "mean": 6.5667072,
+            "median": 6.750208,
+            "p95": 6.946816,
+            "min": 5.046272,
+            "max": 7.012352,
+            "standardDeviation": 0.5246701540570927
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 7.012352,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.88128
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 6.881279999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 7.012352,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.88128
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 5.8982399999999995,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 5.832704
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.160384,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 6.094848
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.946815999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.946815999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 7.077888,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.946816
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 6.881279999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 6.815744,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.684672
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 5.177344,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 5.046272
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 5.8982399999999995,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 5.767168
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 6.750208,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 6.684672
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.946815999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.488064,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.356992
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 5.439488,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 5.308416
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 5.5705599999999995,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 5.505024
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 6.750208,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 6.684672
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 7.012352,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.88128
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 7.077888,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.946816
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 6.881279999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 6.946815999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 7.077888,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.946816
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 6.946815999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.815744
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 6.881279999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 7.077888,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.946816
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 6.881279999999999,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.750208
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 6.946816,
+          "passes": {
+            "Light clustering": 0.065536,
+            "Forward+ shading": 6.88128
+          }
+        },
+        {
+          "cpuMs": 0.599999999627471,
+          "gpuMs": 7.1434239999999996,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 7.012352
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 7.012352,
+          "passes": {
+            "Light clustering": 0.131072,
+            "Forward+ shading": 6.88128
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2586,
+        "overflow": 7,
+        "maximum": 131,
+        "mean": 17.032118055555557,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 2022,
+          "1": 29,
+          "2": 29,
+          "3": 19,
+          "4": 23,
+          "5": 24,
+          "6": 23,
+          "7": 13,
+          "8": 8,
+          "9": 9,
+          "10": 16,
+          "11": 7,
+          "12": 147,
+          "13": 86,
+          "14": 113,
+          "15": 157,
+          "16": 125,
+          "17": 155,
+          "18": 60,
+          "19": 69,
+          "20": 67,
+          "21": 57,
+          "22": 99,
+          "23": 101,
+          "24": 67,
+          "25": 55,
+          "26": 55,
+          "27": 59,
+          "28": 40,
+          "29": 44,
+          "30": 23,
+          "31": 32,
+          "32": 31,
+          "33": 31,
+          "34": 22,
+          "35": 23,
+          "36": 32,
+          "37": 23,
+          "38": 21,
+          "39": 16,
+          "40": 26,
+          "41": 17,
+          "42": 12,
+          "43": 13,
+          "44": 16,
+          "45": 11,
+          "46": 13,
+          "47": 12,
+          "48": 9,
+          "49": 13,
+          "50": 11,
+          "51": 16,
+          "52": 13,
+          "53": 11,
+          "54": 9,
+          "55": 14,
+          "56": 13,
+          "57": 10,
+          "58": 9,
+          "59": 6,
+          "60": 8,
+          "61": 9,
+          "62": 8,
+          "63": 5,
+          "64": 7,
+          "65": 6,
+          "66": 7,
+          "67": 7,
+          "68": 3,
+          "69": 8,
+          "70": 11,
+          "71": 6,
+          "72": 9,
+          "73": 8,
+          "74": 13,
+          "75": 13,
+          "76": 6,
+          "77": 6,
+          "78": 7,
+          "79": 7,
+          "80": 8,
+          "81": 4,
+          "82": 7,
+          "83": 6,
+          "84": 9,
+          "85": 6,
+          "86": 7,
+          "87": 4,
+          "88": 8,
+          "89": 3,
+          "90": 5,
+          "91": 6,
+          "92": 3,
+          "93": 8,
+          "94": 3,
+          "95": 1,
+          "96": 3,
+          "97": 3,
+          "98": 2,
+          "99": 5,
+          "100": 2,
+          "101": 2,
+          "102": 3,
+          "103": 1,
+          "104": 6,
+          "105": 3,
+          "106": 1,
+          "107": 1,
+          "108": 4,
+          "109": 2,
+          "110": 1,
+          "111": 4,
+          "112": 2,
+          "113": 1,
+          "114": 4,
+          "115": 4,
+          "117": 2,
+          "118": 3,
+          "120": 4,
+          "121": 1,
+          "122": 2,
+          "123": 3,
+          "124": 1,
+          "126": 1,
+          "127": 1,
+          "128": 1,
+          "129": 2,
+          "130": 1,
+          "131": 4
+        }
+      }
+    },
+    {
+      "mode": "clustered deferred",
+      "lights": 500,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.2399999999285986,
+          "median": 0.20000000018626451,
+          "p95": 0.2999999998137355,
+          "min": 0.19999999972060323,
+          "max": 0.2999999998137355,
+          "standardDeviation": 0.04898979476187822
+        },
+        "gpu": {
+          "mean": 4.5416448,
+          "median": 4.390912,
+          "p95": 5.111808,
+          "min": 4.063232,
+          "max": 5.111808,
+          "standardDeviation": 0.31799032486145434
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.2075306666666667,
+            "median": 0.196608,
+            "p95": 0.262144,
+            "min": 0.131072,
+            "max": 0.262144,
+            "standardDeviation": 0.05633385849696037
+          },
+          "G-buffer geometry": {
+            "mean": 3.080192,
+            "median": 3.080192,
+            "p95": 3.2768,
+            "min": 2.94912,
+            "max": 3.342336,
+            "standardDeviation": 0.11476599252856509
+          },
+          "Deferred lighting": {
+            "mean": 1.2539221333333337,
+            "median": 1.245184,
+            "p95": 1.572864,
+            "min": 0.917504,
+            "max": 1.572864,
+            "standardDeviation": 0.20145140545877455
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.063232,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 0.917504
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.194304,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 0.917504
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.194304000000001,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 0.98304
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.063232,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 0.98304
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.2598400000000005,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.048576
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.2598400000000005,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.048576
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 1.048576
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.128768,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.048576
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 1.114112
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 1.114112
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.2598400000000005,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.179648
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.653056,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.245184
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 1.179648
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.325376,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.245184
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.521984,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.179648
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 1.245184
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.653056,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.245184
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.390912,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 1.31072
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.58752,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 1.31072
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.653056,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.376256
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.58752,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 1.376256
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.718592,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 1.376256
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.9152000000000005,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 1.441792
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.9152000000000005,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 1.441792
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 4.980736,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 1.507328
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 5.111808,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.342336,
+            "Deferred lighting": 1.507328
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 4.784128,
+          "passes": {
+            "Light clustering": 0.131072,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.507328
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 5.111808,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.2768,
+            "Deferred lighting": 1.572864
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 5.111808,
+          "passes": {
+            "Light clustering": 0.262144,
+            "G-buffer geometry": 3.2768,
+            "Deferred lighting": 1.572864
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 4.9152000000000005,
+          "passes": {
+            "Light clustering": 0.196608,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 1.572864
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2586,
+        "overflow": 7,
+        "maximum": 131,
+        "mean": 17.032118055555557,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 2022,
+          "1": 29,
+          "2": 29,
+          "3": 19,
+          "4": 23,
+          "5": 24,
+          "6": 23,
+          "7": 13,
+          "8": 8,
+          "9": 9,
+          "10": 16,
+          "11": 7,
+          "12": 147,
+          "13": 86,
+          "14": 113,
+          "15": 157,
+          "16": 125,
+          "17": 155,
+          "18": 60,
+          "19": 69,
+          "20": 67,
+          "21": 57,
+          "22": 99,
+          "23": 101,
+          "24": 67,
+          "25": 55,
+          "26": 55,
+          "27": 59,
+          "28": 40,
+          "29": 44,
+          "30": 23,
+          "31": 32,
+          "32": 31,
+          "33": 31,
+          "34": 22,
+          "35": 23,
+          "36": 32,
+          "37": 23,
+          "38": 21,
+          "39": 16,
+          "40": 26,
+          "41": 17,
+          "42": 12,
+          "43": 13,
+          "44": 16,
+          "45": 11,
+          "46": 13,
+          "47": 12,
+          "48": 9,
+          "49": 13,
+          "50": 11,
+          "51": 16,
+          "52": 13,
+          "53": 11,
+          "54": 9,
+          "55": 14,
+          "56": 13,
+          "57": 10,
+          "58": 9,
+          "59": 6,
+          "60": 8,
+          "61": 9,
+          "62": 8,
+          "63": 5,
+          "64": 7,
+          "65": 6,
+          "66": 7,
+          "67": 7,
+          "68": 3,
+          "69": 8,
+          "70": 11,
+          "71": 6,
+          "72": 9,
+          "73": 8,
+          "74": 13,
+          "75": 13,
+          "76": 6,
+          "77": 6,
+          "78": 7,
+          "79": 7,
+          "80": 8,
+          "81": 4,
+          "82": 7,
+          "83": 6,
+          "84": 9,
+          "85": 6,
+          "86": 7,
+          "87": 4,
+          "88": 8,
+          "89": 3,
+          "90": 5,
+          "91": 6,
+          "92": 3,
+          "93": 8,
+          "94": 3,
+          "95": 1,
+          "96": 3,
+          "97": 3,
+          "98": 2,
+          "99": 5,
+          "100": 2,
+          "101": 2,
+          "102": 3,
+          "103": 1,
+          "104": 6,
+          "105": 3,
+          "106": 1,
+          "107": 1,
+          "108": 4,
+          "109": 2,
+          "110": 1,
+          "111": 4,
+          "112": 2,
+          "113": 1,
+          "114": 4,
+          "115": 4,
+          "117": 2,
+          "118": 3,
+          "120": 4,
+          "121": 1,
+          "122": 2,
+          "123": 3,
+          "124": 1,
+          "126": 1,
+          "127": 1,
+          "128": 1,
+          "129": 2,
+          "130": 1,
+          "131": 4
+        }
+      }
+    },
+    {
+      "mode": "naive",
+      "lights": 2000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.26000000005587937,
+          "median": 0.20000000018626451,
+          "p95": 0.40000000037252903,
+          "min": 0.10000000009313226,
+          "max": 0.6000000000931323,
+          "standardDeviation": 0.12274635090789017
+        },
+        "gpu": {
+          "mean": 103.28473600000001,
+          "median": 103.153664,
+          "p95": 104.8576,
+          "min": 100.663296,
+          "max": 107.80672,
+          "standardDeviation": 1.2954485277785965
+        },
+        "passes": {
+          "Naive shading": {
+            "mean": 103.28473600000001,
+            "median": 103.153664,
+            "p95": 104.8576,
+            "min": 100.663296,
+            "max": 107.80672,
+            "standardDeviation": 1.2954485277785965
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 101.974016,
+          "passes": {
+            "Naive shading": 101.974016
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 104.20224,
+          "passes": {
+            "Naive shading": 104.20224
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 102.89152,
+          "passes": {
+            "Naive shading": 102.89152
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 103.415808,
+          "passes": {
+            "Naive shading": 103.415808
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 104.398848,
+          "passes": {
+            "Naive shading": 104.398848
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 102.629376,
+          "passes": {
+            "Naive shading": 102.629376
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 102.825984,
+          "passes": {
+            "Naive shading": 102.825984
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 102.825984,
+          "passes": {
+            "Naive shading": 102.825984
+          }
+        },
+        {
+          "cpuMs": 0.599999999627471,
+          "gpuMs": 102.56384,
+          "passes": {
+            "Naive shading": 102.56384
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 101.90848,
+          "passes": {
+            "Naive shading": 101.90848
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 102.23616,
+          "passes": {
+            "Naive shading": 102.23616
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 102.629376,
+          "passes": {
+            "Naive shading": 102.629376
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 100.663296,
+          "passes": {
+            "Naive shading": 100.663296
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 103.153664,
+          "passes": {
+            "Naive shading": 103.153664
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 101.90848,
+          "passes": {
+            "Naive shading": 101.90848
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 101.90848,
+          "passes": {
+            "Naive shading": 101.90848
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 103.87456,
+          "passes": {
+            "Naive shading": 103.87456
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 103.743488,
+          "passes": {
+            "Naive shading": 103.743488
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 103.481344,
+          "passes": {
+            "Naive shading": 103.481344
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 102.89152,
+          "passes": {
+            "Naive shading": 102.89152
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 107.80672,
+          "passes": {
+            "Naive shading": 107.80672
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 105.119744,
+          "passes": {
+            "Naive shading": 105.119744
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 103.2192,
+          "passes": {
+            "Naive shading": 103.2192
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 104.8576,
+          "passes": {
+            "Naive shading": 104.8576
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 103.940096,
+          "passes": {
+            "Naive shading": 103.940096
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 104.267776,
+          "passes": {
+            "Naive shading": 104.267776
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 103.54688,
+          "passes": {
+            "Naive shading": 103.54688
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 103.677952,
+          "passes": {
+            "Naive shading": 103.677952
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 101.974016,
+          "passes": {
+            "Naive shading": 101.974016
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 104.005632,
+          "passes": {
+            "Naive shading": 104.005632
+          }
+        }
+      ],
+      "clusters": null
+    },
+    {
+      "mode": "forward+",
+      "lights": 2000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.25000000004656614,
+          "median": 0.20000000018626451,
+          "p95": 0.3000000002793968,
+          "min": 0.10000000009313226,
+          "max": 0.39999999990686774,
+          "standardDeviation": 0.061913918719139774
+        },
+        "gpu": {
+          "mean": 66.78992213333332,
+          "median": 65.86368,
+          "p95": 67.82976,
+          "min": 64.159744,
+          "max": 80.2816,
+          "standardDeviation": 3.1587505972995045
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.3429717333333335,
+            "median": 0.32768,
+            "p95": 0.393216,
+            "min": 0.32768,
+            "max": 0.393216,
+            "standardDeviation": 0.027718620589696645
+          },
+          "Forward+ shading": {
+            "mean": 66.44695039999999,
+            "median": 65.536,
+            "p95": 67.436544,
+            "min": 63.832064,
+            "max": 79.95392,
+            "standardDeviation": 3.161270333305326
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 65.994752,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.667072
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 64.159744,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 63.832064
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 80.2816,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 79.95392
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 65.011712,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 64.684032
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 64.815104,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 64.487424
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 65.536,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.20832
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 65.732608,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.404928
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 64.55296,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 64.159744
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 75.300864,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 74.973184
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 65.077248,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 64.749568
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 64.749568,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 64.421888
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 67.69868799999999,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 67.305472
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 66.125824,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.798144
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 64.749568,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 64.356352
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 66.781184,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.453504
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 65.86368,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.536
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 66.781184,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.453504
+          }
+        },
+        {
+          "cpuMs": 0.10000000009313226,
+          "gpuMs": 65.732608,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.404928
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 65.077248,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 64.749568
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 65.86368,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.536
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 66.387968,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.060288
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 66.977792,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 66.584576
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 67.50208,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 67.1744
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 67.108864,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.781184
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 66.715648,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.387968
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 66.51903999999999,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 66.125824
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 67.82976,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 67.436544
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 67.239936,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 66.912256
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 65.732608,
+          "passes": {
+            "Light clustering": 0.393216,
+            "Forward+ shading": 65.339392
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 65.79814400000001,
+          "passes": {
+            "Light clustering": 0.32768,
+            "Forward+ shading": 65.470464
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2610,
+        "overflow": 709,
+        "maximum": 513,
+        "mean": 66.91232638888889,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 1998,
+          "1": 3,
+          "2": 13,
+          "3": 8,
+          "4": 9,
+          "5": 8,
+          "6": 9,
+          "7": 5,
+          "8": 7,
+          "9": 11,
+          "10": 6,
+          "11": 6,
+          "12": 10,
+          "13": 5,
+          "14": 9,
+          "15": 2,
+          "16": 4,
+          "17": 6,
+          "18": 5,
+          "19": 2,
+          "20": 8,
+          "21": 12,
+          "22": 1,
+          "23": 6,
+          "24": 5,
+          "25": 2,
+          "26": 4,
+          "27": 4,
+          "28": 8,
+          "29": 5,
+          "30": 5,
+          "31": 2,
+          "32": 2,
+          "33": 2,
+          "34": 2,
+          "35": 1,
+          "36": 1,
+          "37": 3,
+          "38": 1,
+          "39": 3,
+          "40": 4,
+          "42": 5,
+          "43": 3,
+          "44": 2,
+          "45": 1,
+          "46": 4,
+          "47": 3,
+          "48": 3,
+          "49": 1,
+          "50": 1,
+          "51": 13,
+          "52": 57,
+          "53": 53,
+          "54": 48,
+          "55": 60,
+          "56": 36,
+          "57": 59,
+          "58": 56,
+          "59": 61,
+          "60": 63,
+          "61": 55,
+          "62": 50,
+          "63": 53,
+          "64": 43,
+          "65": 30,
+          "66": 41,
+          "67": 20,
+          "68": 18,
+          "69": 22,
+          "70": 28,
+          "71": 30,
+          "72": 23,
+          "73": 21,
+          "74": 23,
+          "75": 13,
+          "76": 12,
+          "77": 20,
+          "78": 20,
+          "79": 15,
+          "80": 15,
+          "81": 16,
+          "82": 20,
+          "83": 34,
+          "84": 14,
+          "85": 20,
+          "86": 27,
+          "87": 25,
+          "88": 11,
+          "89": 23,
+          "90": 12,
+          "91": 17,
+          "92": 20,
+          "93": 12,
+          "94": 12,
+          "95": 15,
+          "96": 11,
+          "97": 17,
+          "98": 10,
+          "99": 12,
+          "100": 11,
+          "101": 15,
+          "102": 19,
+          "103": 14,
+          "104": 9,
+          "105": 13,
+          "106": 12,
+          "107": 16,
+          "108": 14,
+          "109": 16,
+          "110": 12,
+          "111": 7,
+          "112": 9,
+          "113": 8,
+          "114": 9,
+          "115": 6,
+          "116": 6,
+          "117": 7,
+          "118": 7,
+          "119": 8,
+          "120": 6,
+          "121": 8,
+          "122": 8,
+          "123": 5,
+          "124": 7,
+          "125": 7,
+          "126": 10,
+          "127": 5,
+          "128": 9,
+          "129": 6,
+          "130": 2,
+          "131": 3,
+          "132": 2,
+          "133": 5,
+          "134": 1,
+          "135": 5,
+          "136": 4,
+          "137": 7,
+          "138": 5,
+          "139": 10,
+          "140": 5,
+          "141": 9,
+          "142": 5,
+          "143": 4,
+          "144": 9,
+          "145": 8,
+          "146": 5,
+          "147": 5,
+          "148": 4,
+          "149": 4,
+          "150": 2,
+          "151": 4,
+          "152": 2,
+          "153": 10,
+          "154": 2,
+          "155": 3,
+          "156": 7,
+          "157": 2,
+          "158": 4,
+          "159": 7,
+          "160": 1,
+          "161": 8,
+          "162": 6,
+          "163": 1,
+          "164": 7,
+          "165": 3,
+          "166": 7,
+          "167": 4,
+          "168": 7,
+          "169": 3,
+          "170": 2,
+          "171": 2,
+          "172": 2,
+          "174": 2,
+          "175": 4,
+          "177": 5,
+          "178": 7,
+          "179": 2,
+          "180": 3,
+          "181": 3,
+          "182": 1,
+          "183": 3,
+          "184": 2,
+          "185": 2,
+          "186": 5,
+          "187": 3,
+          "188": 3,
+          "189": 2,
+          "190": 5,
+          "191": 2,
+          "192": 3,
+          "193": 3,
+          "194": 9,
+          "195": 4,
+          "196": 1,
+          "197": 4,
+          "198": 3,
+          "199": 3,
+          "200": 5,
+          "202": 3,
+          "203": 3,
+          "205": 4,
+          "206": 6,
+          "207": 1,
+          "208": 2,
+          "209": 3,
+          "210": 1,
+          "211": 1,
+          "212": 1,
+          "213": 6,
+          "214": 3,
+          "215": 1,
+          "216": 1,
+          "217": 3,
+          "218": 4,
+          "219": 2,
+          "220": 2,
+          "221": 4,
+          "222": 3,
+          "223": 4,
+          "224": 3,
+          "225": 2,
+          "226": 4,
+          "227": 3,
+          "228": 4,
+          "229": 3,
+          "230": 2,
+          "231": 1,
+          "232": 1,
+          "233": 3,
+          "234": 6,
+          "235": 3,
+          "236": 4,
+          "237": 1,
+          "238": 3,
+          "239": 1,
+          "240": 3,
+          "241": 1,
+          "242": 2,
+          "245": 1,
+          "246": 3,
+          "248": 1,
+          "249": 2,
+          "250": 3,
+          "251": 1,
+          "252": 1,
+          "253": 3,
+          "254": 3,
+          "255": 1,
+          "256": 2,
+          "257": 2,
+          "259": 5,
+          "261": 1,
+          "262": 1,
+          "263": 6,
+          "264": 2,
+          "265": 3,
+          "266": 1,
+          "267": 3,
+          "268": 2,
+          "269": 2,
+          "270": 2,
+          "271": 1,
+          "272": 3,
+          "274": 1,
+          "275": 2,
+          "276": 2,
+          "278": 4,
+          "279": 2,
+          "280": 5,
+          "281": 1,
+          "282": 2,
+          "283": 1,
+          "284": 1,
+          "285": 1,
+          "286": 2,
+          "287": 2,
+          "290": 1,
+          "291": 3,
+          "292": 2,
+          "293": 2,
+          "294": 4,
+          "295": 3,
+          "296": 1,
+          "297": 1,
+          "298": 2,
+          "300": 5,
+          "301": 5,
+          "302": 1,
+          "303": 1,
+          "304": 1,
+          "305": 4,
+          "306": 2,
+          "307": 3,
+          "309": 3,
+          "310": 3,
+          "311": 5,
+          "312": 1,
+          "313": 1,
+          "314": 1,
+          "316": 3,
+          "317": 3,
+          "318": 1,
+          "319": 1,
+          "320": 3,
+          "321": 1,
+          "322": 4,
+          "324": 1,
+          "325": 1,
+          "326": 2,
+          "327": 2,
+          "328": 1,
+          "329": 2,
+          "330": 1,
+          "331": 2,
+          "332": 1,
+          "333": 2,
+          "334": 1,
+          "335": 1,
+          "336": 2,
+          "337": 1,
+          "339": 1,
+          "340": 1,
+          "341": 1,
+          "343": 1,
+          "344": 2,
+          "345": 2,
+          "347": 4,
+          "349": 4,
+          "352": 2,
+          "354": 2,
+          "356": 3,
+          "360": 1,
+          "361": 1,
+          "363": 2,
+          "364": 1,
+          "365": 2,
+          "366": 1,
+          "367": 1,
+          "368": 1,
+          "369": 1,
+          "370": 3,
+          "374": 3,
+          "375": 1,
+          "376": 1,
+          "378": 2,
+          "379": 1,
+          "381": 2,
+          "382": 1,
+          "383": 1,
+          "384": 1,
+          "385": 1,
+          "386": 1,
+          "387": 1,
+          "389": 1,
+          "397": 3,
+          "398": 2,
+          "400": 1,
+          "401": 3,
+          "402": 2,
+          "403": 2,
+          "407": 1,
+          "408": 1,
+          "409": 1,
+          "410": 1,
+          "413": 1,
+          "416": 1,
+          "417": 3,
+          "418": 1,
+          "419": 1,
+          "421": 1,
+          "422": 1,
+          "423": 1,
+          "425": 1,
+          "426": 3,
+          "429": 1,
+          "430": 1,
+          "432": 3,
+          "433": 1,
+          "435": 1,
+          "436": 2,
+          "438": 3,
+          "441": 3,
+          "443": 1,
+          "446": 1,
+          "448": 1,
+          "449": 1,
+          "452": 1,
+          "457": 1,
+          "460": 1,
+          "462": 1,
+          "465": 1,
+          "466": 3,
+          "469": 1,
+          "470": 1,
+          "472": 1,
+          "473": 1,
+          "476": 1,
+          "478": 1,
+          "481": 1,
+          "482": 2,
+          "487": 1,
+          "489": 1,
+          "490": 1,
+          "492": 1,
+          "495": 2,
+          "497": 2,
+          "499": 1,
+          "500": 1,
+          "505": 1,
+          "507": 1,
+          "509": 1,
+          "513": 2
+        }
+      }
+    },
+    {
+      "mode": "clustered deferred",
+      "lights": 2000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.36333333334575096,
+          "median": 0.3000000002793968,
+          "p95": 0.5,
+          "min": 0.19999999972060323,
+          "max": 0.6999999997206032,
+          "standardDeviation": 0.12775845259744784
+        },
+        "gpu": {
+          "mean": 16.919210666666668,
+          "median": 16.908288,
+          "p95": 17.563648,
+          "min": 15.925248,
+          "max": 17.956864,
+          "standardDeviation": 0.4429003282682106
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 0.35607893333333346,
+            "median": 0.32768,
+            "p95": 0.393216,
+            "min": 0.32768,
+            "max": 0.458752,
+            "standardDeviation": 0.036619451573294874
+          },
+          "G-buffer geometry": {
+            "mean": 3.156650666666668,
+            "median": 3.145728,
+            "p95": 3.473408,
+            "min": 2.94912,
+            "max": 3.60448,
+            "standardDeviation": 0.15699789837177935
+          },
+          "Deferred lighting": {
+            "mean": 13.406481066666665,
+            "median": 13.43488,
+            "p95": 13.893632,
+            "min": 12.45184,
+            "max": 13.959168,
+            "standardDeviation": 0.34788993405299257
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 16.842752,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.369344
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 17.03936,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.342336,
+            "Deferred lighting": 13.369344
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 16.515072,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 13.172736
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 17.235968,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 13.76256
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.842752,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 13.43488
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 17.104896,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.631488
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 17.235968,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 13.631488
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 17.039360000000002,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 13.697024
+          }
+        },
+        {
+          "cpuMs": 0.6999999997206032,
+          "gpuMs": 16.973824,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 13.697024
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 16.777216,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 13.303808
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 16.580608,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 13.172736
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 16.318464000000002,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 2.94912,
+            "Deferred lighting": 13.041664
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 17.03936,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.500416
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 16.71168,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.080192,
+            "Deferred lighting": 13.303808
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 17.956864,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.60448,
+            "Deferred lighting": 13.959168
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.908288,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.43488
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.908288,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.43488
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 17.498112,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 13.893632
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 17.563648,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.2768,
+            "Deferred lighting": 13.893632
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 17.104896,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 13.565952
+          }
+        },
+        {
+          "cpuMs": 0.599999999627471,
+          "gpuMs": 17.563648,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.473408,
+            "Deferred lighting": 13.76256
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 16.842752,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.369344
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 17.235968,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 13.697024
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 16.842752,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 13.500416
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.777216,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.211264,
+            "Deferred lighting": 13.172736
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 16.449536000000002,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 13.1072
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 17.36704,
+          "passes": {
+            "Light clustering": 0.458752,
+            "G-buffer geometry": 3.538944,
+            "Deferred lighting": 13.369344
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.187392,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 12.713984
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 15.925248,
+          "passes": {
+            "Light clustering": 0.32768,
+            "G-buffer geometry": 3.145728,
+            "Deferred lighting": 12.45184
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 16.187392,
+          "passes": {
+            "Light clustering": 0.393216,
+            "G-buffer geometry": 3.014656,
+            "Deferred lighting": 12.77952
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2610,
+        "overflow": 709,
+        "maximum": 513,
+        "mean": 66.91232638888889,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 1998,
+          "1": 3,
+          "2": 13,
+          "3": 8,
+          "4": 9,
+          "5": 8,
+          "6": 9,
+          "7": 5,
+          "8": 7,
+          "9": 11,
+          "10": 6,
+          "11": 6,
+          "12": 10,
+          "13": 5,
+          "14": 9,
+          "15": 2,
+          "16": 4,
+          "17": 6,
+          "18": 5,
+          "19": 2,
+          "20": 8,
+          "21": 12,
+          "22": 1,
+          "23": 6,
+          "24": 5,
+          "25": 2,
+          "26": 4,
+          "27": 4,
+          "28": 8,
+          "29": 5,
+          "30": 5,
+          "31": 2,
+          "32": 2,
+          "33": 2,
+          "34": 2,
+          "35": 1,
+          "36": 1,
+          "37": 3,
+          "38": 1,
+          "39": 3,
+          "40": 4,
+          "42": 5,
+          "43": 3,
+          "44": 2,
+          "45": 1,
+          "46": 4,
+          "47": 3,
+          "48": 3,
+          "49": 1,
+          "50": 1,
+          "51": 13,
+          "52": 57,
+          "53": 53,
+          "54": 48,
+          "55": 60,
+          "56": 36,
+          "57": 59,
+          "58": 56,
+          "59": 61,
+          "60": 63,
+          "61": 55,
+          "62": 50,
+          "63": 53,
+          "64": 43,
+          "65": 30,
+          "66": 41,
+          "67": 20,
+          "68": 18,
+          "69": 22,
+          "70": 28,
+          "71": 30,
+          "72": 23,
+          "73": 21,
+          "74": 23,
+          "75": 13,
+          "76": 12,
+          "77": 20,
+          "78": 20,
+          "79": 15,
+          "80": 15,
+          "81": 16,
+          "82": 20,
+          "83": 34,
+          "84": 14,
+          "85": 20,
+          "86": 27,
+          "87": 25,
+          "88": 11,
+          "89": 23,
+          "90": 12,
+          "91": 17,
+          "92": 20,
+          "93": 12,
+          "94": 12,
+          "95": 15,
+          "96": 11,
+          "97": 17,
+          "98": 10,
+          "99": 12,
+          "100": 11,
+          "101": 15,
+          "102": 19,
+          "103": 14,
+          "104": 9,
+          "105": 13,
+          "106": 12,
+          "107": 16,
+          "108": 14,
+          "109": 16,
+          "110": 12,
+          "111": 7,
+          "112": 9,
+          "113": 8,
+          "114": 9,
+          "115": 6,
+          "116": 6,
+          "117": 7,
+          "118": 7,
+          "119": 8,
+          "120": 6,
+          "121": 8,
+          "122": 8,
+          "123": 5,
+          "124": 7,
+          "125": 7,
+          "126": 10,
+          "127": 5,
+          "128": 9,
+          "129": 6,
+          "130": 2,
+          "131": 3,
+          "132": 2,
+          "133": 5,
+          "134": 1,
+          "135": 5,
+          "136": 4,
+          "137": 7,
+          "138": 5,
+          "139": 10,
+          "140": 5,
+          "141": 9,
+          "142": 5,
+          "143": 4,
+          "144": 9,
+          "145": 8,
+          "146": 5,
+          "147": 5,
+          "148": 4,
+          "149": 4,
+          "150": 2,
+          "151": 4,
+          "152": 2,
+          "153": 10,
+          "154": 2,
+          "155": 3,
+          "156": 7,
+          "157": 2,
+          "158": 4,
+          "159": 7,
+          "160": 1,
+          "161": 8,
+          "162": 6,
+          "163": 1,
+          "164": 7,
+          "165": 3,
+          "166": 7,
+          "167": 4,
+          "168": 7,
+          "169": 3,
+          "170": 2,
+          "171": 2,
+          "172": 2,
+          "174": 2,
+          "175": 4,
+          "177": 5,
+          "178": 7,
+          "179": 2,
+          "180": 3,
+          "181": 3,
+          "182": 1,
+          "183": 3,
+          "184": 2,
+          "185": 2,
+          "186": 5,
+          "187": 3,
+          "188": 3,
+          "189": 2,
+          "190": 5,
+          "191": 2,
+          "192": 3,
+          "193": 3,
+          "194": 9,
+          "195": 4,
+          "196": 1,
+          "197": 4,
+          "198": 3,
+          "199": 3,
+          "200": 5,
+          "202": 3,
+          "203": 3,
+          "205": 4,
+          "206": 6,
+          "207": 1,
+          "208": 2,
+          "209": 3,
+          "210": 1,
+          "211": 1,
+          "212": 1,
+          "213": 6,
+          "214": 3,
+          "215": 1,
+          "216": 1,
+          "217": 3,
+          "218": 4,
+          "219": 2,
+          "220": 2,
+          "221": 4,
+          "222": 3,
+          "223": 4,
+          "224": 3,
+          "225": 2,
+          "226": 4,
+          "227": 3,
+          "228": 4,
+          "229": 3,
+          "230": 2,
+          "231": 1,
+          "232": 1,
+          "233": 3,
+          "234": 6,
+          "235": 3,
+          "236": 4,
+          "237": 1,
+          "238": 3,
+          "239": 1,
+          "240": 3,
+          "241": 1,
+          "242": 2,
+          "245": 1,
+          "246": 3,
+          "248": 1,
+          "249": 2,
+          "250": 3,
+          "251": 1,
+          "252": 1,
+          "253": 3,
+          "254": 3,
+          "255": 1,
+          "256": 2,
+          "257": 2,
+          "259": 5,
+          "261": 1,
+          "262": 1,
+          "263": 6,
+          "264": 2,
+          "265": 3,
+          "266": 1,
+          "267": 3,
+          "268": 2,
+          "269": 2,
+          "270": 2,
+          "271": 1,
+          "272": 3,
+          "274": 1,
+          "275": 2,
+          "276": 2,
+          "278": 4,
+          "279": 2,
+          "280": 5,
+          "281": 1,
+          "282": 2,
+          "283": 1,
+          "284": 1,
+          "285": 1,
+          "286": 2,
+          "287": 2,
+          "290": 1,
+          "291": 3,
+          "292": 2,
+          "293": 2,
+          "294": 4,
+          "295": 3,
+          "296": 1,
+          "297": 1,
+          "298": 2,
+          "300": 5,
+          "301": 5,
+          "302": 1,
+          "303": 1,
+          "304": 1,
+          "305": 4,
+          "306": 2,
+          "307": 3,
+          "309": 3,
+          "310": 3,
+          "311": 5,
+          "312": 1,
+          "313": 1,
+          "314": 1,
+          "316": 3,
+          "317": 3,
+          "318": 1,
+          "319": 1,
+          "320": 3,
+          "321": 1,
+          "322": 4,
+          "324": 1,
+          "325": 1,
+          "326": 2,
+          "327": 2,
+          "328": 1,
+          "329": 2,
+          "330": 1,
+          "331": 2,
+          "332": 1,
+          "333": 2,
+          "334": 1,
+          "335": 1,
+          "336": 2,
+          "337": 1,
+          "339": 1,
+          "340": 1,
+          "341": 1,
+          "343": 1,
+          "344": 2,
+          "345": 2,
+          "347": 4,
+          "349": 4,
+          "352": 2,
+          "354": 2,
+          "356": 3,
+          "360": 1,
+          "361": 1,
+          "363": 2,
+          "364": 1,
+          "365": 2,
+          "366": 1,
+          "367": 1,
+          "368": 1,
+          "369": 1,
+          "370": 3,
+          "374": 3,
+          "375": 1,
+          "376": 1,
+          "378": 2,
+          "379": 1,
+          "381": 2,
+          "382": 1,
+          "383": 1,
+          "384": 1,
+          "385": 1,
+          "386": 1,
+          "387": 1,
+          "389": 1,
+          "397": 3,
+          "398": 2,
+          "400": 1,
+          "401": 3,
+          "402": 2,
+          "403": 2,
+          "407": 1,
+          "408": 1,
+          "409": 1,
+          "410": 1,
+          "413": 1,
+          "416": 1,
+          "417": 3,
+          "418": 1,
+          "419": 1,
+          "421": 1,
+          "422": 1,
+          "423": 1,
+          "425": 1,
+          "426": 3,
+          "429": 1,
+          "430": 1,
+          "432": 3,
+          "433": 1,
+          "435": 1,
+          "436": 2,
+          "438": 3,
+          "441": 3,
+          "443": 1,
+          "446": 1,
+          "448": 1,
+          "449": 1,
+          "452": 1,
+          "457": 1,
+          "460": 1,
+          "462": 1,
+          "465": 1,
+          "466": 3,
+          "469": 1,
+          "470": 1,
+          "472": 1,
+          "473": 1,
+          "476": 1,
+          "478": 1,
+          "481": 1,
+          "482": 2,
+          "487": 1,
+          "489": 1,
+          "490": 1,
+          "492": 1,
+          "495": 2,
+          "497": 2,
+          "499": 1,
+          "500": 1,
+          "505": 1,
+          "507": 1,
+          "509": 1,
+          "513": 2
+        }
+      }
+    },
+    {
+      "mode": "naive",
+      "lights": 5000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.3300000000745058,
+          "median": 0.3000000002793968,
+          "p95": 0.5,
+          "min": 0.19999999972060323,
+          "max": 0.6000000000931323,
+          "standardDeviation": 0.10999999999661339
+        },
+        "gpu": {
+          "mean": 276.2932224,
+          "median": 276.692992,
+          "p95": 279.445504,
+          "min": 268.566528,
+          "max": 284.295168,
+          "standardDeviation": 3.0164766861449617
+        },
+        "passes": {
+          "Naive shading": {
+            "mean": 276.2932224,
+            "median": 276.692992,
+            "p95": 279.445504,
+            "min": 268.566528,
+            "max": 284.295168,
+            "standardDeviation": 3.0164766861449617
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 284.295168,
+          "passes": {
+            "Naive shading": 284.295168
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 276.692992,
+          "passes": {
+            "Naive shading": 276.692992
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 279.969792,
+          "passes": {
+            "Naive shading": 279.969792
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 274.399232,
+          "passes": {
+            "Naive shading": 274.399232
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 273.154048,
+          "passes": {
+            "Naive shading": 273.154048
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 278.265856,
+          "passes": {
+            "Naive shading": 278.265856
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 278.724608,
+          "passes": {
+            "Naive shading": 278.724608
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 278.20032,
+          "passes": {
+            "Naive shading": 278.20032
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 276.365312,
+          "passes": {
+            "Naive shading": 276.365312
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 274.333696,
+          "passes": {
+            "Naive shading": 274.333696
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 271.187968,
+          "passes": {
+            "Naive shading": 271.187968
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 278.20032,
+          "passes": {
+            "Naive shading": 278.20032
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 277.610496,
+          "passes": {
+            "Naive shading": 277.610496
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 278.790144,
+          "passes": {
+            "Naive shading": 278.790144
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 279.18336,
+          "passes": {
+            "Naive shading": 279.18336
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 277.676032,
+          "passes": {
+            "Naive shading": 277.676032
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 277.610496,
+          "passes": {
+            "Naive shading": 277.610496
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 279.445504,
+          "passes": {
+            "Naive shading": 279.445504
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 273.416192,
+          "passes": {
+            "Naive shading": 273.416192
+          }
+        },
+        {
+          "cpuMs": 0.19999999972060323,
+          "gpuMs": 268.566528,
+          "passes": {
+            "Naive shading": 268.566528
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 274.92352,
+          "passes": {
+            "Naive shading": 274.92352
+          }
+        },
+        {
+          "cpuMs": 0.20000000018626451,
+          "gpuMs": 274.530304,
+          "passes": {
+            "Naive shading": 274.530304
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 276.955136,
+          "passes": {
+            "Naive shading": 276.955136
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 276.758528,
+          "passes": {
+            "Naive shading": 276.758528
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 275.185664,
+          "passes": {
+            "Naive shading": 275.185664
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 271.9744,
+          "passes": {
+            "Naive shading": 271.9744
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 273.809408,
+          "passes": {
+            "Naive shading": 273.809408
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 277.54496,
+          "passes": {
+            "Naive shading": 277.54496
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 274.399232,
+          "passes": {
+            "Naive shading": 274.399232
+          }
+        },
+        {
+          "cpuMs": 0.3000000002793968,
+          "gpuMs": 276.627456,
+          "passes": {
+            "Naive shading": 276.627456
+          }
+        }
+      ],
+      "clusters": null
+    },
+    {
+      "mode": "forward+",
+      "lights": 5000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 0.5099999999782692,
+          "median": 0.5,
+          "p95": 0.6999999997206032,
+          "min": 0.2999999998137355,
+          "max": 0.8999999999068677,
+          "standardDeviation": 0.13988090175500598
+        },
+        "gpu": {
+          "mean": 262.9500928,
+          "median": 261.685248,
+          "p95": 265.09312,
+          "min": 258.408448,
+          "max": 298.582016,
+          "standardDeviation": 6.848185880082122
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 1.0201770666666667,
+            "median": 1.048576,
+            "p95": 1.114112,
+            "min": 0.786432,
+            "max": 1.114112,
+            "standardDeviation": 0.060263035586188486
+          },
+          "Forward+ shading": {
+            "mean": 261.92991573333336,
+            "median": 260.702208,
+            "p95": 264.044544,
+            "min": 257.425408,
+            "max": 297.53344,
+            "standardDeviation": 6.840379104234338
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 261.292032,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 260.243456
+          }
+        },
+        {
+          "cpuMs": 0.40000000037252903,
+          "gpuMs": 261.750784,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 260.767744
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 258.408448,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 257.425408
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 260.30899200000005,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 259.260416
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 259.457024,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 258.473984
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 262.86489600000004,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 261.881856
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 265.09312,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 264.044544
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 262.078464,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 261.095424
+          }
+        },
+        {
+          "cpuMs": 0.8999999999068677,
+          "gpuMs": 260.767744,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 259.784704
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 260.308992,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 259.325952
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 265.682944,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 264.699904
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 261.55417600000004,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 260.5056
+          }
+        },
+        {
+          "cpuMs": 0.6999999997206032,
+          "gpuMs": 259.52256,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 258.473984
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 261.81632,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 260.83328
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 298.582016,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 297.53344
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 259.457024,
+          "passes": {
+            "Light clustering": 0.786432,
+            "Forward+ shading": 258.670592
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 262.012928,
+          "passes": {
+            "Light clustering": 1.114112,
+            "Forward+ shading": 260.898816
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 261.029888,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 259.981312
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 262.47168000000005,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 261.423104
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 261.88185599999997,
+          "passes": {
+            "Light clustering": 1.114112,
+            "Forward+ shading": 260.767744
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 260.24345600000004,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 259.19488
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 263.913472,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 262.864896
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 261.09542400000004,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 260.112384
+          }
+        },
+        {
+          "cpuMs": 0.8000000002793968,
+          "gpuMs": 262.47168000000005,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 261.423104
+          }
+        },
+        {
+          "cpuMs": 0.39999999990686774,
+          "gpuMs": 261.685248,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 260.702208
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 264.17561600000005,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 263.12704
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 259.78470400000003,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 258.736128
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 264.830976,
+          "passes": {
+            "Light clustering": 1.048576,
+            "Forward+ shading": 263.7824
+          }
+        },
+        {
+          "cpuMs": 0.6999999997206032,
+          "gpuMs": 260.374528,
+          "passes": {
+            "Light clustering": 1.114112,
+            "Forward+ shading": 259.260416
+          }
+        },
+        {
+          "cpuMs": 0.2999999998137355,
+          "gpuMs": 263.585792,
+          "passes": {
+            "Light clustering": 0.98304,
+            "Forward+ shading": 262.602752
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2616,
+        "overflow": 2376,
+        "maximum": 1283,
+        "mean": 167.35959201388889,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 1992,
+          "1": 4,
+          "2": 3,
+          "4": 4,
+          "5": 3,
+          "6": 10,
+          "7": 2,
+          "8": 4,
+          "9": 5,
+          "10": 5,
+          "11": 4,
+          "12": 3,
+          "13": 3,
+          "14": 4,
+          "15": 2,
+          "16": 2,
+          "17": 5,
+          "18": 2,
+          "19": 3,
+          "20": 3,
+          "21": 1,
+          "22": 2,
+          "23": 6,
+          "24": 5,
+          "25": 3,
+          "26": 4,
+          "27": 3,
+          "29": 2,
+          "30": 3,
+          "31": 3,
+          "32": 5,
+          "33": 3,
+          "34": 2,
+          "35": 4,
+          "36": 1,
+          "37": 2,
+          "38": 3,
+          "39": 1,
+          "40": 1,
+          "41": 1,
+          "42": 6,
+          "43": 1,
+          "44": 3,
+          "45": 2,
+          "46": 1,
+          "47": 1,
+          "48": 1,
+          "49": 1,
+          "50": 3,
+          "51": 1,
+          "52": 2,
+          "53": 4,
+          "54": 2,
+          "56": 1,
+          "57": 4,
+          "58": 1,
+          "59": 2,
+          "60": 4,
+          "61": 3,
+          "62": 1,
+          "63": 2,
+          "64": 4,
+          "65": 2,
+          "66": 1,
+          "67": 2,
+          "72": 1,
+          "73": 1,
+          "74": 1,
+          "75": 2,
+          "77": 4,
+          "78": 2,
+          "80": 2,
+          "82": 1,
+          "83": 2,
+          "84": 1,
+          "86": 1,
+          "87": 1,
+          "88": 2,
+          "89": 1,
+          "90": 1,
+          "92": 2,
+          "93": 2,
+          "94": 1,
+          "95": 2,
+          "96": 1,
+          "97": 1,
+          "99": 1,
+          "100": 1,
+          "101": 1,
+          "102": 1,
+          "105": 2,
+          "107": 1,
+          "109": 1,
+          "110": 2,
+          "112": 1,
+          "113": 1,
+          "114": 2,
+          "116": 1,
+          "117": 1,
+          "119": 2,
+          "121": 1,
+          "122": 1,
+          "123": 2,
+          "124": 1,
+          "125": 1,
+          "126": 1,
+          "127": 1,
+          "128": 1,
+          "129": 12,
+          "130": 25,
+          "131": 32,
+          "132": 33,
+          "133": 34,
+          "134": 22,
+          "135": 23,
+          "136": 17,
+          "137": 30,
+          "138": 27,
+          "139": 28,
+          "140": 27,
+          "141": 21,
+          "142": 25,
+          "143": 24,
+          "144": 27,
+          "145": 22,
+          "146": 29,
+          "147": 34,
+          "148": 33,
+          "149": 27,
+          "150": 19,
+          "151": 22,
+          "152": 20,
+          "153": 20,
+          "154": 9,
+          "155": 14,
+          "156": 14,
+          "157": 20,
+          "158": 15,
+          "159": 7,
+          "160": 10,
+          "161": 4,
+          "162": 14,
+          "163": 5,
+          "164": 6,
+          "165": 7,
+          "166": 8,
+          "167": 11,
+          "168": 12,
+          "169": 11,
+          "170": 15,
+          "171": 17,
+          "172": 14,
+          "173": 12,
+          "174": 18,
+          "175": 13,
+          "176": 8,
+          "177": 12,
+          "178": 8,
+          "179": 8,
+          "180": 8,
+          "181": 7,
+          "182": 6,
+          "183": 7,
+          "184": 7,
+          "185": 5,
+          "186": 6,
+          "187": 9,
+          "188": 4,
+          "189": 1,
+          "190": 3,
+          "191": 8,
+          "192": 8,
+          "193": 9,
+          "194": 11,
+          "195": 15,
+          "196": 7,
+          "197": 10,
+          "198": 7,
+          "199": 11,
+          "200": 11,
+          "201": 7,
+          "202": 6,
+          "203": 11,
+          "204": 9,
+          "205": 4,
+          "206": 11,
+          "207": 9,
+          "208": 6,
+          "209": 7,
+          "210": 6,
+          "211": 6,
+          "212": 9,
+          "213": 7,
+          "214": 10,
+          "215": 10,
+          "216": 8,
+          "217": 6,
+          "218": 10,
+          "219": 10,
+          "220": 7,
+          "221": 3,
+          "222": 6,
+          "223": 9,
+          "224": 8,
+          "225": 3,
+          "226": 4,
+          "227": 4,
+          "228": 8,
+          "229": 7,
+          "230": 5,
+          "231": 6,
+          "232": 4,
+          "233": 4,
+          "234": 5,
+          "235": 6,
+          "236": 6,
+          "237": 6,
+          "238": 7,
+          "239": 7,
+          "240": 3,
+          "241": 3,
+          "242": 2,
+          "243": 5,
+          "244": 7,
+          "245": 2,
+          "246": 8,
+          "247": 6,
+          "248": 5,
+          "249": 6,
+          "250": 7,
+          "251": 8,
+          "252": 4,
+          "253": 7,
+          "254": 4,
+          "255": 7,
+          "256": 10,
+          "257": 3,
+          "258": 4,
+          "259": 2,
+          "260": 3,
+          "261": 4,
+          "262": 5,
+          "263": 4,
+          "264": 6,
+          "265": 6,
+          "266": 5,
+          "267": 3,
+          "268": 5,
+          "269": 5,
+          "270": 3,
+          "271": 2,
+          "272": 4,
+          "273": 3,
+          "274": 2,
+          "275": 4,
+          "276": 3,
+          "277": 3,
+          "278": 6,
+          "279": 6,
+          "280": 5,
+          "281": 5,
+          "282": 5,
+          "283": 5,
+          "284": 5,
+          "285": 3,
+          "286": 2,
+          "288": 2,
+          "289": 1,
+          "290": 5,
+          "291": 3,
+          "292": 3,
+          "293": 3,
+          "294": 3,
+          "295": 1,
+          "298": 3,
+          "299": 4,
+          "300": 2,
+          "301": 2,
+          "302": 2,
+          "303": 2,
+          "304": 3,
+          "305": 3,
+          "306": 4,
+          "307": 1,
+          "308": 5,
+          "309": 6,
+          "310": 5,
+          "311": 2,
+          "312": 2,
+          "313": 1,
+          "314": 5,
+          "317": 2,
+          "318": 1,
+          "319": 2,
+          "320": 2,
+          "321": 2,
+          "322": 3,
+          "323": 3,
+          "324": 2,
+          "325": 2,
+          "326": 2,
+          "327": 1,
+          "328": 2,
+          "329": 2,
+          "330": 1,
+          "332": 4,
+          "333": 3,
+          "334": 2,
+          "335": 6,
+          "337": 2,
+          "338": 2,
+          "340": 1,
+          "341": 2,
+          "342": 1,
+          "343": 3,
+          "344": 1,
+          "345": 2,
+          "346": 1,
+          "347": 7,
+          "349": 2,
+          "350": 3,
+          "351": 4,
+          "352": 3,
+          "353": 6,
+          "354": 1,
+          "355": 3,
+          "356": 1,
+          "357": 2,
+          "358": 2,
+          "360": 8,
+          "361": 4,
+          "362": 4,
+          "363": 6,
+          "364": 2,
+          "365": 1,
+          "366": 2,
+          "369": 2,
+          "370": 2,
+          "371": 4,
+          "372": 1,
+          "373": 1,
+          "374": 2,
+          "375": 2,
+          "377": 1,
+          "378": 6,
+          "379": 1,
+          "380": 2,
+          "381": 3,
+          "382": 2,
+          "383": 2,
+          "386": 2,
+          "387": 4,
+          "388": 2,
+          "389": 2,
+          "390": 1,
+          "392": 2,
+          "393": 2,
+          "394": 2,
+          "395": 1,
+          "396": 2,
+          "397": 1,
+          "398": 1,
+          "399": 1,
+          "400": 2,
+          "401": 2,
+          "402": 1,
+          "404": 1,
+          "406": 1,
+          "407": 3,
+          "408": 4,
+          "410": 2,
+          "411": 1,
+          "412": 2,
+          "413": 4,
+          "414": 1,
+          "415": 2,
+          "416": 1,
+          "417": 1,
+          "418": 1,
+          "419": 1,
+          "420": 3,
+          "421": 2,
+          "422": 2,
+          "424": 2,
+          "425": 1,
+          "426": 2,
+          "427": 4,
+          "428": 1,
+          "430": 1,
+          "431": 1,
+          "433": 1,
+          "435": 1,
+          "436": 2,
+          "437": 1,
+          "438": 1,
+          "439": 1,
+          "440": 1,
+          "442": 1,
+          "443": 2,
+          "444": 1,
+          "445": 2,
+          "446": 1,
+          "447": 2,
+          "449": 1,
+          "450": 2,
+          "451": 3,
+          "453": 1,
+          "454": 3,
+          "455": 1,
+          "456": 3,
+          "457": 1,
+          "459": 2,
+          "460": 1,
+          "461": 1,
+          "462": 3,
+          "463": 3,
+          "464": 2,
+          "466": 2,
+          "467": 1,
+          "468": 1,
+          "470": 1,
+          "472": 1,
+          "474": 1,
+          "475": 2,
+          "476": 1,
+          "477": 4,
+          "478": 4,
+          "479": 2,
+          "480": 2,
+          "481": 4,
+          "488": 1,
+          "489": 4,
+          "490": 1,
+          "492": 2,
+          "494": 1,
+          "495": 1,
+          "497": 2,
+          "498": 3,
+          "499": 1,
+          "500": 1,
+          "502": 1,
+          "504": 1,
+          "505": 2,
+          "506": 1,
+          "507": 1,
+          "508": 2,
+          "514": 1,
+          "516": 4,
+          "517": 2,
+          "519": 2,
+          "520": 3,
+          "521": 2,
+          "522": 1,
+          "523": 2,
+          "524": 1,
+          "525": 1,
+          "526": 2,
+          "527": 2,
+          "529": 1,
+          "530": 1,
+          "531": 2,
+          "532": 3,
+          "533": 1,
+          "537": 1,
+          "541": 1,
+          "542": 1,
+          "544": 1,
+          "546": 3,
+          "547": 3,
+          "548": 1,
+          "550": 1,
+          "551": 2,
+          "554": 1,
+          "556": 3,
+          "557": 2,
+          "558": 1,
+          "559": 4,
+          "561": 2,
+          "562": 1,
+          "565": 3,
+          "566": 1,
+          "567": 1,
+          "568": 1,
+          "570": 2,
+          "571": 1,
+          "572": 1,
+          "573": 4,
+          "575": 1,
+          "576": 3,
+          "577": 2,
+          "578": 1,
+          "580": 1,
+          "581": 2,
+          "582": 2,
+          "584": 1,
+          "585": 2,
+          "586": 1,
+          "589": 2,
+          "591": 2,
+          "592": 1,
+          "593": 1,
+          "594": 1,
+          "595": 2,
+          "596": 1,
+          "598": 3,
+          "599": 1,
+          "605": 1,
+          "606": 2,
+          "608": 1,
+          "610": 1,
+          "614": 1,
+          "616": 2,
+          "617": 1,
+          "618": 3,
+          "622": 3,
+          "625": 1,
+          "626": 1,
+          "627": 1,
+          "628": 1,
+          "629": 1,
+          "630": 1,
+          "632": 1,
+          "633": 1,
+          "634": 1,
+          "639": 1,
+          "641": 2,
+          "642": 3,
+          "651": 1,
+          "652": 1,
+          "656": 1,
+          "657": 2,
+          "658": 2,
+          "662": 2,
+          "663": 2,
+          "664": 1,
+          "667": 1,
+          "672": 1,
+          "673": 2,
+          "674": 1,
+          "675": 1,
+          "676": 1,
+          "677": 2,
+          "680": 1,
+          "681": 1,
+          "683": 3,
+          "686": 1,
+          "687": 1,
+          "688": 4,
+          "690": 2,
+          "691": 2,
+          "692": 1,
+          "697": 1,
+          "698": 2,
+          "699": 2,
+          "701": 1,
+          "702": 1,
+          "704": 1,
+          "705": 1,
+          "706": 1,
+          "707": 1,
+          "708": 1,
+          "711": 1,
+          "714": 1,
+          "715": 1,
+          "716": 2,
+          "717": 1,
+          "718": 1,
+          "721": 1,
+          "725": 2,
+          "726": 3,
+          "727": 1,
+          "729": 3,
+          "731": 1,
+          "735": 1,
+          "737": 2,
+          "738": 1,
+          "739": 2,
+          "740": 2,
+          "747": 1,
+          "749": 2,
+          "750": 1,
+          "751": 1,
+          "753": 1,
+          "754": 2,
+          "755": 1,
+          "758": 1,
+          "759": 3,
+          "760": 1,
+          "761": 1,
+          "762": 1,
+          "763": 1,
+          "764": 1,
+          "765": 2,
+          "768": 3,
+          "770": 1,
+          "771": 2,
+          "774": 1,
+          "775": 1,
+          "776": 1,
+          "778": 3,
+          "779": 1,
+          "781": 1,
+          "782": 1,
+          "783": 1,
+          "785": 2,
+          "789": 2,
+          "790": 1,
+          "791": 1,
+          "792": 1,
+          "794": 1,
+          "796": 2,
+          "799": 1,
+          "800": 2,
+          "802": 1,
+          "803": 1,
+          "805": 1,
+          "807": 1,
+          "808": 1,
+          "810": 1,
+          "811": 3,
+          "814": 1,
+          "816": 1,
+          "818": 2,
+          "819": 1,
+          "824": 1,
+          "825": 1,
+          "826": 1,
+          "832": 1,
+          "833": 1,
+          "836": 2,
+          "837": 1,
+          "838": 1,
+          "842": 1,
+          "844": 2,
+          "846": 1,
+          "850": 1,
+          "854": 1,
+          "855": 1,
+          "856": 2,
+          "858": 1,
+          "863": 1,
+          "868": 1,
+          "870": 1,
+          "871": 2,
+          "873": 1,
+          "874": 1,
+          "875": 1,
+          "876": 1,
+          "878": 1,
+          "879": 1,
+          "880": 2,
+          "881": 1,
+          "883": 1,
+          "885": 2,
+          "898": 1,
+          "899": 1,
+          "900": 1,
+          "903": 1,
+          "906": 1,
+          "911": 1,
+          "912": 2,
+          "921": 1,
+          "922": 2,
+          "923": 1,
+          "924": 1,
+          "927": 1,
+          "929": 1,
+          "932": 1,
+          "934": 1,
+          "938": 1,
+          "946": 3,
+          "949": 1,
+          "954": 1,
+          "958": 1,
+          "959": 1,
+          "961": 1,
+          "962": 1,
+          "965": 1,
+          "973": 1,
+          "979": 1,
+          "980": 1,
+          "986": 2,
+          "990": 1,
+          "991": 1,
+          "992": 1,
+          "995": 1,
+          "996": 1,
+          "997": 1,
+          "1006": 1,
+          "1007": 1,
+          "1008": 1,
+          "1010": 2,
+          "1023": 1,
+          "1024": 2,
+          "1031": 1,
+          "1032": 1,
+          "1036": 1,
+          "1038": 1,
+          "1039": 1,
+          "1042": 1,
+          "1043": 1,
+          "1049": 1,
+          "1051": 1,
+          "1054": 1,
+          "1058": 1,
+          "1064": 1,
+          "1066": 1,
+          "1067": 1,
+          "1070": 1,
+          "1072": 1,
+          "1077": 1,
+          "1078": 1,
+          "1080": 2,
+          "1091": 2,
+          "1097": 1,
+          "1098": 1,
+          "1102": 1,
+          "1108": 2,
+          "1109": 1,
+          "1115": 2,
+          "1118": 1,
+          "1127": 1,
+          "1132": 1,
+          "1136": 1,
+          "1141": 1,
+          "1150": 1,
+          "1153": 1,
+          "1157": 1,
+          "1158": 1,
+          "1163": 1,
+          "1166": 1,
+          "1168": 1,
+          "1176": 1,
+          "1184": 2,
+          "1188": 1,
+          "1190": 1,
+          "1192": 1,
+          "1193": 1,
+          "1204": 1,
+          "1207": 1,
+          "1214": 1,
+          "1224": 1,
+          "1227": 1,
+          "1232": 1,
+          "1236": 1,
+          "1238": 1,
+          "1239": 1,
+          "1241": 1,
+          "1244": 1,
+          "1247": 1,
+          "1260": 1,
+          "1262": 1,
+          "1271": 1,
+          "1276": 1,
+          "1283": 1
+        }
+      }
+    },
+    {
+      "mode": "clustered deferred",
+      "lights": 5000,
+      "repeat": 0,
+      "summary": {
+        "cpu": {
+          "mean": 1.1366666667163372,
+          "median": 1.1999999997206032,
+          "p95": 1.7999999998137355,
+          "min": 0.5,
+          "max": 2.7000000001862645,
+          "standardDeviation": 0.4460817065210106
+        },
+        "gpu": {
+          "mean": 53.08415999999999,
+          "median": 52.690944,
+          "p95": 54.72256,
+          "min": 51.970048,
+          "max": 55.640064,
+          "standardDeviation": 0.9889930327741114
+        },
+        "passes": {
+          "Light clustering": {
+            "mean": 1.0704213333333332,
+            "median": 1.048576,
+            "p95": 1.179648,
+            "min": 0.98304,
+            "max": 1.703936,
+            "standardDeviation": 0.13252035336036327
+          },
+          "G-buffer geometry": {
+            "mean": 8.294673066666668,
+            "median": 7.929856,
+            "p95": 9.895936,
+            "min": 7.733248,
+            "max": 11.206656,
+            "standardDeviation": 0.9023497812876091
+          },
+          "Deferred lighting": {
+            "mean": 43.7190656,
+            "median": 43.58144,
+            "p95": 44.89216,
+            "min": 42.5984,
+            "max": 45.088768,
+            "standardDeviation": 0.6874202633495562
+          }
+        }
+      },
+      "frames": [
+        {
+          "cpuMs": 0.7000000001862645,
+          "gpuMs": 52.363264,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.995392,
+            "Deferred lighting": 43.319296
+          }
+        },
+        {
+          "cpuMs": 1.1000000000931323,
+          "gpuMs": 54.72256,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 9.371648,
+            "Deferred lighting": 44.367872
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 52.494336,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.798784,
+            "Deferred lighting": 43.712512
+          }
+        },
+        {
+          "cpuMs": 1.3999999999068677,
+          "gpuMs": 52.363264,
+          "passes": {
+            "Light clustering": 1.179648,
+            "G-buffer geometry": 7.798784,
+            "Deferred lighting": 43.384832
+          }
+        },
+        {
+          "cpuMs": 1.8000000002793968,
+          "gpuMs": 53.673984,
+          "passes": {
+            "Light clustering": 1.179648,
+            "G-buffer geometry": 7.86432,
+            "Deferred lighting": 44.630016
+          }
+        },
+        {
+          "cpuMs": 0.8999999999068677,
+          "gpuMs": 52.166656,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.733248,
+            "Deferred lighting": 43.319296
+          }
+        },
+        {
+          "cpuMs": 1.3000000002793968,
+          "gpuMs": 52.297728,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.86432,
+            "Deferred lighting": 43.319296
+          }
+        },
+        {
+          "cpuMs": 0.8999999999068677,
+          "gpuMs": 52.494336,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.733248,
+            "Deferred lighting": 43.778048
+          }
+        },
+        {
+          "cpuMs": 1,
+          "gpuMs": 51.970048,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.798784,
+            "Deferred lighting": 43.188224
+          }
+        },
+        {
+          "cpuMs": 1.3999999999068677,
+          "gpuMs": 52.035584,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.733248,
+            "Deferred lighting": 43.188224
+          }
+        },
+        {
+          "cpuMs": 1.3000000002793968,
+          "gpuMs": 52.75648,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.86432,
+            "Deferred lighting": 43.90912
+          }
+        },
+        {
+          "cpuMs": 1.2000000001862645,
+          "gpuMs": 52.101119999999995,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.929856,
+            "Deferred lighting": 43.122688
+          }
+        },
+        {
+          "cpuMs": 0.7000000001862645,
+          "gpuMs": 53.870592,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 8.650752,
+            "Deferred lighting": 44.171264
+          }
+        },
+        {
+          "cpuMs": 0.8000000002793968,
+          "gpuMs": 53.542912,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 8.257536,
+            "Deferred lighting": 44.302336
+          }
+        },
+        {
+          "cpuMs": 0.7000000001862645,
+          "gpuMs": 54.329344,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 8.388608,
+            "Deferred lighting": 44.89216
+          }
+        },
+        {
+          "cpuMs": 0.5,
+          "gpuMs": 52.690944,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 8.060928,
+            "Deferred lighting": 43.646976
+          }
+        },
+        {
+          "cpuMs": 1.5,
+          "gpuMs": 52.756479999999996,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.86432,
+            "Deferred lighting": 43.778048
+          }
+        },
+        {
+          "cpuMs": 1.3000000002793968,
+          "gpuMs": 52.363264,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.733248,
+            "Deferred lighting": 43.58144
+          }
+        },
+        {
+          "cpuMs": 0.6000000000931323,
+          "gpuMs": 53.542912,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.929856,
+            "Deferred lighting": 44.56448
+          }
+        },
+        {
+          "cpuMs": 0.6999999997206032,
+          "gpuMs": 51.970048,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.929856,
+            "Deferred lighting": 42.991616
+          }
+        },
+        {
+          "cpuMs": 1.1000000000931323,
+          "gpuMs": 53.805056,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 9.895936,
+            "Deferred lighting": 42.92608
+          }
+        },
+        {
+          "cpuMs": 1.7999999998137355,
+          "gpuMs": 54.263808,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 8.257536,
+            "Deferred lighting": 44.957696
+          }
+        },
+        {
+          "cpuMs": 1.2999999998137355,
+          "gpuMs": 53.608448,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.929856,
+            "Deferred lighting": 44.56448
+          }
+        },
+        {
+          "cpuMs": 2.7000000001862645,
+          "gpuMs": 55.640064,
+          "passes": {
+            "Light clustering": 1.703936,
+            "G-buffer geometry": 11.206656,
+            "Deferred lighting": 42.729472
+          }
+        },
+        {
+          "cpuMs": 1.2999999998137355,
+          "gpuMs": 51.970048,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 8.388608,
+            "Deferred lighting": 42.5984
+          }
+        },
+        {
+          "cpuMs": 1.1999999997206032,
+          "gpuMs": 52.559872,
+          "passes": {
+            "Light clustering": 1.048576,
+            "G-buffer geometry": 7.929856,
+            "Deferred lighting": 43.58144
+          }
+        },
+        {
+          "cpuMs": 1.2000000001862645,
+          "gpuMs": 53.018624,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 7.995392,
+            "Deferred lighting": 43.90912
+          }
+        },
+        {
+          "cpuMs": 0.8000000002793968,
+          "gpuMs": 54.984704,
+          "passes": {
+            "Light clustering": 1.114112,
+            "G-buffer geometry": 11.14112,
+            "Deferred lighting": 42.729472
+          }
+        },
+        {
+          "cpuMs": 1.2000000001862645,
+          "gpuMs": 53.870592,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.798784,
+            "Deferred lighting": 45.088768
+          }
+        },
+        {
+          "cpuMs": 1.1999999997206032,
+          "gpuMs": 52.297728,
+          "passes": {
+            "Light clustering": 0.98304,
+            "G-buffer geometry": 7.995392,
+            "Deferred lighting": 43.319296
+          }
+        }
+      ],
+      "clusters": {
+        "clusters": 4608,
+        "occupied": 2616,
+        "overflow": 2376,
+        "maximum": 1283,
+        "mean": 167.35959201388889,
+        "bytes": 2377728,
+        "capacity": 128,
+        "histogram": {
+          "0": 1992,
+          "1": 4,
+          "2": 3,
+          "4": 4,
+          "5": 3,
+          "6": 10,
+          "7": 2,
+          "8": 4,
+          "9": 5,
+          "10": 5,
+          "11": 4,
+          "12": 3,
+          "13": 3,
+          "14": 4,
+          "15": 2,
+          "16": 2,
+          "17": 5,
+          "18": 2,
+          "19": 3,
+          "20": 3,
+          "21": 1,
+          "22": 2,
+          "23": 6,
+          "24": 5,
+          "25": 3,
+          "26": 4,
+          "27": 3,
+          "29": 2,
+          "30": 3,
+          "31": 3,
+          "32": 5,
+          "33": 3,
+          "34": 2,
+          "35": 4,
+          "36": 1,
+          "37": 2,
+          "38": 3,
+          "39": 1,
+          "40": 1,
+          "41": 1,
+          "42": 6,
+          "43": 1,
+          "44": 3,
+          "45": 2,
+          "46": 1,
+          "47": 1,
+          "48": 1,
+          "49": 1,
+          "50": 3,
+          "51": 1,
+          "52": 2,
+          "53": 4,
+          "54": 2,
+          "56": 1,
+          "57": 4,
+          "58": 1,
+          "59": 2,
+          "60": 4,
+          "61": 3,
+          "62": 1,
+          "63": 2,
+          "64": 4,
+          "65": 2,
+          "66": 1,
+          "67": 2,
+          "72": 1,
+          "73": 1,
+          "74": 1,
+          "75": 2,
+          "77": 4,
+          "78": 2,
+          "80": 2,
+          "82": 1,
+          "83": 2,
+          "84": 1,
+          "86": 1,
+          "87": 1,
+          "88": 2,
+          "89": 1,
+          "90": 1,
+          "92": 2,
+          "93": 2,
+          "94": 1,
+          "95": 2,
+          "96": 1,
+          "97": 1,
+          "99": 1,
+          "100": 1,
+          "101": 1,
+          "102": 1,
+          "105": 2,
+          "107": 1,
+          "109": 1,
+          "110": 2,
+          "112": 1,
+          "113": 1,
+          "114": 2,
+          "116": 1,
+          "117": 1,
+          "119": 2,
+          "121": 1,
+          "122": 1,
+          "123": 2,
+          "124": 1,
+          "125": 1,
+          "126": 1,
+          "127": 1,
+          "128": 1,
+          "129": 12,
+          "130": 25,
+          "131": 32,
+          "132": 33,
+          "133": 34,
+          "134": 22,
+          "135": 23,
+          "136": 17,
+          "137": 30,
+          "138": 27,
+          "139": 28,
+          "140": 27,
+          "141": 21,
+          "142": 25,
+          "143": 24,
+          "144": 27,
+          "145": 22,
+          "146": 29,
+          "147": 34,
+          "148": 33,
+          "149": 27,
+          "150": 19,
+          "151": 22,
+          "152": 20,
+          "153": 20,
+          "154": 9,
+          "155": 14,
+          "156": 14,
+          "157": 20,
+          "158": 15,
+          "159": 7,
+          "160": 10,
+          "161": 4,
+          "162": 14,
+          "163": 5,
+          "164": 6,
+          "165": 7,
+          "166": 8,
+          "167": 11,
+          "168": 12,
+          "169": 11,
+          "170": 15,
+          "171": 17,
+          "172": 14,
+          "173": 12,
+          "174": 18,
+          "175": 13,
+          "176": 8,
+          "177": 12,
+          "178": 8,
+          "179": 8,
+          "180": 8,
+          "181": 7,
+          "182": 6,
+          "183": 7,
+          "184": 7,
+          "185": 5,
+          "186": 6,
+          "187": 9,
+          "188": 4,
+          "189": 1,
+          "190": 3,
+          "191": 8,
+          "192": 8,
+          "193": 9,
+          "194": 11,
+          "195": 15,
+          "196": 7,
+          "197": 10,
+          "198": 7,
+          "199": 11,
+          "200": 11,
+          "201": 7,
+          "202": 6,
+          "203": 11,
+          "204": 9,
+          "205": 4,
+          "206": 11,
+          "207": 9,
+          "208": 6,
+          "209": 7,
+          "210": 6,
+          "211": 6,
+          "212": 9,
+          "213": 7,
+          "214": 10,
+          "215": 10,
+          "216": 8,
+          "217": 6,
+          "218": 10,
+          "219": 10,
+          "220": 7,
+          "221": 3,
+          "222": 6,
+          "223": 9,
+          "224": 8,
+          "225": 3,
+          "226": 4,
+          "227": 4,
+          "228": 8,
+          "229": 7,
+          "230": 5,
+          "231": 6,
+          "232": 4,
+          "233": 4,
+          "234": 5,
+          "235": 6,
+          "236": 6,
+          "237": 6,
+          "238": 7,
+          "239": 7,
+          "240": 3,
+          "241": 3,
+          "242": 2,
+          "243": 5,
+          "244": 7,
+          "245": 2,
+          "246": 8,
+          "247": 6,
+          "248": 5,
+          "249": 6,
+          "250": 7,
+          "251": 8,
+          "252": 4,
+          "253": 7,
+          "254": 4,
+          "255": 7,
+          "256": 10,
+          "257": 3,
+          "258": 4,
+          "259": 2,
+          "260": 3,
+          "261": 4,
+          "262": 5,
+          "263": 4,
+          "264": 6,
+          "265": 6,
+          "266": 5,
+          "267": 3,
+          "268": 5,
+          "269": 5,
+          "270": 3,
+          "271": 2,
+          "272": 4,
+          "273": 3,
+          "274": 2,
+          "275": 4,
+          "276": 3,
+          "277": 3,
+          "278": 6,
+          "279": 6,
+          "280": 5,
+          "281": 5,
+          "282": 5,
+          "283": 5,
+          "284": 5,
+          "285": 3,
+          "286": 2,
+          "288": 2,
+          "289": 1,
+          "290": 5,
+          "291": 3,
+          "292": 3,
+          "293": 3,
+          "294": 3,
+          "295": 1,
+          "298": 3,
+          "299": 4,
+          "300": 2,
+          "301": 2,
+          "302": 2,
+          "303": 2,
+          "304": 3,
+          "305": 3,
+          "306": 4,
+          "307": 1,
+          "308": 5,
+          "309": 6,
+          "310": 5,
+          "311": 2,
+          "312": 2,
+          "313": 1,
+          "314": 5,
+          "317": 2,
+          "318": 1,
+          "319": 2,
+          "320": 2,
+          "321": 2,
+          "322": 3,
+          "323": 3,
+          "324": 2,
+          "325": 2,
+          "326": 2,
+          "327": 1,
+          "328": 2,
+          "329": 2,
+          "330": 1,
+          "332": 4,
+          "333": 3,
+          "334": 2,
+          "335": 6,
+          "337": 2,
+          "338": 2,
+          "340": 1,
+          "341": 2,
+          "342": 1,
+          "343": 3,
+          "344": 1,
+          "345": 2,
+          "346": 1,
+          "347": 7,
+          "349": 2,
+          "350": 3,
+          "351": 4,
+          "352": 3,
+          "353": 6,
+          "354": 1,
+          "355": 3,
+          "356": 1,
+          "357": 2,
+          "358": 2,
+          "360": 8,
+          "361": 4,
+          "362": 4,
+          "363": 6,
+          "364": 2,
+          "365": 1,
+          "366": 2,
+          "369": 2,
+          "370": 2,
+          "371": 4,
+          "372": 1,
+          "373": 1,
+          "374": 2,
+          "375": 2,
+          "377": 1,
+          "378": 6,
+          "379": 1,
+          "380": 2,
+          "381": 3,
+          "382": 2,
+          "383": 2,
+          "386": 2,
+          "387": 4,
+          "388": 2,
+          "389": 2,
+          "390": 1,
+          "392": 2,
+          "393": 2,
+          "394": 2,
+          "395": 1,
+          "396": 2,
+          "397": 1,
+          "398": 1,
+          "399": 1,
+          "400": 2,
+          "401": 2,
+          "402": 1,
+          "404": 1,
+          "406": 1,
+          "407": 3,
+          "408": 4,
+          "410": 2,
+          "411": 1,
+          "412": 2,
+          "413": 4,
+          "414": 1,
+          "415": 2,
+          "416": 1,
+          "417": 1,
+          "418": 1,
+          "419": 1,
+          "420": 3,
+          "421": 2,
+          "422": 2,
+          "424": 2,
+          "425": 1,
+          "426": 2,
+          "427": 4,
+          "428": 1,
+          "430": 1,
+          "431": 1,
+          "433": 1,
+          "435": 1,
+          "436": 2,
+          "437": 1,
+          "438": 1,
+          "439": 1,
+          "440": 1,
+          "442": 1,
+          "443": 2,
+          "444": 1,
+          "445": 2,
+          "446": 1,
+          "447": 2,
+          "449": 1,
+          "450": 2,
+          "451": 3,
+          "453": 1,
+          "454": 3,
+          "455": 1,
+          "456": 3,
+          "457": 1,
+          "459": 2,
+          "460": 1,
+          "461": 1,
+          "462": 3,
+          "463": 3,
+          "464": 2,
+          "466": 2,
+          "467": 1,
+          "468": 1,
+          "470": 1,
+          "472": 1,
+          "474": 1,
+          "475": 2,
+          "476": 1,
+          "477": 4,
+          "478": 4,
+          "479": 2,
+          "480": 2,
+          "481": 4,
+          "488": 1,
+          "489": 4,
+          "490": 1,
+          "492": 2,
+          "494": 1,
+          "495": 1,
+          "497": 2,
+          "498": 3,
+          "499": 1,
+          "500": 1,
+          "502": 1,
+          "504": 1,
+          "505": 2,
+          "506": 1,
+          "507": 1,
+          "508": 2,
+          "514": 1,
+          "516": 4,
+          "517": 2,
+          "519": 2,
+          "520": 3,
+          "521": 2,
+          "522": 1,
+          "523": 2,
+          "524": 1,
+          "525": 1,
+          "526": 2,
+          "527": 2,
+          "529": 1,
+          "530": 1,
+          "531": 2,
+          "532": 3,
+          "533": 1,
+          "537": 1,
+          "541": 1,
+          "542": 1,
+          "544": 1,
+          "546": 3,
+          "547": 3,
+          "548": 1,
+          "550": 1,
+          "551": 2,
+          "554": 1,
+          "556": 3,
+          "557": 2,
+          "558": 1,
+          "559": 4,
+          "561": 2,
+          "562": 1,
+          "565": 3,
+          "566": 1,
+          "567": 1,
+          "568": 1,
+          "570": 2,
+          "571": 1,
+          "572": 1,
+          "573": 4,
+          "575": 1,
+          "576": 3,
+          "577": 2,
+          "578": 1,
+          "580": 1,
+          "581": 2,
+          "582": 2,
+          "584": 1,
+          "585": 2,
+          "586": 1,
+          "589": 2,
+          "591": 2,
+          "592": 1,
+          "593": 1,
+          "594": 1,
+          "595": 2,
+          "596": 1,
+          "598": 3,
+          "599": 1,
+          "605": 1,
+          "606": 2,
+          "608": 1,
+          "610": 1,
+          "614": 1,
+          "616": 2,
+          "617": 1,
+          "618": 3,
+          "622": 3,
+          "625": 1,
+          "626": 1,
+          "627": 1,
+          "628": 1,
+          "629": 1,
+          "630": 1,
+          "632": 1,
+          "633": 1,
+          "634": 1,
+          "639": 1,
+          "641": 2,
+          "642": 3,
+          "651": 1,
+          "652": 1,
+          "656": 1,
+          "657": 2,
+          "658": 2,
+          "662": 2,
+          "663": 2,
+          "664": 1,
+          "667": 1,
+          "672": 1,
+          "673": 2,
+          "674": 1,
+          "675": 1,
+          "676": 1,
+          "677": 2,
+          "680": 1,
+          "681": 1,
+          "683": 3,
+          "686": 1,
+          "687": 1,
+          "688": 4,
+          "690": 2,
+          "691": 2,
+          "692": 1,
+          "697": 1,
+          "698": 2,
+          "699": 2,
+          "701": 1,
+          "702": 1,
+          "704": 1,
+          "705": 1,
+          "706": 1,
+          "707": 1,
+          "708": 1,
+          "711": 1,
+          "714": 1,
+          "715": 1,
+          "716": 2,
+          "717": 1,
+          "718": 1,
+          "721": 1,
+          "725": 2,
+          "726": 3,
+          "727": 1,
+          "729": 3,
+          "731": 1,
+          "735": 1,
+          "737": 2,
+          "738": 1,
+          "739": 2,
+          "740": 2,
+          "747": 1,
+          "749": 2,
+          "750": 1,
+          "751": 1,
+          "753": 1,
+          "754": 2,
+          "755": 1,
+          "758": 1,
+          "759": 3,
+          "760": 1,
+          "761": 1,
+          "762": 1,
+          "763": 1,
+          "764": 1,
+          "765": 2,
+          "768": 3,
+          "770": 1,
+          "771": 2,
+          "774": 1,
+          "775": 1,
+          "776": 1,
+          "778": 3,
+          "779": 1,
+          "781": 1,
+          "782": 1,
+          "783": 1,
+          "785": 2,
+          "789": 2,
+          "790": 1,
+          "791": 1,
+          "792": 1,
+          "794": 1,
+          "796": 2,
+          "799": 1,
+          "800": 2,
+          "802": 1,
+          "803": 1,
+          "805": 1,
+          "807": 1,
+          "808": 1,
+          "810": 1,
+          "811": 3,
+          "814": 1,
+          "816": 1,
+          "818": 2,
+          "819": 1,
+          "824": 1,
+          "825": 1,
+          "826": 1,
+          "832": 1,
+          "833": 1,
+          "836": 2,
+          "837": 1,
+          "838": 1,
+          "842": 1,
+          "844": 2,
+          "846": 1,
+          "850": 1,
+          "854": 1,
+          "855": 1,
+          "856": 2,
+          "858": 1,
+          "863": 1,
+          "868": 1,
+          "870": 1,
+          "871": 2,
+          "873": 1,
+          "874": 1,
+          "875": 1,
+          "876": 1,
+          "878": 1,
+          "879": 1,
+          "880": 2,
+          "881": 1,
+          "883": 1,
+          "885": 2,
+          "898": 1,
+          "899": 1,
+          "900": 1,
+          "903": 1,
+          "906": 1,
+          "911": 1,
+          "912": 2,
+          "921": 1,
+          "922": 2,
+          "923": 1,
+          "924": 1,
+          "927": 1,
+          "929": 1,
+          "932": 1,
+          "934": 1,
+          "938": 1,
+          "946": 3,
+          "949": 1,
+          "954": 1,
+          "958": 1,
+          "959": 1,
+          "961": 1,
+          "962": 1,
+          "965": 1,
+          "973": 1,
+          "979": 1,
+          "980": 1,
+          "986": 2,
+          "990": 1,
+          "991": 1,
+          "992": 1,
+          "995": 1,
+          "996": 1,
+          "997": 1,
+          "1006": 1,
+          "1007": 1,
+          "1008": 1,
+          "1010": 2,
+          "1023": 1,
+          "1024": 2,
+          "1031": 1,
+          "1032": 1,
+          "1036": 1,
+          "1038": 1,
+          "1039": 1,
+          "1042": 1,
+          "1043": 1,
+          "1049": 1,
+          "1051": 1,
+          "1054": 1,
+          "1058": 1,
+          "1064": 1,
+          "1066": 1,
+          "1067": 1,
+          "1070": 1,
+          "1072": 1,
+          "1077": 1,
+          "1078": 1,
+          "1080": 2,
+          "1091": 2,
+          "1097": 1,
+          "1098": 1,
+          "1102": 1,
+          "1108": 2,
+          "1109": 1,
+          "1115": 2,
+          "1118": 1,
+          "1127": 1,
+          "1132": 1,
+          "1136": 1,
+          "1141": 1,
+          "1150": 1,
+          "1153": 1,
+          "1157": 1,
+          "1158": 1,
+          "1163": 1,
+          "1166": 1,
+          "1168": 1,
+          "1176": 1,
+          "1184": 2,
+          "1188": 1,
+          "1190": 1,
+          "1192": 1,
+          "1193": 1,
+          "1204": 1,
+          "1207": 1,
+          "1214": 1,
+          "1224": 1,
+          "1227": 1,
+          "1232": 1,
+          "1236": 1,
+          "1238": 1,
+          "1239": 1,
+          "1241": 1,
+          "1244": 1,
+          "1247": 1,
+          "1260": 1,
+          "1262": 1,
+          "1271": 1,
+          "1276": 1,
+          "1283": 1
+        }
+      }
+    }
+  ]
+}

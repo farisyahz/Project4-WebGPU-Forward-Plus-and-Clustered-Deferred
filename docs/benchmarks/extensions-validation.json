@@ -1,0 +1,45 @@
+{
+  "rows": [
+    {
+      "case": "packed versus baseline",
+      "compact": false,
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0
+    },
+    {
+      "case": "compute versus raster",
+      "compact": false,
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0
+    },
+    {
+      "case": "packed versus baseline",
+      "compact": true,
+      "max": 12,
+      "mean": 0.023596645481220205,
+      "pixelsAbove3": 28
+    },
+    {
+      "case": "compute versus raster",
+      "compact": true,
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0
+    },
+    {
+      "case": "bloom versus off",
+      "max": 237,
+      "mean": 0.6656632802374681,
+      "pixelsAbove3": 35196
+    },
+    {
+      "case": "debug bypasses bloom",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0
+    }
+  ],
+  "errors": []
+}
