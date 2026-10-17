@@ -11,6 +11,14 @@
 
   <body>
     <canvas id="mainCanvas"></canvas>
+    <aside id="hud">
+      <div class="eyebrow">CIS 5650 / Project 04</div>
+      <h1>Lighting Lab<span>WebGPU</span></h1>
+      <p id="scene-info">Loading Sponza…</p>
+      <div class="timings"><div><span>GPU passes</span><strong id="gpu-time">—</strong></div><div><span>CPU encoding</span><strong id="cpu-time">—</strong></div></div>
+      <p id="status" role="status">Initializing WebGPU…</p>
+      <p class="help">Hold mouse to look · WASD to move · Q/E up/down · Shift to accelerate</p>
+    </aside>
     <script type="module" src="./src/main.ts"></script>
   </body>
 </html>

@@ -37,6 +37,7 @@ export class Camera {
     pitch: number = 0;
     moveSpeed: number = 0.004;
     sensitivity: number = 0.15;
+    inputEnabled = true;
 
     static readonly nearPlane = 0.1;
     static readonly farPlane = 1000;
@@ -64,14 +65,26 @@ export class Camera {
     }
 
     reset() {
-        this.cameraPos = vec3.create(-7, 2, 0);
-        this.yaw = 0;
-        this.pitch = 0;
+        this.setPreset('Atrium');
+    }
+
+    setPreset(name: string) {
+        const presets: Record<string, [number, number, number, number, number]> = {
+            Atrium: [-7, 2, 0, 0, 0],
+            Balcony: [-6, 6, 0, 0, -20],
+            'Side aisle': [-7, 1.5, 3, 0, 0],
+        };
+        const pose = presets[name];
+        if (!pose) throw new Error(`Unknown camera preset: ${name}`);
+        this.cameraPos = vec3.create(pose[0], pose[1], pose[2]);
+        this.yaw = pose[3];
+        this.pitch = pose[4];
         this.keys = {};
         this.rotateCamera(0, 0);
     }
 
     private onKeyEvent(event: KeyboardEvent, down: boolean) {
+        if (!this.inputEnabled || (event.target instanceof HTMLElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(event.target.tagName))) return;
         this.keys[event.key.toLowerCase()] = down;
         if (this.keys['alt']) { // prevent issues from alt shortcuts
             event.preventDefault();
@@ -100,7 +113,7 @@ export class Camera {
     }
 
     private onMouseMove(event: MouseEvent) {
-        if (document.pointerLockElement === canvas) {
+        if (this.inputEnabled && document.pointerLockElement === canvas) {
             this.rotateCamera(event.movementX * this.sensitivity, event.movementY * this.sensitivity);
         }
     }

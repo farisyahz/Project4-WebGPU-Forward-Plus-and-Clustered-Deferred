@@ -2,11 +2,15 @@ import { Scene } from './stage/scene';
 import { Lights } from './stage/lights';
 import { Camera } from './stage/camera';
 import { Stage } from './stage/stage';
+import { FrameTiming, GpuProfiler } from './profiler';
+import { settings } from './settings';
 
 export var canvas: HTMLCanvasElement;
 export var canvasFormat: GPUTextureFormat;
 export var context: GPUCanvasContext;
 export var device: GPUDevice;
+export var profiler: GpuProfiler;
+export var adapterInfo: GPUAdapterInfo;
 export var canvasTextureView: GPUTextureView;
 
 export var aspectRatio: number;
@@ -41,7 +45,9 @@ export async function initWebGPU() {
         throw new Error("no appropriate GPUAdapter found");
     }
 
-    device = await adapter.requestDevice();
+    adapterInfo = adapter.info;
+    device = await adapter.requestDevice({ requiredFeatures: adapter.features.has('timestamp-query') ? ['timestamp-query'] : [] });
+    profiler = new GpuProfiler(device);
     device.addEventListener('uncapturederror', event => console.error('WebGPU:', event.error.message));
     device.lost.then(info => console.error('WebGPU device lost:', info.message));
 
@@ -83,8 +89,8 @@ export async function initWebGPU() {
 }
 
 function updateCanvasSize() {
-    const width = Math.max(1, Math.min(device.limits.maxTextureDimension2D, Math.round(canvas.clientWidth * window.devicePixelRatio)));
-    const height = Math.max(1, Math.min(device.limits.maxTextureDimension2D, Math.round(canvas.clientHeight * window.devicePixelRatio)));
+    const width = Math.max(1, Math.min(device.limits.maxTextureDimension2D, settings.renderWidth || Math.round(canvas.clientWidth * window.devicePixelRatio)));
+    const height = Math.max(1, Math.min(device.limits.maxTextureDimension2D, settings.renderHeight || Math.round(canvas.clientHeight * window.devicePixelRatio)));
     if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
@@ -122,6 +128,7 @@ export abstract class Renderer {
 
     private prevTime: number = 0;
     private frameRequestId: number;
+    private measurement: ((timing: FrameTiming) => void) | undefined;
 
     constructor(stage: Stage) {
         this.scene = stage.scene;
@@ -138,8 +145,31 @@ export abstract class Renderer {
 
     protected abstract draw(): void;
 
+    protected submit(encoder: GPUCommandEncoder) {
+        profiler.resolve(encoder);
+        device.queue.submit([encoder.finish()]);
+    }
+
+    measureFrames(warmup: number, samples: number): Promise<FrameTiming[]> {
+        if (this.measurement) throw new Error('A measurement is already running');
+        let seen = 0;
+        const results: FrameTiming[] = [];
+        return new Promise(resolve => {
+            this.measurement = timing => {
+                if (seen++ < warmup) return;
+                results.push(timing);
+                if (results.length === samples) { this.measurement = undefined; resolve(results); }
+            };
+        });
+    }
+
     // CHECKITOUT: this is the main rendering loop
     private onFrame(time: number) {
+        // Backpressure prevents an unbounded GPU queue on expensive workloads.
+        if (!profiler.beginFrame()) {
+            this.frameRequestId = requestAnimationFrame(t => this.onFrame(t));
+            return;
+        }
         updateCanvasSize();
         if (this.prevTime == 0) {
             this.prevTime = time;
@@ -150,8 +180,13 @@ export abstract class Renderer {
         this.lights.onFrame(time);
 
         this.stats.begin();
-
+        const listener = this.measurement;
+        const start = performance.now();
         this.draw();
+        const cpuMs = performance.now() - start;
+        void profiler.collect(cpuMs).then(timing => {
+            if (timing && listener && listener === this.measurement) listener(timing);
+        }).catch(error => console.error('GPU timing readback:', error));
 
         this.stats.end();
 

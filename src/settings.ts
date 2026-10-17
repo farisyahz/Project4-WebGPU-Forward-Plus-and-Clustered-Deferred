@@ -1,5 +1,6 @@
 export const settings = {
     debugView: 0,
+    renderWidth: 0, renderHeight: 0,
     clusterX: 16, clusterY: 12, clusterZ: 24,
     bundles: false, depthPrepass: false,
     computeLighting: false, compactGBuffer: false, bloom: false,

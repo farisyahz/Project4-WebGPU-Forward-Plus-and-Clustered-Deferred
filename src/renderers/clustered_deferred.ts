@@ -57,6 +57,7 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
         const encoder = renderer.device.createCommandEncoder({ label: 'deferred frame' });
         this.lights.doLightClustering(encoder);
         const geometry = encoder.beginRenderPass({
+            timestampWrites: renderer.profiler.timestampWrites('G-buffer geometry'),
             label: 'G-buffer geometry',
             colorAttachments: this.textures.map(texture => ({ view: texture.createView(), clearValue: [0, 0, 0, 0], loadOp: 'clear', storeOp: 'store' })),
             depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: 'clear', depthStoreOp: 'store' },
@@ -69,13 +70,13 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
             geometry.drawIndexed(primitive.numIndices);
         });
         geometry.end();
-        const lighting = encoder.beginRenderPass({ label: 'deferred lighting', colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), loadOp: 'clear', storeOp: 'store', clearValue: [0, 0, 0, 1] }] });
+        const lighting = encoder.beginRenderPass({ label: 'deferred lighting', timestampWrites: renderer.profiler.timestampWrites('Deferred lighting'), colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), loadOp: 'clear', storeOp: 'store', clearValue: [0, 0, 0, 1] }] });
         lighting.setPipeline(this.lightingPipeline);
         lighting.setBindGroup(0, this.sceneGroup);
         lighting.setBindGroup(1, this.gBufferGroup);
         lighting.draw(3);
         lighting.end();
-        renderer.device.queue.submit([encoder.finish()]);
+        this.submit(encoder);
     }
 
     override stop() {

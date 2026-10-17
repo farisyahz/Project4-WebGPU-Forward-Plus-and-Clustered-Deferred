@@ -36,3 +36,11 @@ The reference student repository is used for presentation inspiration only. Impl
 - 28 bytes/pixel of color attachments plus 4 bytes/pixel depth (logical storage, excluding implementation-specific allocation overhead).
 - Chrome 960 × 540 comparisons at 1/500/5,000 lights passed with no errors. Deferred mean RGB error versus naive: 0 / 0.03994 / 0.19854 on a 0–255 scale. At 5,000 lights, 991 of 518,400 pixels have a channel error >3; maximum channel error 42 near bright lights. Quantization is retained as an explicit measured tradeoff.
 - `npm run build`: passed.
+
+## Milestone 4 — reproducible profiling
+
+- Optional GPU timestamps with a three-slot asynchronous readback ring, bounded frames in flight, CPU encoding timing, pass breakdowns and raw JSON export.
+- Fixed camera presets, render-resolution presets, cluster-grid presets, debug controls, and an in-app measurements panel.
+- Smoke sweep (`benchmarks/fixed-list-smoke.json`): 10 warmup + 30 sampled frames, one repetition, 960 × 540, headless Chrome 155, AMD RDNA 3 / Radeon 780M. No console or validation errors. These short smoke runs establish a diagnostic baseline, not final publication-quality results.
+- Diagnostic finding: at 5,000 lights the default grid has 2,376 overflowing clusters, maximum occupancy 1,283, mean occupancy 167.36. The correct fallback is expensive; compact variable-length lists are the next optimization.
+- Hardware inventory also contains an RTX 4050 Laptop GPU. Browser selection must be recorded rather than inferred from installed hardware.

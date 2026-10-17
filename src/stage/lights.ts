@@ -1,5 +1,5 @@
 import { vec3 } from "wgpu-matrix";
-import { device } from "../renderer";
+import { device, profiler } from "../renderer";
 
 import * as shaders from '../shaders/shaders';
 import { Camera } from "./camera";
@@ -137,11 +137,36 @@ export class Lights {
     }
 
     doLightClustering(encoder: GPUCommandEncoder) {
-        const pass = encoder.beginComputePass({ label: 'light clustering' });
+        const pass = encoder.beginComputePass({ label: 'light clustering', timestampWrites: profiler.timestampWrites('Light clustering') });
         pass.setPipeline(this.clusteringPipeline);
         pass.setBindGroup(0, this.clusteringGroup);
         pass.dispatchWorkgroups(Math.ceil(settings.clusterX * settings.clusterY * settings.clusterZ / 64));
         pass.end();
+    }
+
+    async getClusterStatistics() {
+        const read = device.createBuffer({ size: this.clusterBuffer.size, usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST });
+        try {
+            const encoder = device.createCommandEncoder();
+            encoder.copyBufferToBuffer(this.clusterBuffer, 0, read, 0, read.size);
+            device.queue.submit([encoder.finish()]);
+            await read.mapAsync(GPUMapMode.READ);
+            const data = new Uint32Array(read.getMappedRange());
+            const histogram: Record<number, number> = {};
+            let maximum = 0, total = 0, occupied = 0, overflow = 0;
+            const stride = 1 + shaders.constants.maxLightsPerCluster;
+            for (let i = 0; i < data.length; i += stride) {
+                const count = data[i];
+                histogram[count] = (histogram[count] || 0) + 1;
+                maximum = Math.max(maximum, count);
+                total += count;
+                occupied += Number(count > 0);
+                overflow += Number(count > shaders.constants.maxLightsPerCluster);
+            }
+            const clusters = data.length / stride;
+            read.unmap();
+            return { clusters, occupied, overflow, maximum, mean: total / clusters, bytes: this.clusterBuffer.size, capacity: shaders.constants.maxLightsPerCluster, histogram };
+        } finally { read.destroy(); }
     }
 
     // CHECKITOUT: this is where the light movement compute shader is dispatched from the host

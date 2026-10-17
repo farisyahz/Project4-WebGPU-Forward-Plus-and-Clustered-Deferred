@@ -47,6 +47,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
         const encoder = renderer.device.createCommandEncoder({ label: 'forward+ frame' });
         this.lights.doLightClustering(encoder);
         const pass = encoder.beginRenderPass({
+            timestampWrites: renderer.profiler.timestampWrites('Forward+ shading'),
             label: 'forward+ shading',
             colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), clearValue: [0, 0, 0, 1], loadOp: 'clear', storeOp: 'store' }],
             depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: 'clear', depthStoreOp: 'store' },
@@ -59,7 +60,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
             pass.drawIndexed(primitive.numIndices);
         });
         pass.end();
-        renderer.device.queue.submit([encoder.finish()]);
+        this.submit(encoder);
     }
 
     override stop() { super.stop(); this.depth.destroy(); }
