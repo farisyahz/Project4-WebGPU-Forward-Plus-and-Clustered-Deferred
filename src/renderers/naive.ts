@@ -17,7 +17,7 @@ export class NaiveRenderer extends renderer.Renderer {
         this.sceneUniformsBindGroupLayout = renderer.device.createBindGroupLayout({
             label: "scene uniforms bind group layout",
             entries: [
-                // TODO-1.2: add an entry for camera uniforms at binding 0, visible to only the vertex shader, and of type "uniform"
+                { binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },
                 { // lightSet
                     binding: 1,
                     visibility: GPUShaderStage.FRAGMENT,
@@ -30,9 +30,7 @@ export class NaiveRenderer extends renderer.Renderer {
             label: "scene uniforms bind group",
             layout: this.sceneUniformsBindGroupLayout,
             entries: [
-                // TODO-1.2: add an entry for camera uniforms at binding 0
-                // you can access the camera using `this.camera`
-                // if you run into TypeScript errors, you're probably trying to upload the host buffer instead
+                { binding: 0, resource: { buffer: this.camera.uniformsBuffer } },
                 {
                     binding: 1,
                     resource: { buffer: this.lights.lightSetStorageBuffer }
@@ -83,6 +81,16 @@ export class NaiveRenderer extends renderer.Renderer {
     }
 
     override draw() {
+        if (this.depthTexture.width !== renderer.canvas.width || this.depthTexture.height !== renderer.canvas.height) {
+            this.depthTexture.destroy();
+            this.depthTexture = renderer.device.createTexture({
+                label: 'naive depth',
+                size: [renderer.canvas.width, renderer.canvas.height],
+                format: 'depth24plus',
+                usage: GPUTextureUsage.RENDER_ATTACHMENT,
+            });
+            this.depthTextureView = this.depthTexture.createView();
+        }
         const encoder = renderer.device.createCommandEncoder();
         const canvasTextureView = renderer.context.getCurrentTexture().createView();
 
@@ -105,7 +113,7 @@ export class NaiveRenderer extends renderer.Renderer {
         });
         renderPass.setPipeline(this.pipeline);
 
-        // TODO-1.2: bind `this.sceneUniformsBindGroup` to index `shaders.constants.bindGroup_scene`
+        renderPass.setBindGroup(shaders.constants.bindGroup_scene, this.sceneUniformsBindGroup);
 
         this.scene.iterate(node => {
             renderPass.setBindGroup(shaders.constants.bindGroup_model, node.modelBindGroup);
@@ -120,5 +128,10 @@ export class NaiveRenderer extends renderer.Renderer {
         renderPass.end();
 
         renderer.device.queue.submit([encoder.finish()]);
+    }
+
+    override stop() {
+        super.stop();
+        this.depthTexture.destroy();
     }
 }

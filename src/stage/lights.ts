@@ -11,9 +11,10 @@ function hueToRgb(h: number) {
 }
 
 export class Lights {
-    private camera: Camera;
-
     numLights = 500;
+    paused = false;
+    animationTime = 0;
+    private previousTime: number | undefined;
     static readonly maxNumLights = 5000;
     static readonly numFloatsPerLight = 8; // vec3f is aligned at 16 byte boundaries
 
@@ -30,8 +31,7 @@ export class Lights {
 
     // TODO-2: add layouts, pipelines, textures, etc. needed for light clustering here
 
-    constructor(camera: Camera) {
-        this.camera = camera;
+    constructor(_camera: Camera) {
 
         this.lightSetStorageBuffer = device.createBuffer({
             label: "lights",
@@ -97,9 +97,12 @@ export class Lights {
     }
 
     private populateLightsBuffer() {
+        // Fixed integer PRNG: identical colors on every reload without another dependency.
+        let seed = 5650;
         for (let lightIdx = 0; lightIdx < Lights.maxNumLights; ++lightIdx) {
             // light pos is set by compute shader so no need to set it here
-            const lightColor = vec3.scale(hueToRgb(Math.random()), Lights.lightIntensity);
+            seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+            const lightColor = vec3.scale(hueToRgb(seed / 4294967296), Lights.lightIntensity);
             this.lightsArray.set(lightColor, (lightIdx * Lights.numFloatsPerLight) + 4);
         }
 
@@ -110,14 +113,18 @@ export class Lights {
         device.queue.writeBuffer(this.lightSetStorageBuffer, 0, new Uint32Array([this.numLights]));
     }
 
-    doLightClustering(encoder: GPUCommandEncoder) {
+    doLightClustering(_encoder: GPUCommandEncoder) {
         // TODO-2: run the light clustering compute pass(es) here
         // implementing clustering here allows for reusing the code in both Forward+ and Clustered Deferred
     }
 
     // CHECKITOUT: this is where the light movement compute shader is dispatched from the host
     onFrame(time: number) {
-        device.queue.writeBuffer(this.timeUniformBuffer, 0, new Float32Array([time]));
+        if (!this.paused && this.previousTime !== undefined) {
+            this.animationTime += Math.min(time - this.previousTime, 100);
+        }
+        this.previousTime = time;
+        device.queue.writeBuffer(this.timeUniformBuffer, 0, new Float32Array([this.animationTime]));
 
         // not using same encoder as render pass so this doesn't interfere with measuring actual rendering performance
         const encoder = device.createCommandEncoder();

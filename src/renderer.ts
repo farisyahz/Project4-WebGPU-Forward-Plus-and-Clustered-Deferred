@@ -35,13 +35,15 @@ export async function initWebGPU() {
         throw new Error("WebGPU not supported on this browser");
     }
 
-    const adapter = await navigator.gpu.requestAdapter();
+    const adapter = await navigator.gpu.requestAdapter({ powerPreference: 'high-performance' });
     if (!adapter)
     {
         throw new Error("no appropriate GPUAdapter found");
     }
 
     device = await adapter.requestDevice();
+    device.addEventListener('uncapturederror', event => console.error('WebGPU:', event.error.message));
+    device.lost.then(info => console.error('WebGPU device lost:', info.message));
 
     context = canvas.getContext("webgpu")!;
     canvasFormat = navigator.gpu.getPreferredCanvasFormat();
@@ -78,6 +80,16 @@ export async function initWebGPU() {
             }
         ]
     });
+}
+
+function updateCanvasSize() {
+    const width = Math.max(1, Math.min(device.limits.maxTextureDimension2D, Math.round(canvas.clientWidth * window.devicePixelRatio)));
+    const height = Math.max(1, Math.min(device.limits.maxTextureDimension2D, Math.round(canvas.clientHeight * window.devicePixelRatio)));
+    if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+        aspectRatio = width / height;
+    }
 }
 
 export const vertexBufferLayout: GPUVertexBufferLayout = {
@@ -128,6 +140,7 @@ export abstract class Renderer {
 
     // CHECKITOUT: this is the main rendering loop
     private onFrame(time: number) {
+        updateCanvasSize();
         if (this.prevTime == 0) {
             this.prevTime = time;
         }
