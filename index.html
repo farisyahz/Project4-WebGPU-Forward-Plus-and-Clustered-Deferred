@@ -3,8 +3,9 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="data:,">
-    <title>WebGPU Lighting Lab — Forward+ and Clustered Deferred</title>
+    <title>WebGPU Lighting Lab: Forward+ and Clustered Deferred</title>
 
     <link rel="stylesheet" href="./style.css">
   </head>
@@ -12,13 +13,13 @@
   <body>
     <canvas id="mainCanvas"></canvas>
     <aside id="hud">
-      <div class="eyebrow">CIS 5650 / Project 04</div>
-      <h1>Lighting Lab<span>WebGPU</span></h1>
-      <p id="scene-info">Loading Sponza…</p>
-      <div class="timings"><div><span>GPU passes</span><strong id="gpu-time">—</strong></div><div><span>CPU encoding</span><strong id="cpu-time">—</strong></div></div>
-      <p id="status" role="status">Initializing WebGPU…</p>
+      <div class="project-label">CIS 5650 / Project 4 / WebGPU</div>
+      <h1>Lighting Lab</h1>
+      <p id="scene-info">Loading Sponza...</p>
+      <div class="timings"><div><span>GPU passes</span><strong id="gpu-time">Pending</strong></div><div><span>CPU encoding</span><strong id="cpu-time">Pending</strong></div></div>
+      <p id="status" role="status">Initializing WebGPU...</p>
       <button id="cancel-benchmark" hidden>Cancel benchmark</button>
-      <p class="help">Hold mouse to look · WASD to move · Q/E up/down · Shift to accelerate</p>
+      <p class="help">Hold mouse to look. WASD to move.<br>Q/E up/down. Shift to move faster.</p>
     </aside>
     <script type="module" src="./src/main.ts"></script>
   </body>

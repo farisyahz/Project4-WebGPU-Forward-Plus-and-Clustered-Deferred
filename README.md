@@ -261,7 +261,21 @@ python scripts/plot_benchmarks.py
 
 ## Deployment and submission
 
-The workflow builds on pushes to `main`. Open the repository's **Settings**, select **Pages**, and choose **GitHub Actions** as the source. Enable workflows for the fork as well. After deployment, check that the scene loads and the controls work on the public URL. Submit the course PR with the title **Project 4: Faris Rafie Syahzani**. The [submission description](docs/submission.md) is ready to use.
+The [deployment workflow](.github/workflows/static.yml) builds the app and publishes `dist` when changes reach `main`. It sets the repository URL prefix and copies the scene assets during the build.
+
+1. In the fork's **Settings**, open **Pages**. Under **Build and deployment**, choose **GitHub Actions** as the source. The workflow is already included, so there is no need to create another one.
+2. Open the **Actions** tab and enable workflows if GitHub asks.
+3. Push the implementation branch:
+
+   ```sh
+   git push -u origin codex/lighting-lab
+   ```
+
+4. Open a pull request in this fork with `main` as the base and `codex/lighting-lab` as the compare branch, then merge it. This is separate from the course submission PR.
+5. In **Actions**, wait for **Deploy static content to Pages** to finish. If the code was already on `main` before Pages was enabled, open that workflow and use **Run workflow** on `main`.
+6. Open the [public demo](https://farisyahz.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred/). Check that Sponza loads and the renderer controls work, then update the publication note at the top of this README.
+
+Submit the course PR with the title **Project 4: Faris Rafie Syahzani**. The [submission description](docs/submission.md) is ready to use.
 
 ## Credits
 

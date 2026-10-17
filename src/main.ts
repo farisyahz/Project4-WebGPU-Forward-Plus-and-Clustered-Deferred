@@ -122,7 +122,7 @@ export async function runBenchmark(options: BenchmarkOptions = {}) {
                 lights.numLights = count;
                 lights.updateLightSetUniformNumLights();
                 setRenderer(mode);
-                status.textContent = `Measuring ${mode} · ${count} lights · run ${repeat + 1}/${repeats}`;
+                status.textContent = `Measuring ${mode} / ${count} lights / run ${repeat + 1}/${repeats}`;
                 const frames = await renderer.measureFrames(warmup, samples);
                 const clusters = mode === renderModes.naive ? null : await lights.getClusterStatistics();
                 runs.push({ mode, lights: count, repeat, summary: summarizeFrames(frames), frames, clusters });
