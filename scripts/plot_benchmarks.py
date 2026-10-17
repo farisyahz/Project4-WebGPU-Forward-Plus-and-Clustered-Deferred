@@ -78,7 +78,7 @@ optimizations = load(optimization_file)["experiments"]
 experiments = {e["name"]: aggregate(e["result"]) for e in optimizations}
 workloads = load("workloads.json")["experiments"]
 work = {e["name"]: aggregate(e["result"]) for e in workloads}
-note = "Hardware WebGPU · headless Chrome · Radeon 780M · 960 × 540 · error bars: SD across repetition means"
+note = "Hardware WebGPU, headless Chrome, Radeon 780M, 960 × 540. Error bars: SD across repetition means."
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
 for mode in COLORS:
@@ -96,7 +96,7 @@ for name, color in zip(["Deferred baseline", "Compute lighting", "Packed G-buffe
     line(ax, experiments[name], "clustered deferred", name, color)
 ax.set_title("Deferred pipeline variants", loc="left", fontweight="bold")
 ax.legend(ncol=2, fontsize=9)
-finish(fig, "deferred-variants", f"Same scene and camera · 30 warmup + 90 samples × {optimizations[0]['result']['methodology']['repeats']} repetitions per case · GPU milliseconds")
+finish(fig, "deferred-variants", f"Same scene and camera, 30 warmup + 90 samples × {optimizations[0]['result']['methodology']['repeats']} repetitions per case. GPU milliseconds.")
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.7))
 for enabled, color in [(False, "#7eafff"), (True, "#79ddbc")]:
@@ -128,7 +128,7 @@ ax.set_ylabel("Logical storage (bytes / pixel)")
 ax.set_ylim(0, 48)
 ax.set_title("Logical render-target storage", loc="left", fontweight="bold")
 ax.legend(loc="upper right")
-finish(fig, "gbuffer-memory", "Geometry: 32 → 12 B/pixel · shared HDR: 8 B/pixel · bloom excluded · format-based estimate")
+finish(fig, "gbuffer-memory", "Geometry: 32 to 12 B/pixel. Shared HDR: 8 B/pixel. Bloom excluded. Format-based estimate.")
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
 sizes = ["960x540", "1280x720", "1920x1080"]
@@ -147,7 +147,7 @@ for ax in axes:
     ax.legend()
 axes[0].set_title("Baseline renderers versus resolution", loc="left", fontweight="bold")
 axes[1].set_title("Bloom cost with packed compute deferred", loc="left", fontweight="bold")
-finish(fig, "resolution-bloom", "2,000 lights · 30 warmup + 60 samples × 2 repetitions per case")
+finish(fig, "resolution-bloom", "2,000 lights, 30 warmup + 60 samples × 2 repetitions per case")
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
 poses = ["Atrium", "Balcony", "Side aisle"]
@@ -167,7 +167,7 @@ for ax in axes:
     ax.set_ylim(bottom=0)
     ax.grid(axis="y", alpha=.4)
     ax.legend()
-finish(fig, "camera-grid", "2,000 lights · 960 × 540 · equal light seed/time; different visibility and cluster occupancy")
+finish(fig, "camera-grid", "2,000 lights, 960 × 540, equal light seed/time; different visibility and cluster occupancy")
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.6))
 for mode, ax in zip(["forward+", "clustered deferred"], axes):
@@ -175,7 +175,7 @@ for mode, ax in zip(["forward+", "clustered deferred"], axes):
         line(ax, aggregate(load(name)), mode, "128-entry fixed lists" if name.startswith("fixed") else "Variable-length pool", color)
     ax.set_title(LABELS[mode], loc="left", fontweight="bold")
     ax.legend()
-finish(fig, "light-list-optimization", "Diagnostic before/after runs only: 10 warmup + 30 samples × 1 · before shared HDR composite was introduced")
+finish(fig, "light-list-optimization", "Diagnostic runs: 10 warmup + 30 samples, one repetition, before the shared HDR composite was introduced")
 
 all_rows = []
 datasets = [("Renderer sweep", baseline)] + [(e["name"], e["result"]) for e in optimizations + workloads]
