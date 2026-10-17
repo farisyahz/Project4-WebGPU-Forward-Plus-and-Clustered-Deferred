@@ -20,3 +20,12 @@
 5. Measured analysis, original media/README, deployment and submission preparation.
 
 The reference student repository is used for presentation inspiration only. Implementation and measured results are produced independently.
+
+## Milestone 2 — clustered Forward+
+
+- Shared camera layout (304 bytes), logarithmic depth slicing, conservative sphere/AABB clustering.
+- 128 stored indices per cluster; true counts are retained. Overflow falls back to all-light shading instead of truncation.
+- Occupancy, slices, overflow, albedo, normal and position debug views.
+- Shader constant substitution no longer uses `eval`.
+- `npm run build`: passed (only existing loaders.gl browser-external warning).
+- Chrome 960 × 540 frozen-frame comparison against naive at 1, 500, and 5,000 lights: every channel identical for all three cases. No console/WebGPU errors, including resize to 803 × 453.

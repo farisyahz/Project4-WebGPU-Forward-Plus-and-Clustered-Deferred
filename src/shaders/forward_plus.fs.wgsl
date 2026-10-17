@@ -1,16 +1,33 @@
-// TODO-2: implement the Forward+ fragment shader
+@group(0) @binding(0) var<uniform> camera: CameraUniforms;
+@group(0) @binding(1) var<storage, read> lightSet: LightSet;
+@group(0) @binding(2) var<storage, read> clusterSet: ClusterSet;
+@group(2) @binding(0) var diffuseTex: texture_2d<f32>;
+@group(2) @binding(1) var diffuseSampler: sampler;
 
-// See naive.fs.wgsl for basic fragment shader setup; this shader should use light clusters instead of looping over all lights
+struct FragmentInput {
+    @builtin(position) pixel: vec4f,
+    @location(0) pos: vec3f,
+    @location(1) nor: vec3f,
+    @location(2) uv: vec2f,
+}
 
-// ------------------------------------
-// Shading process:
-// ------------------------------------
-// Determine which cluster contains the current fragment.
-// Retrieve the number of lights that affect the current fragment from the cluster’s data.
-// Initialize a variable to accumulate the total light contribution for the fragment.
-// For each light in the cluster:
-//     Access the light's properties using its index.
-//     Calculate the contribution of the light based on its position, the fragment’s position, and the surface normal.
-//     Add the calculated contribution to the total light accumulation.
-// Multiply the fragment’s diffuse color by the accumulated light contribution.
-// Return the final color, ensuring that the alpha component is set appropriately (typically to 1).
+@fragment
+fn main(in: FragmentInput) -> @location(0) vec4f {
+    let albedo = textureSample(diffuseTex, diffuseSampler, in.uv);
+    if (albedo.a < 0.5) { discard; }
+    let normal = normalize(in.nor);
+    let index = clusterIndex(in.pixel.xy, in.pos, camera);
+    let count = clusterSet.clusters[index].count;
+    if (camera.debug.x != 0u) {
+        return vec4f(debugColor(camera.debug.x, count, in.pos, normal, albedo.rgb, camera), 1.0);
+    }
+    var lighting = vec3f(0.0);
+    let overflow = count > ${maxLightsPerCluster}u;
+    let iterations = select(count, lightSet.numLights, overflow);
+    for (var i = 0u; i < iterations; i++) {
+        var light = i;
+        if (!overflow) { light = clusterSet.clusters[index].indices[i]; }
+        lighting += calculateLightContrib(lightSet.lights[light], in.pos, normal);
+    }
+    return vec4f(albedo.rgb * lighting, 1.0);
+}

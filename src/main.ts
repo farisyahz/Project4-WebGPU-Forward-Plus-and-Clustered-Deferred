@@ -10,6 +10,7 @@ import { setupLoaders, Scene } from './stage/scene';
 import { Lights } from './stage/lights';
 import { Camera } from './stage/camera';
 import { Stage } from './stage/stage';
+import { debugViews, settings } from './settings';
 
 await initWebGPU();
 setupLoaders();
@@ -30,6 +31,7 @@ gui.add(lights, 'numLights').min(1).max(Lights.maxNumLights).step(1).onChange(()
 });
 gui.add(lights, 'paused').name('Pause lights');
 gui.add({ reset: () => { camera.reset(); lights.animationTime = 0; } }, 'reset').name('Reset scene');
+gui.add(settings, 'debugView', debugViews).name('Debug view');
 
 const stage = new Stage(scene, lights, camera, stats);
 

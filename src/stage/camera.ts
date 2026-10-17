@@ -1,16 +1,27 @@
 import { Mat4, mat4, Vec3, vec3 } from "wgpu-matrix";
 import { toRadians } from "../math_util";
 import { device, canvas, fovYDegrees, aspectRatio } from "../renderer";
+import { settings } from '../settings';
 
 class CameraUniforms {
-    readonly buffer = new ArrayBuffer(16 * 4);
+    // Four matrices followed by three aligned vec4s, matching WGSL.
+    readonly buffer = new ArrayBuffer(304);
     private readonly floatView = new Float32Array(this.buffer);
+    private readonly uintView = new Uint32Array(this.buffer);
 
     set viewProjMat(mat: Mat4) {
         this.floatView.set(mat, 0);
     }
 
-    // TODO-2: add extra functions to set values needed for light clustering here
+    update(view: Mat4, projection: Mat4, viewProjection: Mat4) {
+        this.viewProjMat = viewProjection;
+        this.floatView.set(view, 16);
+        this.floatView.set(mat4.inverse(projection), 32);
+        this.floatView.set(mat4.inverse(viewProjection), 48);
+        this.floatView.set([canvas.width, canvas.height, Camera.nearPlane, Camera.farPlane], 64);
+        this.uintView.set([settings.clusterX, settings.clusterY, settings.clusterZ, 0], 68);
+        this.uintView.set([settings.debugView, 0, 0, 0], 72);
+    }
 }
 
 export class Camera {
@@ -137,9 +148,7 @@ export class Camera {
         const lookPos = vec3.add(this.cameraPos, vec3.scale(this.cameraFront, 1));
         const viewMat = mat4.lookAt(this.cameraPos, lookPos, [0, 1, 0]);
         const viewProjMat = mat4.mul(this.projMat, viewMat);
-        this.uniforms.viewProjMat = viewProjMat;
-
-        // TODO-2: write to extra buffers needed for light clustering here
+        this.uniforms.update(viewMat, this.projMat, viewProjMat);
 
         device.queue.writeBuffer(this.uniformsBuffer, 0, this.uniforms.buffer);
     }
