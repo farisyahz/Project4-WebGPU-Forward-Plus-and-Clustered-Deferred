@@ -1,6 +1,7 @@
 // CHECKITOUT: this file loads all the shaders and preprocesses them with some common code
 
 import commonRaw from './common.wgsl?raw';
+import clusteredLightingRaw from './clustered_lighting.wgsl?raw';
 
 import naiveVertRaw from './naive.vs.wgsl?raw';
 import naiveFragRaw from './naive.fs.wgsl?raw';
@@ -51,11 +52,12 @@ function processShaderRaw(raw: string) {
 export const naiveVertSrc: string = processShaderRaw(naiveVertRaw);
 export const naiveFragSrc: string = processShaderRaw(naiveFragRaw);
 
-export const forwardPlusFragSrc: string = processShaderRaw(forwardPlusFragRaw);
+const clusteredLightingSrc = evalShaderRaw(clusteredLightingRaw);
+export const forwardPlusFragSrc: string = processShaderRaw(clusteredLightingSrc + forwardPlusFragRaw);
 
 export const clusteredDeferredFragSrc: string = processShaderRaw(clusteredDeferredFragRaw);
 export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(clusteredDeferredFullscreenVertRaw);
-export const clusteredDeferredFullscreenFragSrc: string = processShaderRaw(clusteredDeferredFullscreenFragRaw);
+export const clusteredDeferredFullscreenFragSrc: string = processShaderRaw(clusteredLightingSrc + clusteredDeferredFullscreenFragRaw);
 
 export const moveLightsComputeSrc: string = processShaderRaw(moveLightsComputeRaw);
 export const clusteringComputeSrc: string = processShaderRaw(clusteringComputeRaw);

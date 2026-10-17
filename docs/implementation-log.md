@@ -29,3 +29,10 @@ The reference student repository is used for presentation inspiration only. Impl
 - Shader constant substitution no longer uses `eval`.
 - `npm run build`: passed (only existing loaders.gl browser-external warning).
 - Chrome 960 × 540 frozen-frame comparison against naive at 1, 500, and 5,000 lights: every channel identical for all three cases. No console/WebGPU errors, including resize to 803 × 453.
+
+## Milestone 3 — baseline clustered deferred
+
+- Geometry writes world position (`rgba32float`), normal (`rgba16float`), albedo (`rgba8unorm`); fullscreen triangle shades visible pixels using the same light-list function as Forward+.
+- 28 bytes/pixel of color attachments plus 4 bytes/pixel depth (logical storage, excluding implementation-specific allocation overhead).
+- Chrome 960 × 540 comparisons at 1/500/5,000 lights passed with no errors. Deferred mean RGB error versus naive: 0 / 0.03994 / 0.19854 on a 0–255 scale. At 5,000 lights, 991 of 518,400 pixels have a channel error >3; maximum channel error 42 near bright lights. Quantization is retained as an explicit measured tradeoff.
+- `npm run build`: passed.
