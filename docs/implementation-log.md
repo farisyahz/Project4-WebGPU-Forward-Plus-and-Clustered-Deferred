@@ -44,3 +44,11 @@ The reference student repository is used for presentation inspiration only. Impl
 - Smoke sweep (`benchmarks/fixed-list-smoke.json`): 10 warmup + 30 sampled frames, one repetition, 960 × 540, headless Chrome 155, AMD RDNA 3 / Radeon 780M. No console or validation errors. These short smoke runs establish a diagnostic baseline, not final publication-quality results.
 - Diagnostic finding: at 5,000 lights the default grid has 2,376 overflowing clusters, maximum occupancy 1,283, mean occupancy 167.36. The correct fallback is expensive; compact variable-length lists are the next optimization.
 - Hardware inventory also contains an RTX 4050 Laptop GPU. Browser selection must be recorded rather than inferred from installed hardware.
+
+## Optimization — compact variable-length light lists
+
+- Replaced fixed 128-index arrays with `(offset, count)` records and a shared pool. Each cluster counts intersections, reserves one contiguous range atomically, then writes its list in ascending light-index order.
+- Default pool budget is 256 indices per cluster on average, not a per-cluster cap. Default grid storage is 4,755,472 bytes including records/header, versus 2,377,728 bytes for the previous capped lists. A pool exhaustion sentinel retains the correct all-lights fallback.
+- At 5,000 lights/Atrium, 771,193 of 1,179,648 available indices are used and overflow is zero, including clusters with 1,283 lights.
+- Frozen image checks at multiple light counts, default/balcony/side-aisle cameras and multiple grids passed; Forward+ remains pixel-identical to naive. Deferred quantization error remains unchanged. Raw correctness data: `benchmarks/compact-list-validation.json`.
+- Short 10/30/1 smoke runs on the same headless AMD adapter: Forward+ 5,000-light mean GPU 262.95 → 36.26 ms; deferred 53.08 → 10.04 ms. Clustering itself costs 1.02 → 1.43 ms for Forward+. Timing comparisons are preliminary, with limited warmup/repetitions and possible thermal differences; preserve both raw datasets rather than presenting these as final headline results.

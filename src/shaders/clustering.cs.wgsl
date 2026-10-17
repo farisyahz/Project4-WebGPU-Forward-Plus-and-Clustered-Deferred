@@ -1,6 +1,13 @@
 @group(0) @binding(0) var<uniform> camera: CameraUniforms;
 @group(0) @binding(1) var<storage, read> lightSet: LightSet;
 @group(0) @binding(2) var<storage, read_write> clusterSet: ClusterSet;
+struct WritablePool {
+    allocated: atomic<u32>,
+    unused: u32,
+    padding: vec2u,
+    indices: array<u32>,
+}
+@group(0) @binding(3) var<storage, read_write> indexPool: WritablePool;
 
 fn pointAtDepth(uv: vec2f, depth: f32) -> vec3f {
     let ray = camera.inverseProjMat * vec4f(uv * vec2f(2.0, -2.0) + vec2f(-1.0, 1.0), 1.0, 1.0);
@@ -33,10 +40,26 @@ fn main(@builtin(global_invocation_id) global: vec3u) {
         let center = (camera.viewMat * vec4f(lightSet.lights[light].pos, 1.0)).xyz;
         let delta = center - clamp(center, lower, upper);
         if (dot(delta, delta) <= ${lightRadius} * ${lightRadius}) {
-            if (count < ${maxLightsPerCluster}u) { clusterSet.clusters[index].indices[count] = light; }
             count++;
         }
     }
-    // Preserve true counts so shading falls back rather than losing lights.
     clusterSet.clusters[index].count = count;
+    if (count == 0u) { clusterSet.clusters[index].offset = 0u; return; }
+    // One allocation per cluster avoids a fixed per-cluster cap and keeps each
+    // list contiguous. A second intersection sweep writes indices in light order.
+    let offset = atomicAdd(&indexPool.allocated, count);
+    if (offset + count > arrayLength(&indexPool.indices)) {
+        clusterSet.clusters[index].offset = 0xffffffffu;
+        return; // A correct all-lights fallback handles exhausted pool storage.
+    }
+    clusterSet.clusters[index].offset = offset;
+    var output = offset;
+    for (var light = 0u; light < lightSet.numLights; light++) {
+        let center = (camera.viewMat * vec4f(lightSet.lights[light].pos, 1.0)).xyz;
+        let delta = center - clamp(center, lower, upper);
+        if (dot(delta, delta) <= ${lightRadius} * ${lightRadius}) {
+            indexPool.indices[output] = light;
+            output++;
+        }
+    }
 }

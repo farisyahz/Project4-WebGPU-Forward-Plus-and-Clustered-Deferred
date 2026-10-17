@@ -19,11 +19,13 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
             { binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT, buffer: { type: 'uniform' } },
             { binding: 1, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
             { binding: 2, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
+            { binding: 3, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
         ] });
         this.sceneGroup = renderer.device.createBindGroup({ label: 'deferred scene', layout: sceneLayout, entries: [
             { binding: 0, resource: { buffer: this.camera.uniformsBuffer } },
             { binding: 1, resource: { buffer: this.lights.lightSetStorageBuffer } },
             { binding: 2, resource: { buffer: this.lights.clusterBuffer } },
+            { binding: 3, resource: { buffer: this.lights.indexPool } },
         ] });
         this.geometryPipeline = renderer.device.createRenderPipeline({
             label: 'G-buffer geometry',

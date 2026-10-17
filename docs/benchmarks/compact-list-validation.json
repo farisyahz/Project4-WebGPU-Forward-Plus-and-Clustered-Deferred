@@ -1,0 +1,175 @@
+{
+  "rows": [
+    {
+      "lights": 1,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 0.006076388888888889,
+      "requiredIndices": 28,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 1,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "clustered deferred",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 0.006076388888888889,
+      "requiredIndices": 28,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 500,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 17.032118055555557,
+      "requiredIndices": 78484,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 500,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "clustered deferred",
+      "max": 8,
+      "mean": 0.03994277263374486,
+      "pixelsAbove3": 22,
+      "overflow": 0,
+      "meanOccupancy": 17.032118055555557,
+      "requiredIndices": 78484,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 5000,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 167.35959201388889,
+      "requiredIndices": 771193,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 5000,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "clustered deferred",
+      "max": 42,
+      "mean": 0.1985403806584362,
+      "pixelsAbove3": 991,
+      "overflow": 0,
+      "meanOccupancy": 167.35959201388889,
+      "requiredIndices": 771193,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 5000,
+      "pose": "Balcony",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 127.55121527777777,
+      "requiredIndices": 587756,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 5000,
+      "pose": "Balcony",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "mode": "clustered deferred",
+      "max": 18,
+      "mean": 0.18094843106995884,
+      "pixelsAbove3": 1205,
+      "overflow": 0,
+      "meanOccupancy": 127.55121527777777,
+      "requiredIndices": 587756,
+      "poolCapacity": 1179648
+    },
+    {
+      "lights": 5000,
+      "pose": "Side aisle",
+      "grid": [
+        8,
+        6,
+        16
+      ],
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 0,
+      "meanOccupancy": 140.1796875,
+      "requiredIndices": 107658,
+      "poolCapacity": 196608
+    },
+    {
+      "lights": 5000,
+      "pose": "Side aisle",
+      "grid": [
+        8,
+        6,
+        16
+      ],
+      "mode": "clustered deferred",
+      "max": 26,
+      "mean": 0.14428562242798354,
+      "pixelsAbove3": 65,
+      "overflow": 0,
+      "meanOccupancy": 140.1796875,
+      "requiredIndices": 107658,
+      "poolCapacity": 196608
+    }
+  ],
+  "errors": []
+}

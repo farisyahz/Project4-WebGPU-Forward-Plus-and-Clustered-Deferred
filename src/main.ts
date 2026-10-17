@@ -36,7 +36,7 @@ export function setRenderer(mode: string) {
 }
 
 const gui = new GUI({ width: 290 });
-gui.add(controls, 'mode', renderModes).name('Renderer').onChange(setRenderer);
+gui.add(controls, 'mode', { 'Naive forward': renderModes.naive, 'Forward+': renderModes.forwardPlus, 'Clustered deferred': renderModes.clusteredDeferred }).name('Renderer').onChange(setRenderer);
 const sceneFolder = gui.addFolder('Scene');
 sceneFolder.add(lights, 'numLights', 1, Lights.maxNumLights, 1).name('Point lights').listen().onChange(() => lights.updateLightSetUniformNumLights());
 sceneFolder.add(lights, 'paused').name('Pause lights').listen();
@@ -55,6 +55,10 @@ debugFolder.add(controls, 'grid', ['8 × 6 × 16', '16 × 12 × 24', '24 × 18 �
     setRenderer(controls.mode);
 });
 const benchmarkFolder = gui.addFolder('Measurements');
+debugFolder.add(settings, 'lightIndexBudget', [64, 128, 256, 512]).name('Pool budget / cluster').onChange(() => {
+    lights.configureClustering();
+    setRenderer(controls.mode);
+});
 benchmarkFolder.add({ run: () => void runBenchmark({ modes: [controls.mode], lightCounts: [lights.numLights], repeats: 1 }).catch(showError) }, 'run').name('Benchmark current');
 benchmarkFolder.add({ run: () => void runBenchmark().catch(showError) }, 'run').name('Full light sweep');
 benchmarkFolder.add({ save: () => { if (lastBenchmark) downloadJson('lighting-benchmark.json', lastBenchmark); } }, 'save').name('Export last results');

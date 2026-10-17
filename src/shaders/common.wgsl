@@ -11,10 +11,16 @@ struct LightSet {
 }
 
 struct Cluster {
+    offset: u32,
     count: u32,
-    indices: array<u32, ${maxLightsPerCluster}>,
 }
 struct ClusterSet { clusters: array<Cluster> }
+struct LightIndexPool {
+    allocated: u32,
+    unused: u32,
+    padding: vec2u,
+    indices: array<u32>,
+}
 
 struct CameraUniforms {
     viewProjMat: mat4x4f,
@@ -43,11 +49,11 @@ fn reconstructPosition(pixel: vec2f, depth: f32, data: CameraUniforms) -> vec3f 
     return world.xyz / world.w;
 }
 
-fn debugColor(mode: u32, count: u32, world: vec3f, normal: vec3f, albedo: vec3f, data: CameraUniforms) -> vec3f {
+fn debugColor(mode: u32, count: u32, overflow: bool, world: vec3f, normal: vec3f, albedo: vec3f, data: CameraUniforms) -> vec3f {
     switch mode {
         case 1u: {
-            if (count > ${maxLightsPerCluster}u) { return vec3f(1.0, 0.0, 1.0); }
-            let t = min(f32(count) / f32(${maxLightsPerCluster}), 1.0);
+            if (overflow) { return vec3f(1.0, 0.0, 1.0); }
+            let t = min(f32(count) / 512.0, 1.0);
             return vec3f(t, t * t, 1.0 - t) * select(1.0, 0.0, count == 0u);
         }
         case 2u: {
@@ -57,7 +63,7 @@ fn debugColor(mode: u32, count: u32, world: vec3f, normal: vec3f, albedo: vec3f,
         case 3u: { return albedo; }
         case 4u: { return normal * 0.5 + 0.5; }
         case 5u: { return abs(world) / 12.0; }
-        case 6u: { return select(vec3f(0.03), vec3f(1.0, 0.0, 1.0), count > ${maxLightsPerCluster}u); }
+        case 6u: { return select(vec3f(0.03), vec3f(1.0, 0.0, 1.0), overflow); }
         default: { return vec3f(0.0); }
     }
 }

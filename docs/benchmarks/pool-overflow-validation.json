@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "lights": 5000,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "budget": 64,
+      "mode": "forward+",
+      "max": 0,
+      "mean": 0,
+      "pixelsAbove3": 0,
+      "overflow": 1621,
+      "meanOccupancy": 167.35959201388889,
+      "requiredIndices": 771193,
+      "poolCapacity": 294912
+    },
+    {
+      "lights": 5000,
+      "pose": "Atrium",
+      "grid": [
+        16,
+        12,
+        24
+      ],
+      "budget": 64,
+      "mode": "clustered deferred",
+      "max": 42,
+      "mean": 0.1985403806584362,
+      "pixelsAbove3": 991,
+      "overflow": 1671,
+      "meanOccupancy": 167.35959201388889,
+      "requiredIndices": 771193,
+      "poolCapacity": 294912
+    }
+  ],
+  "errors": []
+}

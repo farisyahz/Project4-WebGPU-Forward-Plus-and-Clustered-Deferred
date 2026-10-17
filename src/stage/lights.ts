@@ -32,6 +32,7 @@ export class Lights {
     moveLightsComputePipeline: GPUComputePipeline;
 
     clusterBuffer!: GPUBuffer;
+    indexPool!: GPUBuffer;
     private clusteringGroup!: GPUBindGroup;
     private clusteringPipeline!: GPUComputePipeline;
 
@@ -119,24 +120,30 @@ export class Lights {
     }
 
     configureClustering() {
-        const size = settings.clusterX * settings.clusterY * settings.clusterZ * (1 + shaders.constants.maxLightsPerCluster) * 4;
-        if (this.clusterBuffer?.size === size) return;
+        const size = settings.clusterX * settings.clusterY * settings.clusterZ * 8;
+        const poolSize = 16 + size / 8 * settings.lightIndexBudget * 4;
+        if (this.clusterBuffer?.size === size && this.indexPool?.size === poolSize) return;
         this.clusterBuffer?.destroy();
+        this.indexPool?.destroy();
         this.clusterBuffer = device.createBuffer({ label: 'cluster counts and indices', size, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC });
+        this.indexPool = device.createBuffer({ label: 'compact light-index pool', size: poolSize, usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST });
         const layout = device.createBindGroupLayout({ label: 'clustering layout', entries: [
             { binding: 0, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'uniform' } },
             { binding: 1, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
             { binding: 2, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'storage' } },
+            { binding: 3, visibility: GPUShaderStage.COMPUTE, buffer: { type: 'storage' } },
         ] });
         this.clusteringGroup = device.createBindGroup({ layout, entries: [
             { binding: 0, resource: { buffer: this.camera.uniformsBuffer } },
             { binding: 1, resource: { buffer: this.lightSetStorageBuffer } },
             { binding: 2, resource: { buffer: this.clusterBuffer } },
+            { binding: 3, resource: { buffer: this.indexPool } },
         ] });
         this.clusteringPipeline = device.createComputePipeline({ label: 'sphere-AABB clustering', layout: device.createPipelineLayout({ bindGroupLayouts: [layout] }), compute: { module: device.createShaderModule({ label: 'clustering compute', code: shaders.clusteringComputeSrc }), entryPoint: 'main' } });
     }
 
     doLightClustering(encoder: GPUCommandEncoder) {
+        encoder.clearBuffer(this.indexPool, 0, 16);
         const pass = encoder.beginComputePass({ label: 'light clustering', timestampWrites: profiler.timestampWrites('Light clustering') });
         pass.setPipeline(this.clusteringPipeline);
         pass.setBindGroup(0, this.clusteringGroup);
@@ -154,18 +161,18 @@ export class Lights {
             const data = new Uint32Array(read.getMappedRange());
             const histogram: Record<number, number> = {};
             let maximum = 0, total = 0, occupied = 0, overflow = 0;
-            const stride = 1 + shaders.constants.maxLightsPerCluster;
+            const stride = 2;
             for (let i = 0; i < data.length; i += stride) {
-                const count = data[i];
+                const count = data[i + 1];
                 histogram[count] = (histogram[count] || 0) + 1;
                 maximum = Math.max(maximum, count);
                 total += count;
                 occupied += Number(count > 0);
-                overflow += Number(count > shaders.constants.maxLightsPerCluster);
+                overflow += Number(data[i] === 0xffffffff);
             }
             const clusters = data.length / stride;
             read.unmap();
-            return { clusters, occupied, overflow, maximum, mean: total / clusters, bytes: this.clusterBuffer.size, capacity: shaders.constants.maxLightsPerCluster, histogram };
+            return { clusters, occupied, overflow, maximum, mean: total / clusters, bytes: this.clusterBuffer.size + this.indexPool.size, poolCapacity: (this.indexPool.size - 16) / 4, requiredIndices: total, histogram };
         } finally { read.destroy(); }
     }
 
