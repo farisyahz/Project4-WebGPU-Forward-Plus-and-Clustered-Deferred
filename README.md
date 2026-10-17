@@ -52,6 +52,8 @@ npm run dev
 
 Use **Reset scene** with paused lights for visual comparisons. Changing a cluster debug view while using naive rendering selects Forward+, since naive rendering has no cluster data. Bloom is bypassed in debug views.
 
+The top-left monitor shows live FPS, the observed minimum and maximum, and a scrolling history graph. Click it to cycle through the available performance graphs. FPS measures the render loop's frame rate, while the GPU and CPU timings in the bottom-left panel measure individual parts of the rendering work.
+
 ## Renderers
 
 ### Naive forward
