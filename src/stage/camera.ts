@@ -84,7 +84,7 @@ export class Camera {
     }
 
     private onKeyEvent(event: KeyboardEvent, down: boolean) {
-        if (!this.inputEnabled || (event.target instanceof HTMLElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(event.target.tagName))) return;
+        if (!this.inputEnabled || (down && event.target instanceof HTMLElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(event.target.tagName))) return;
         this.keys[event.key.toLowerCase()] = down;
         if (this.keys['alt']) { // prevent issues from alt shortcuts
             event.preventDefault();

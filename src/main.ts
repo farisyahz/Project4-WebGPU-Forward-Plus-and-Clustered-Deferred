@@ -79,7 +79,11 @@ benchmarkFolder.add({ save: () => { if (lastBenchmark) downloadJson('lighting-be
 const status = document.getElementById('status')!;
 const cancelBenchmark = document.getElementById('cancel-benchmark')!;
 cancelBenchmark.addEventListener('click', () => renderer.cancelMeasurement());
-function showError(error: unknown) { console.error(error); status.textContent = String(error); }
+function showError(error: unknown) {
+    if (error instanceof Error && error.message === 'Benchmark cancelled') { status.textContent = 'Benchmark cancelled.'; return; }
+    console.error(error);
+    status.textContent = String(error);
+}
 
 interface BenchmarkOptions {
     modes?: string[];
@@ -102,8 +106,8 @@ export async function runBenchmark(options: BenchmarkOptions = {}) {
     benchmarkRunning = true;
     gui.domElement.style.pointerEvents = 'none';
     cancelBenchmark.hidden = false;
-    settings.renderWidth = canvas.width;
-    settings.renderHeight = canvas.height;
+    settings.renderWidth = original.width || canvas.width;
+    settings.renderHeight = original.height || canvas.height;
     camera.keys = {};
     camera.inputEnabled = false;
     lights.paused = true;

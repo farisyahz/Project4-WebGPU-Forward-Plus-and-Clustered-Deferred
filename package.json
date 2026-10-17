@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
+    "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "build": "npm run typecheck && vite build && node scripts/copy-scenes.mjs"
   },
