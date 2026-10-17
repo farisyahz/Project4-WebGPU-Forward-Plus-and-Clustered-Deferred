@@ -19,6 +19,21 @@ await scene.loadGltf('./scenes/sponza/Sponza.gltf');
 export const camera = new Camera();
 export const lights = new Lights(camera);
 const stats = new Stats();
+stats.showPanel(0);
+stats.dom.id = 'fps-monitor';
+stats.dom.removeAttribute('style');
+stats.dom.title = 'Live FPS and history. Click to cycle performance graphs.';
+stats.dom.setAttribute('role', 'button');
+stats.dom.setAttribute('aria-label', 'Live performance graphs. Activate to switch graphs.');
+stats.dom.tabIndex = 0;
+stats.dom.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        stats.dom.click();
+    }
+});
+document.getElementById('hud')!.appendChild(stats.dom);
+
 const stage = new Stage(scene, lights, camera, stats);
 export const renderModes = {
     naive: 'naive',
