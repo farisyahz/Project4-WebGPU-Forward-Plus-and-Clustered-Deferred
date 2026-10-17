@@ -129,6 +129,7 @@ export abstract class Renderer {
     private prevTime: number = 0;
     private frameRequestId: number;
     private measurement: ((timing: FrameTiming) => void) | undefined;
+    private readonly bundles = new Map<GPURenderPipeline, GPURenderBundle>();
 
     constructor(stage: Stage) {
         this.scene = stage.scene;
@@ -144,6 +145,28 @@ export abstract class Renderer {
     }
 
     protected abstract draw(): void;
+
+    protected renderScene(pass: GPURenderPassEncoder, pipeline: GPURenderPipeline, sceneGroup: GPUBindGroup, colorFormats: GPUTextureFormat[], depthFormat: GPUTextureFormat) {
+        const encode = (target: GPURenderPassEncoder | GPURenderBundleEncoder) => {
+            target.setPipeline(pipeline);
+            target.setBindGroup(0, sceneGroup);
+            this.scene.iterate(node => target.setBindGroup(1, node.modelBindGroup), material => target.setBindGroup(2, material.materialBindGroup), primitive => {
+                target.setVertexBuffer(0, primitive.vertexBuffer);
+                target.setIndexBuffer(primitive.indexBuffer, 'uint32');
+                target.drawIndexed(primitive.numIndices);
+            });
+        };
+        if (settings.bundles) {
+            let bundle = this.bundles.get(pipeline);
+            if (!bundle) {
+                const recorder = device.createRenderBundleEncoder({ label: 'static scene draws', colorFormats, depthStencilFormat: depthFormat });
+                encode(recorder);
+                bundle = recorder.finish();
+                this.bundles.set(pipeline, bundle);
+            }
+            pass.executeBundles([bundle]);
+        } else encode(pass);
+    }
 
     protected submit(encoder: GPUCommandEncoder) {
         profiler.resolve(encoder);

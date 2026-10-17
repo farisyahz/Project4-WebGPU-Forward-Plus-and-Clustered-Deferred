@@ -55,6 +55,9 @@ debugFolder.add(controls, 'grid', ['8 × 6 × 16', '16 × 12 × 24', '24 × 18 �
     setRenderer(controls.mode);
 });
 const benchmarkFolder = gui.addFolder('Measurements');
+const optimizations = gui.addFolder('Effects and optimizations');
+optimizations.add(settings, 'bundles').name('Render bundles');
+optimizations.add(settings, 'depthPrepass').name('Forward+ depth prepass');
 debugFolder.add(settings, 'lightIndexBudget', [64, 128, 256, 512]).name('Pool budget / cluster').onChange(() => {
     lights.configureClustering();
     setRenderer(controls.mode);

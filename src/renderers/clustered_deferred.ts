@@ -64,13 +64,7 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
             colorAttachments: this.textures.map(texture => ({ view: texture.createView(), clearValue: [0, 0, 0, 0], loadOp: 'clear', storeOp: 'store' })),
             depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: 'clear', depthStoreOp: 'store' },
         });
-        geometry.setPipeline(this.geometryPipeline);
-        geometry.setBindGroup(0, this.sceneGroup);
-        this.scene.iterate(node => geometry.setBindGroup(1, node.modelBindGroup), material => geometry.setBindGroup(2, material.materialBindGroup), primitive => {
-            geometry.setVertexBuffer(0, primitive.vertexBuffer);
-            geometry.setIndexBuffer(primitive.indexBuffer, 'uint32');
-            geometry.drawIndexed(primitive.numIndices);
-        });
+        this.renderScene(geometry, this.geometryPipeline, this.sceneGroup, this.formats, 'depth32float');
         geometry.end();
         const lighting = encoder.beginRenderPass({ label: 'deferred lighting', timestampWrites: renderer.profiler.timestampWrites('Deferred lighting'), colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), loadOp: 'clear', storeOp: 'store', clearValue: [0, 0, 0, 1] }] });
         lighting.setPipeline(this.lightingPipeline);

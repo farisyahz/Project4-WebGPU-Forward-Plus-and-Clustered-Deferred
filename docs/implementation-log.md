@@ -52,3 +52,10 @@ The reference student repository is used for presentation inspiration only. Impl
 - At 5,000 lights/Atrium, 771,193 of 1,179,648 available indices are used and overflow is zero, including clusters with 1,283 lights.
 - Frozen image checks at multiple light counts, default/balcony/side-aisle cameras and multiple grids passed; Forward+ remains pixel-identical to naive. Deferred quantization error remains unchanged. Raw correctness data: `benchmarks/compact-list-validation.json`.
 - Short 10/30/1 smoke runs on the same headless AMD adapter: Forward+ 5,000-light mean GPU 262.95 → 36.26 ms; deferred 53.08 → 10.04 ms. Clustering itself costs 1.02 → 1.43 ms for Forward+. Timing comparisons are preliminary, with limited warmup/repetitions and possible thermal differences; preserve both raw datasets rather than presenting these as final headline results.
+
+## Milestone 5 — render bundles and Forward+ prepass
+
+- Static scene commands can be recorded once per geometry pipeline and replayed as render bundles in all renderers.
+- Optional alpha-tested depth prepass followed by equal-depth shading. A stencil claim prevents later coplanar fragments from overwriting the first fragment at a depth tie, preserving baseline draw-order behavior. No depth-based cluster culling is claimed.
+- Frozen-frame bundle toggles are pixel-identical for all renderers. Prepass off/on and prepass+bundles are pixel-identical after the depth-tie fix.
+- Short post-fix Forward+ smoke: 5,000 lights, 30 warmup/20 samples, GPU 32.13 → 22.07 ms including prepass; 500-light CPU encoding 0.260 → 0.125 ms with bundles. These are diagnostic checks; final experiments need repeated sampling.
