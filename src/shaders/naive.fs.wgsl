@@ -1,4 +1,5 @@
 @group(${bindGroup_scene}) @binding(1) var<storage, read> lightSet: LightSet;
+@group(${bindGroup_scene}) @binding(0) var<uniform> camera: CameraUniforms;
 
 @group(${bindGroup_material}) @binding(0) var diffuseTex: texture_2d<f32>;
 @group(${bindGroup_material}) @binding(1) var diffuseTexSampler: sampler;
@@ -16,6 +17,9 @@ fn main(in: FragmentInput) -> @location(0) vec4f
     let diffuseColor = textureSample(diffuseTex, diffuseTexSampler, in.uv);
     if (diffuseColor.a < 0.5f) {
         discard;
+    }
+    if (camera.debug.x != 0u) {
+        return vec4f(debugColor(camera.debug.x, 0u, false, in.pos, normalize(in.nor), diffuseColor.rgb, camera), 1.0);
     }
 
     var totalLightContrib = vec3f(0, 0, 0);

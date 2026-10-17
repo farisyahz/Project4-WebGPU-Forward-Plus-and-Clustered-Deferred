@@ -32,6 +32,20 @@ struct CameraUniforms {
     debug: vec4u,
 }
 
+struct Surface { world: vec3f, normal: vec3f, albedo: vec3f, valid: bool }
+
+fn octEncode(normal: vec3f) -> vec2f {
+    let n = normal / (abs(normal.x) + abs(normal.y) + abs(normal.z));
+    if (n.z < 0.0) { return (1.0 - abs(n.yx)) * select(vec2f(-1.0), vec2f(1.0), n.xy >= vec2f(0.0)); }
+    return n.xy;
+}
+
+fn octDecode(encoded: vec2f) -> vec3f {
+    var n = vec3f(encoded, 1.0 - abs(encoded.x) - abs(encoded.y));
+    if (n.z < 0.0) { n = vec3f((1.0 - abs(n.yx)) * select(vec2f(-1.0), vec2f(1.0), n.xy >= vec2f(0.0)), n.z); }
+    return normalize(n);
+}
+
 fn depthSlice(depth: f32, data: CameraUniforms) -> u32 {
     let normalized = log(max(depth, data.viewport.z) / data.viewport.z) / log(data.viewport.w / data.viewport.z);
     return u32(clamp(floor(normalized * f32(data.grid.z)), 0.0, f32(data.grid.z - 1u)));

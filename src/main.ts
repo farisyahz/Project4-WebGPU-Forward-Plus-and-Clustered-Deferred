@@ -30,13 +30,14 @@ export function setRenderer(mode: string) {
     if (!Object.values(renderModes).includes(mode)) throw new Error(`Unknown renderer: ${mode}`);
     renderer?.stop();
     controls.mode = mode;
+    if (mode === renderModes.naive && [1, 2, 6].includes(settings.debugView)) settings.debugView = 0;
     if (mode === renderModes.naive) renderer = new NaiveRenderer(stage);
     else if (mode === renderModes.forwardPlus) renderer = new ForwardPlusRenderer(stage);
     else renderer = new ClusteredDeferredRenderer(stage);
 }
 
 const gui = new GUI({ width: 290 });
-gui.add(controls, 'mode', { 'Naive forward': renderModes.naive, 'Forward+': renderModes.forwardPlus, 'Clustered deferred': renderModes.clusteredDeferred }).name('Renderer').onChange(setRenderer);
+gui.add(controls, 'mode', { 'Naive forward': renderModes.naive, 'Forward+': renderModes.forwardPlus, 'Clustered deferred': renderModes.clusteredDeferred }).name('Renderer').listen().onChange(setRenderer);
 const sceneFolder = gui.addFolder('Scene');
 sceneFolder.add(lights, 'numLights', 1, Lights.maxNumLights, 1).name('Point lights').listen().onChange(() => lights.updateLightSetUniformNumLights());
 sceneFolder.add(lights, 'paused').name('Pause lights').listen();
@@ -48,7 +49,10 @@ sceneFolder.add(controls, 'resolution', ['Native', '960 × 540', '1280 × 720', 
 });
 sceneFolder.open();
 const debugFolder = gui.addFolder('Clustering and debug');
-debugFolder.add(settings, 'debugView', debugViews).name('View');
+debugFolder.add(settings, 'debugView', debugViews).name('View').listen().onChange(value => {
+    settings.debugView = Number(value);
+    if (controls.mode === renderModes.naive && [1, 2, 6].includes(Number(value))) setRenderer(renderModes.forwardPlus);
+});
 debugFolder.add(controls, 'grid', ['8 × 6 × 16', '16 × 12 × 24', '24 × 18 × 32']).name('Cluster grid').onChange(value => {
     [settings.clusterX, settings.clusterY, settings.clusterZ] = value.split(' × ').map(Number);
     lights.configureClustering();
@@ -58,7 +62,13 @@ const benchmarkFolder = gui.addFolder('Measurements');
 const optimizations = gui.addFolder('Effects and optimizations');
 optimizations.add(settings, 'bundles').name('Render bundles');
 optimizations.add(settings, 'depthPrepass').name('Forward+ depth prepass');
+optimizations.add(settings, 'computeLighting').name('Deferred compute lighting');
+optimizations.add(settings, 'compactGBuffer').name('Packed G-buffer').onChange(() => setRenderer(controls.mode));
+optimizations.add(settings, 'bloom').name('Compute bloom');
+optimizations.add(settings, 'bloomStrength', 0, 0.6, 0.01).name('Bloom strength');
+optimizations.add(settings, 'bloomThreshold', 0.1, 2, 0.05).name('Bloom threshold');
 debugFolder.add(settings, 'lightIndexBudget', [64, 128, 256, 512]).name('Pool budget / cluster').onChange(() => {
+    settings.lightIndexBudget = Number(settings.lightIndexBudget);
     lights.configureClustering();
     setRenderer(controls.mode);
 });
@@ -67,6 +77,8 @@ benchmarkFolder.add({ run: () => void runBenchmark().catch(showError) }, 'run').
 benchmarkFolder.add({ save: () => { if (lastBenchmark) downloadJson('lighting-benchmark.json', lastBenchmark); } }, 'save').name('Export last results');
 
 const status = document.getElementById('status')!;
+const cancelBenchmark = document.getElementById('cancel-benchmark')!;
+cancelBenchmark.addEventListener('click', () => renderer.cancelMeasurement());
 function showError(error: unknown) { console.error(error); status.textContent = String(error); }
 
 interface BenchmarkOptions {
@@ -86,9 +98,12 @@ export async function runBenchmark(options: BenchmarkOptions = {}) {
     const repeats = options.repeats ?? 3;
     if (!Number.isInteger(warmup) || warmup < 0 || !Number.isInteger(samples) || samples < 1 || !Number.isInteger(repeats) || repeats < 1) throw new Error('Invalid benchmark sample counts');
     if (!counts.length || counts.some(count => !Number.isInteger(count) || count < 1 || count > Lights.maxNumLights) || !modes.length || modes.some(mode => !Object.values(renderModes).includes(mode))) throw new Error('Invalid benchmark workload');
-    const original = { mode: controls.mode, paused: lights.paused, time: lights.animationTime, count: lights.numLights, debug: settings.debugView };
+    const original = { mode: controls.mode, paused: lights.paused, time: lights.animationTime, count: lights.numLights, debug: settings.debugView, width: settings.renderWidth, height: settings.renderHeight };
     benchmarkRunning = true;
     gui.domElement.style.pointerEvents = 'none';
+    cancelBenchmark.hidden = false;
+    settings.renderWidth = canvas.width;
+    settings.renderHeight = canvas.height;
     camera.keys = {};
     camera.inputEnabled = false;
     lights.paused = true;
@@ -115,7 +130,7 @@ export async function runBenchmark(options: BenchmarkOptions = {}) {
             environment: { userAgent: navigator.userAgent, hardwareConcurrency: navigator.hardwareConcurrency, adapter: { vendor: adapterInfo.vendor, architecture: adapterInfo.architecture, device: adapterInfo.device, description: adapterInfo.description }, timestampQueries: profiler.supported, width: canvas.width, height: canvas.height, devicePixelRatio: window.devicePixelRatio },
             camera: { position: Array.from(camera.cameraPos), yaw: camera.yaw, pitch: camera.pitch, near: Camera.nearPlane, far: Camera.farPlane },
             settings: { ...settings },
-            methodology: { warmupFrames: warmup, sampledFrames: samples, repeats, animationTimeMs: 0, lightColorSeed: 5650, gpuTiming: 'Sum of timestamped renderer passes; excludes light animation, presentation/compositor, and readback. CPU measures draw command encoding and submit, excluding camera/light updates.' },
+            methodology: { warmupFrames: warmup, sampledFrames: samples, repeats, animationTimeMs: 0, lightColorSeed: 5650, gpuTiming: 'Sum of timestamped renderer passes including HDR composite and enabled bloom; excludes light animation, browser compositor/presentation, and readback. CPU measures draw command encoding and submit, excluding camera/light updates.' },
             runs,
         };
         lastBenchmark = result;
@@ -130,6 +145,9 @@ export async function runBenchmark(options: BenchmarkOptions = {}) {
         camera.inputEnabled = true;
         benchmarkRunning = false;
         gui.domElement.style.pointerEvents = '';
+        cancelBenchmark.hidden = true;
+        settings.renderWidth = original.width;
+        settings.renderHeight = original.height;
         setRenderer(original.mode);
         gui.updateDisplay();
     }

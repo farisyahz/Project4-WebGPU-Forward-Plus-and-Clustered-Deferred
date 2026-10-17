@@ -5,6 +5,7 @@ export const settings = {
     lightIndexBudget: 256,
     bundles: false, depthPrepass: false,
     computeLighting: false, compactGBuffer: false, bloom: false,
+    bloomStrength: 0.2, bloomThreshold: 0.8,
 };
 
 export const debugViews = {

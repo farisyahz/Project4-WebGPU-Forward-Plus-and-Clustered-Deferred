@@ -4,9 +4,11 @@ import { Camera } from './stage/camera';
 import { Stage } from './stage/stage';
 import { FrameTiming, GpuProfiler } from './profiler';
 import { settings } from './settings';
+import { PostProcess } from './postprocess';
 
 export var canvas: HTMLCanvasElement;
 export var canvasFormat: GPUTextureFormat;
+export const sceneColorFormat: GPUTextureFormat = 'rgba16float';
 export var context: GPUCanvasContext;
 export var device: GPUDevice;
 export var profiler: GpuProfiler;
@@ -46,7 +48,8 @@ export async function initWebGPU() {
     }
 
     adapterInfo = adapter.info;
-    device = await adapter.requestDevice({ requiredFeatures: adapter.features.has('timestamp-query') ? ['timestamp-query'] : [] });
+    const timestamps = adapter.features.has('timestamp-query') && new URLSearchParams(location.search).get('timestamps') !== 'off';
+    device = await adapter.requestDevice({ requiredFeatures: timestamps ? ['timestamp-query'] : [] });
     profiler = new GpuProfiler(device);
     device.addEventListener('uncapturederror', event => console.error('WebGPU:', event.error.message));
     device.lost.then(info => console.error('WebGPU device lost:', info.message));
@@ -129,19 +132,24 @@ export abstract class Renderer {
     private prevTime: number = 0;
     private frameRequestId: number;
     private measurement: ((timing: FrameTiming) => void) | undefined;
+    private measurementCancel: (() => void) | undefined;
     private readonly bundles = new Map<GPURenderPipeline, GPURenderBundle>();
+    private readonly postProcess: PostProcess;
 
     constructor(stage: Stage) {
         this.scene = stage.scene;
         this.lights = stage.lights;
         this.camera = stage.camera;
         this.stats = stage.stats;
+        this.postProcess = new PostProcess();
 
         this.frameRequestId = requestAnimationFrame((t) => this.onFrame(t));
     }
 
     stop(): void {
         cancelAnimationFrame(this.frameRequestId);
+        this.cancelMeasurement();
+        this.postProcess.destroy();
     }
 
     protected abstract draw(): void;
@@ -169,22 +177,38 @@ export abstract class Renderer {
     }
 
     protected submit(encoder: GPUCommandEncoder) {
+        this.postProcess.render(encoder);
         profiler.resolve(encoder);
         device.queue.submit([encoder.finish()]);
     }
+
+    protected colorTarget() { return this.postProcess.target(); }
 
     measureFrames(warmup: number, samples: number): Promise<FrameTiming[]> {
         if (this.measurement) throw new Error('A measurement is already running');
         let seen = 0;
         const results: FrameTiming[] = [];
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => {
+                this.measurement = undefined;
+                this.measurementCancel = undefined;
+                reject(new Error('Benchmark timed out; check device errors or reduce the workload.'));
+            }, 180000);
+            this.measurementCancel = () => {
+                clearTimeout(timeout);
+                this.measurement = undefined;
+                this.measurementCancel = undefined;
+                reject(new Error('Benchmark cancelled'));
+            };
             this.measurement = timing => {
                 if (seen++ < warmup) return;
                 results.push(timing);
-                if (results.length === samples) { this.measurement = undefined; resolve(results); }
+                if (results.length === samples) { clearTimeout(timeout); this.measurement = undefined; this.measurementCancel = undefined; resolve(results); }
             };
         });
     }
+
+    cancelMeasurement() { this.measurementCancel?.(); }
 
     // CHECKITOUT: this is the main rendering loop
     private onFrame(time: number) {

@@ -19,8 +19,10 @@ export class GpuProfiler {
     latest: FrameTiming = { cpuMs: 0, gpuMs: null, passes: {} };
     private readonly slots: Slot[] = [];
     private active: Slot | undefined;
+    private pendingWithoutTimestamps = 0;
 
     constructor(device: GPUDevice) {
+        this.deviceQueueDone = () => device.queue.onSubmittedWorkDone();
         this.supported = device.features.has('timestamp-query');
         if (!this.supported) return;
         for (let i = 0; i < 3; i++) this.slots.push({
@@ -32,6 +34,11 @@ export class GpuProfiler {
     }
 
     beginFrame() {
+        if (!this.supported) {
+            if (this.pendingWithoutTimestamps >= 3) return false;
+            this.pendingWithoutTimestamps++;
+            return true;
+        }
         this.active = this.slots.find(slot => !slot.busy);
         if (this.active) { this.active.busy = true; this.active.labels = []; }
         return !this.supported || this.active !== undefined;
@@ -57,6 +64,7 @@ export class GpuProfiler {
         this.active = undefined;
         if (!slot) {
             if (this.supported) return null; // Readback ring is busy; do not pretend this is a GPU sample.
+            try { await this.deviceQueueDone(); } finally { this.pendingWithoutTimestamps--; }
             return this.latest = { cpuMs, gpuMs: null, passes: {} };
         }
         const passes: Record<string, number> = {};
@@ -71,4 +79,6 @@ export class GpuProfiler {
             return this.latest = { cpuMs, gpuMs: Object.values(passes).reduce((a, b) => a + b, 0), passes };
         } finally { slot.busy = false; }
     }
+
+    private deviceQueueDone: () => Promise<void> = () => Promise.resolve();
 }

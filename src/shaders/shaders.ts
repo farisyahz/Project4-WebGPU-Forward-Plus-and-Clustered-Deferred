@@ -15,6 +15,10 @@ import clusteredDeferredFullscreenFragRaw from './clustered_deferred_fullscreen.
 import moveLightsComputeRaw from './move_lights.cs.wgsl?raw';
 import clusteringComputeRaw from './clustering.cs.wgsl?raw';
 import depthPrepassRaw from './depth_prepass.fs.wgsl?raw';
+import deferredSurfaceRaw from './deferred_surface.wgsl?raw';
+import compactSurfaceRaw from './compact_surface.wgsl?raw';
+import compactGBufferRaw from './compact_gbuffer.fs.wgsl?raw';
+import deferredComputeRaw from './deferred_lighting.cs.wgsl?raw';
 
 // CONSTANTS (for use in shaders)
 // =================================
@@ -30,8 +34,7 @@ export const constants = {
 
     moveLightsWorkgroupSize: 128,
 
-    lightRadius: 2,
-    maxLightsPerCluster: 128
+    lightRadius: 2
 };
 
 // =================================
@@ -58,7 +61,10 @@ export const forwardPlusFragSrc: string = processShaderRaw(clusteredLightingSrc 
 
 export const clusteredDeferredFragSrc: string = processShaderRaw(clusteredDeferredFragRaw);
 export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(clusteredDeferredFullscreenVertRaw);
-export const clusteredDeferredFullscreenFragSrc: string = processShaderRaw(clusteredLightingSrc + clusteredDeferredFullscreenFragRaw);
+export function deferredLightingSrc(compact: boolean, compute: boolean) {
+    return processShaderRaw(clusteredLightingSrc + (compact ? compactSurfaceRaw : deferredSurfaceRaw) + (compute ? deferredComputeRaw : clusteredDeferredFullscreenFragRaw));
+}
+export const compactGBufferSrc = processShaderRaw(compactGBufferRaw);
 
 export const moveLightsComputeSrc: string = processShaderRaw(moveLightsComputeRaw);
 export const clusteringComputeSrc: string = processShaderRaw(clusteringComputeRaw);

@@ -1,25 +1,30 @@
 import * as renderer from '../renderer';
 import * as shaders from '../shaders/shaders';
 import { Stage } from '../stage/stage';
+import { settings } from '../settings';
 
 export class ClusteredDeferredRenderer extends renderer.Renderer {
     private readonly sceneGroup: GPUBindGroup;
     private readonly geometryPipeline: GPURenderPipeline;
     private readonly lightingPipeline: GPURenderPipeline;
+    private readonly computePipeline: GPUComputePipeline;
+    private readonly outputLayout: GPUBindGroupLayout;
+    private outputGroup!: GPUBindGroup;
     private readonly gBufferLayout: GPUBindGroupLayout;
     private gBufferGroup!: GPUBindGroup;
     private textures: GPUTexture[] = [];
     private depth!: GPUTexture;
-    private readonly formats: GPUTextureFormat[] = ['rgba32float', 'rgba16float', 'rgba8unorm'];
+    private readonly compact = settings.compactGBuffer;
+    private readonly formats: GPUTextureFormat[] = this.compact ? ['rg32uint'] : ['rgba32float', 'rgba16float', 'rgba8unorm'];
 
     constructor(stage: Stage) {
         super(stage);
         this.lights.configureClustering();
         const sceneLayout = renderer.device.createBindGroupLayout({ label: 'deferred scene layout', entries: [
-            { binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT, buffer: { type: 'uniform' } },
-            { binding: 1, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
-            { binding: 2, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
-            { binding: 3, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
+            { binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE, buffer: { type: 'uniform' } },
+            { binding: 1, visibility: GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
+            { binding: 2, visibility: GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
+            { binding: 3, visibility: GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE, buffer: { type: 'read-only-storage' } },
         ] });
         this.sceneGroup = renderer.device.createBindGroup({ label: 'deferred scene', layout: sceneLayout, entries: [
             { binding: 0, resource: { buffer: this.camera.uniformsBuffer } },
@@ -31,16 +36,18 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
             label: 'G-buffer geometry',
             layout: renderer.device.createPipelineLayout({ bindGroupLayouts: [sceneLayout, renderer.modelBindGroupLayout, renderer.materialBindGroupLayout] }),
             vertex: { module: renderer.device.createShaderModule({ code: shaders.naiveVertSrc }), buffers: [renderer.vertexBufferLayout] },
-            fragment: { module: renderer.device.createShaderModule({ code: shaders.clusteredDeferredFragSrc }), targets: this.formats.map(format => ({ format })) },
+            fragment: { module: renderer.device.createShaderModule({ code: this.compact ? shaders.compactGBufferSrc : shaders.clusteredDeferredFragSrc }), targets: this.formats.map(format => ({ format })) },
             depthStencil: { format: 'depth32float', depthWriteEnabled: true, depthCompare: 'less' },
         });
-        this.gBufferLayout = renderer.device.createBindGroupLayout({ label: 'G-buffer textures', entries: this.formats.map((_format, binding) => ({ binding, visibility: GPUShaderStage.FRAGMENT, texture: { sampleType: 'unfilterable-float' as GPUTextureSampleType } })) });
+        this.gBufferLayout = renderer.device.createBindGroupLayout({ label: 'G-buffer textures', entries: (this.compact ? ['uint', 'depth'] : ['unfilterable-float', 'unfilterable-float', 'unfilterable-float']).map((sampleType, binding) => ({ binding, visibility: GPUShaderStage.FRAGMENT | GPUShaderStage.COMPUTE, texture: { sampleType: sampleType as GPUTextureSampleType } })) });
         this.lightingPipeline = renderer.device.createRenderPipeline({
             label: 'deferred fullscreen lighting',
             layout: renderer.device.createPipelineLayout({ bindGroupLayouts: [sceneLayout, this.gBufferLayout] }),
             vertex: { module: renderer.device.createShaderModule({ code: shaders.clusteredDeferredFullscreenVertSrc }) },
-            fragment: { module: renderer.device.createShaderModule({ code: shaders.clusteredDeferredFullscreenFragSrc }), targets: [{ format: renderer.canvasFormat }] },
+            fragment: { module: renderer.device.createShaderModule({ code: shaders.deferredLightingSrc(this.compact, false) }), targets: [{ format: renderer.sceneColorFormat }] },
         });
+        this.outputLayout = renderer.device.createBindGroupLayout({ entries: [{ binding: 0, visibility: GPUShaderStage.COMPUTE, storageTexture: { access: 'write-only', format: renderer.sceneColorFormat } }] });
+        this.computePipeline = renderer.device.createComputePipeline({ label: 'deferred compute lighting', layout: renderer.device.createPipelineLayout({ bindGroupLayouts: [sceneLayout, this.gBufferLayout, this.outputLayout] }), compute: { module: renderer.device.createShaderModule({ code: shaders.deferredLightingSrc(this.compact, true) }) } });
         this.resize();
     }
 
@@ -51,7 +58,8 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
         const size = [renderer.canvas.width, renderer.canvas.height];
         this.textures = this.formats.map((format, index) => renderer.device.createTexture({ label: ['position', 'normal', 'albedo'][index], size, format, usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING }));
         this.depth = renderer.device.createTexture({ label: 'deferred depth', size, format: 'depth32float', usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.TEXTURE_BINDING });
-        this.gBufferGroup = renderer.device.createBindGroup({ layout: this.gBufferLayout, entries: this.textures.map((texture, binding) => ({ binding, resource: texture.createView() })) });
+        this.gBufferGroup = renderer.device.createBindGroup({ layout: this.gBufferLayout, entries: (this.compact ? [this.textures[0], this.depth] : this.textures).map((texture, binding) => ({ binding, resource: texture.createView() })) });
+        this.outputGroup = renderer.device.createBindGroup({ layout: this.outputLayout, entries: [{ binding: 0, resource: this.colorTarget() }] });
     }
 
     override draw() {
@@ -66,12 +74,16 @@ export class ClusteredDeferredRenderer extends renderer.Renderer {
         });
         this.renderScene(geometry, this.geometryPipeline, this.sceneGroup, this.formats, 'depth32float');
         geometry.end();
-        const lighting = encoder.beginRenderPass({ label: 'deferred lighting', timestampWrites: renderer.profiler.timestampWrites('Deferred lighting'), colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), loadOp: 'clear', storeOp: 'store', clearValue: [0, 0, 0, 1] }] });
-        lighting.setPipeline(this.lightingPipeline);
-        lighting.setBindGroup(0, this.sceneGroup);
-        lighting.setBindGroup(1, this.gBufferGroup);
-        lighting.draw(3);
-        lighting.end();
+        if (settings.computeLighting) {
+            const lighting = encoder.beginComputePass({ label: 'deferred compute lighting', timestampWrites: renderer.profiler.timestampWrites('Deferred compute lighting') });
+            lighting.setPipeline(this.computePipeline);
+            lighting.setBindGroup(0, this.sceneGroup); lighting.setBindGroup(1, this.gBufferGroup); lighting.setBindGroup(2, this.outputGroup);
+            lighting.dispatchWorkgroups(Math.ceil(renderer.canvas.width / 8), Math.ceil(renderer.canvas.height / 8)); lighting.end();
+        } else {
+            const lighting = encoder.beginRenderPass({ label: 'deferred lighting', timestampWrites: renderer.profiler.timestampWrites('Deferred lighting'), colorAttachments: [{ view: this.colorTarget(), loadOp: 'clear', storeOp: 'store', clearValue: [0, 0, 0, 1] }] });
+            lighting.setPipeline(this.lightingPipeline);
+            lighting.setBindGroup(0, this.sceneGroup); lighting.setBindGroup(1, this.gBufferGroup); lighting.draw(3); lighting.end();
+        }
         this.submit(encoder);
     }
 

@@ -35,7 +35,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
             label: 'forward+ pipeline',
             layout: renderer.device.createPipelineLayout({ bindGroupLayouts: [layout, renderer.modelBindGroupLayout, renderer.materialBindGroupLayout] }),
             vertex: { module: renderer.device.createShaderModule({ label: 'scene vertex', code: shaders.naiveVertSrc }), buffers: [renderer.vertexBufferLayout] },
-            fragment: { module: renderer.device.createShaderModule({ label: 'forward+ fragment', code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.canvasFormat }] },
+            fragment: { module: renderer.device.createShaderModule({ label: 'forward+ fragment', code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.sceneColorFormat }] },
             depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: true, depthCompare: 'less' },
         });
         const pipelineLayout = renderer.device.createPipelineLayout({ bindGroupLayouts: [layout, renderer.modelBindGroupLayout, renderer.materialBindGroupLayout] });
@@ -43,7 +43,7 @@ export class ForwardPlusRenderer extends renderer.Renderer {
         this.prepassPipeline = renderer.device.createRenderPipeline({ label: 'alpha-tested depth prepass', layout: pipelineLayout, vertex, fragment: { module: renderer.device.createShaderModule({ code: shaders.depthPrepassSrc }), targets: [] }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: true, depthCompare: 'less' } });
         // Stencil claims the first visible fragment at a depth tie. Without it,
         // equal-depth coplanar surfaces can overwrite each other in this pass.
-        this.equalPipeline = renderer.device.createRenderPipeline({ label: 'forward+ visible shading', layout: pipelineLayout, vertex, fragment: { module: renderer.device.createShaderModule({ code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.canvasFormat }] }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'equal', stencilFront: { compare: 'equal', passOp: 'increment-clamp' }, stencilBack: { compare: 'equal', passOp: 'increment-clamp' } } });
+        this.equalPipeline = renderer.device.createRenderPipeline({ label: 'forward+ visible shading', layout: pipelineLayout, vertex, fragment: { module: renderer.device.createShaderModule({ code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.sceneColorFormat }] }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'equal', stencilFront: { compare: 'equal', passOp: 'increment-clamp' }, stencilBack: { compare: 'equal', passOp: 'increment-clamp' } } });
         this.resize();
     }
 
@@ -65,14 +65,13 @@ export class ForwardPlusRenderer extends renderer.Renderer {
         const pass = encoder.beginRenderPass({
             timestampWrites: renderer.profiler.timestampWrites('Forward+ shading'),
             label: 'forward+ shading',
-            colorAttachments: [{ view: renderer.context.getCurrentTexture().createView(), clearValue: [0, 0, 0, 1], loadOp: 'clear', storeOp: 'store' }],
+            colorAttachments: [{ view: this.colorTarget(), clearValue: [0, 0, 0, 1], loadOp: 'clear', storeOp: 'store' }],
             depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: settings.depthPrepass ? 'load' : 'clear', depthStoreOp: 'store', stencilClearValue: 0, stencilLoadOp: settings.depthPrepass ? 'load' : 'clear', stencilStoreOp: 'store' },
         });
-        this.renderScene(pass, settings.depthPrepass ? this.equalPipeline : this.pipeline, this.sceneGroup, [renderer.canvasFormat], 'depth24plus-stencil8');
+        this.renderScene(pass, settings.depthPrepass ? this.equalPipeline : this.pipeline, this.sceneGroup, [renderer.sceneColorFormat], 'depth24plus-stencil8');
         pass.end();
         this.submit(encoder);
     }
 
     override stop() { super.stop(); this.depth.destroy(); }
 }
-

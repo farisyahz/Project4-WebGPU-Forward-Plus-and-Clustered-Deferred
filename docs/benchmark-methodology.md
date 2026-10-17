@@ -13,12 +13,12 @@ Use the Measurements controls in the application. **Benchmark current** captures
 
 ## Reported quantities
 
-- GPU milliseconds: sum of timestamp intervals for clustering and renderer passes. This excludes the separate light-animation compute submission, browser compositor/presentation, timestamp resolution, and readback copies. Pass-level breakdowns are exported.
+- GPU milliseconds: sum of timestamp intervals for clustering and renderer passes, including the final HDR composite and enabled bloom passes. This excludes the separate light-animation compute submission, browser compositor/presentation, timestamp resolution, and readback copies. Pass-level breakdowns are exported.
 - CPU milliseconds: command encoding and submission in the renderer draw call. Excludes camera/light updates, browser UI and asynchronous readback.
 - GPU timing is unavailable when the adapter lacks `timestamp-query`; CPU encoding is not presented as GPU timing.
 - Summary includes mean, median, p95, min/max and standard deviation. Each repetition remains separate in raw data.
 - Cluster statistics are read once after sampling; their readback cost is excluded from renderer timings. Counts cover the full frustum grid, not only clusters containing visible geometry.
-- An overflowing cluster uses an all-lights fallback. Compare overflow counts when interpreting timing differences; omitted lights must never be treated as a speedup.
+- Exhausting the shared light-index pool causes affected clusters to use an all-lights fallback. Compare overflow counts when interpreting timing differences; omitted lights must never be treated as a speedup. The pool budget is an average storage allowance, not a per-cluster light limit.
 - G-buffer memory is calculated from format bytes per pixel, not measured VRAM allocation. Report color and depth storage separately.
 
 ## Experiment matrix

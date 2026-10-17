@@ -17,6 +17,7 @@ h1 span { font-size: 10px; color: #a8e6d1; background: #79d9b91a; border: 1px so
 .timings strong { display: block; font-size: 22px; font-variant-numeric: tabular-nums; font-weight: 550; margin-top: 3px; }
 #status, .help { color: #91a2bc; font-size: 10px; line-height: 1.6; margin: 6px 0 0; }
 .help { color: #778ba9; }
+#cancel-benchmark { pointer-events: auto; color: #e1eafa; background: #23344d; border: 1px solid #526784; border-radius: 4px; padding: 5px 10px; margin-top: 10px; cursor: pointer; }
 .dg.ac { z-index: 10 !important; }
 .dg.main { margin-right: 20px !important; margin-top: 20px; border: 1px solid #8aafff30; border-radius: 8px; overflow: hidden; }
 .dg .cr, .dg li.folder { border-color: #263347 !important; }

@@ -59,3 +59,12 @@ The reference student repository is used for presentation inspiration only. Impl
 - Optional alpha-tested depth prepass followed by equal-depth shading. A stencil claim prevents later coplanar fragments from overwriting the first fragment at a depth tie, preserving baseline draw-order behavior. No depth-based cluster culling is claimed.
 - Frozen-frame bundle toggles are pixel-identical for all renderers. Prepass off/on and prepass+bundles are pixel-identical after the depth-tie fix.
 - Short post-fix Forward+ smoke: 5,000 lights, 30 warmup/20 samples, GPU 32.13 → 22.07 ms including prepass; 500-light CPU encoding 0.260 → 0.125 ms with bundles. These are diagnostic checks; final experiments need repeated sampling.
+
+## Milestone 6 — packed G-buffer, compute lighting, compute bloom
+
+- Deferred raster and 8 × 8 compute lighting share identical surface decoding and clustered lighting. Both remain selectable.
+- Packed G-buffer uses one `rg32uint` attachment: RGBA8 albedo + signed 16-bit octahedral normal coordinates. Position is reconstructed using depth and inverse view-projection. Color storage 28 → 8 bytes/pixel; geometry attachments including depth 32 → 12 bytes/pixel (62.5% reduction).
+- Shared `rgba16float` HDR scene output and fullscreen composite support all renderers. Optional half-resolution bloom uses compute extraction and two separable Gaussian compute passes. Composite is presentation, not the deferred lighting calculation.
+- At 833 × 469 / 2,000 lights, raster and compute outputs were pixel-identical in both G-buffer modes. Packed versus baseline mean RGB error 0.02360 / 255; maximum 12; 28 pixels have a channel difference >3. Debug views bypass bloom exactly.
+- Resize to 901 × 507 and renderer switching with combinations of bloom/compute/packing/bundles/prepass completed without console or validation errors.
+- Benchmark cancellation restores controls. Timestamp-disabled validation (`?timestamps=off`) correctly reports CPU-only results and still bounds frames in flight. Numeric GUI options are normalized explicitly.

@@ -17,7 +17,7 @@ export class NaiveRenderer extends renderer.Renderer {
         this.sceneUniformsBindGroupLayout = renderer.device.createBindGroupLayout({
             label: "scene uniforms bind group layout",
             entries: [
-                { binding: 0, visibility: GPUShaderStage.VERTEX, buffer: { type: 'uniform' } },
+                { binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT, buffer: { type: 'uniform' } },
                 { // lightSet
                     binding: 1,
                     visibility: GPUShaderStage.FRAGMENT,
@@ -73,7 +73,7 @@ export class NaiveRenderer extends renderer.Renderer {
                 }),
                 targets: [
                     {
-                        format: renderer.canvasFormat,
+                        format: renderer.sceneColorFormat,
                     }
                 ]
             }
@@ -92,7 +92,7 @@ export class NaiveRenderer extends renderer.Renderer {
             this.depthTextureView = this.depthTexture.createView();
         }
         const encoder = renderer.device.createCommandEncoder();
-        const canvasTextureView = renderer.context.getCurrentTexture().createView();
+        const canvasTextureView = this.colorTarget();
 
         const renderPass = encoder.beginRenderPass({
             timestampWrites: renderer.profiler.timestampWrites('Naive shading'),
@@ -112,7 +112,7 @@ export class NaiveRenderer extends renderer.Renderer {
                 depthStoreOp: "store"
             }
         });
-        this.renderScene(renderPass, this.pipeline, this.sceneUniformsBindGroup, [renderer.canvasFormat], 'depth24plus');
+        this.renderScene(renderPass, this.pipeline, this.sceneUniformsBindGroup, [renderer.sceneColorFormat], 'depth24plus');
 
         renderPass.end();
 
