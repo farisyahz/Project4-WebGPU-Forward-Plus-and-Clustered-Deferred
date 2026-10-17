@@ -68,3 +68,12 @@ The reference student repository is used for presentation inspiration only. Impl
 - At 833 × 469 / 2,000 lights, raster and compute outputs were pixel-identical in both G-buffer modes. Packed versus baseline mean RGB error 0.02360 / 255; maximum 12; 28 pixels have a channel difference >3. Debug views bypass bloom exactly.
 - Resize to 901 × 507 and renderer switching with combinations of bloom/compute/packing/bundles/prepass completed without console or validation errors.
 - Benchmark cancellation restores controls. Timestamp-disabled validation (`?timestamps=off`) correctly reports CPU-only results and still bounds frames in flight. Numeric GUI options are normalized explicitly.
+
+## Final report and production verification
+
+- Primary renderer sweep: 45 runs; workload studies: 48 runs; final paired optimization study: 81 runs. Total: 174 report runs and 14,220 sampled frames, excluding warmups. Raw exports and per-run CSV are retained.
+- Initial sequential feature trials are retained separately. Independent baseline drift motivated paired, rotating-order feature trials; the report states the remaining power/thermal and single-machine limitations.
+- Seven original Matplotlib figures, clean screenshots/debug views, and a verified 37.44-second original demo (MP4 and animated GIF).
+- Production build tested at the full GitHub Pages repository subpath: 71 successful scene-asset responses, zero console/WebGPU errors, pixel-identical naive versus Forward+ with bundles/prepass, packed compute+bloom resizing, immediate requested resolution, and GUI cancellation.
+- A Windows file-watcher crash while an encoder held a report file exclusively was reproduced and fixed by excluding `docs/` from Vite's application watcher. Exclusive-lock regression test: server remained available.
+- GitHub Pages base path includes leading/trailing slashes; submission description is prepared. Publication remains pending; no remote push, deployment or submission PR has been performed.

@@ -1,0 +1,16 @@
+{
+  "sceneResponses": 71,
+  "requestedResolution": [
+    803,
+    453
+  ],
+  "measuredResolution": [
+    803,
+    453
+  ],
+  "cancelText": "Benchmark cancelled.",
+  "forwardMaxChannelError": 0,
+  "errors": [],
+  "litChannels": 1037606,
+  "bloomCapturePixels": 921600
+}

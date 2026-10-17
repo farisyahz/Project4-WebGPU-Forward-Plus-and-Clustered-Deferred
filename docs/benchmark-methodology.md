@@ -31,3 +31,14 @@ Use the Measurements controls in the application. **Benchmark current** captures
 6. Frozen-frame image comparisons for baseline and optimized pipelines. Report quantization differences rather than assuming identical images.
 
 Use milliseconds on chart axes. Keep raw samples next to generated charts. Explain observed relationships, uncertainty and tradeoffs; distinguish hypotheses about overdraw/bandwidth from directly measured evidence.
+
+## Committed report datasets
+
+- `renderers.json`: primary light-count sweep, development build, 30 warmup + 90 sampled frames, three repetitions.
+- `workloads.json`: resolution, bloom-resolution, camera and cluster-grid studies, development build, 30 warmup + 60 sampled frames, two repetitions.
+- `optimizations.json`: initial sequential feature trials, retained as provenance. Baseline drift motivated a paired follow-up; these are not the final feature-comparison plots.
+- `paired-optimizations.json`: production preview, three paired/rotating-order repetitions per configuration, each with its own 30-frame warmup and 90 samples. This is the source for final feature-comparison plots.
+- `*-smoke.json`: short diagnostic milestones; do not mix these with the final sweeps.
+- `summary.csv` and `report-summary.json`: generated from the primary, workload and paired feature datasets by `scripts/plot_benchmarks.py`.
+
+Observed between-study baseline drift is larger than some within-study variation. No GPU power/thermal lock was applied. Paired ordering reduces systematic bias but does not eliminate this limitation. All figures label the actual selected AMD adapter and headless execution.
