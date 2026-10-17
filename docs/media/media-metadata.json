@@ -2,6 +2,9 @@
   "durationSeconds": 37.44,
   "sourceBytes": 9000683,
   "mp4Bytes": 13944584,
-  "gifBytes": 6805874,
+  "gifBytes": 58103598,
+  "gifWidth": 960,
+  "gifFramesPerSecond": 8,
+  "gifPaletteColors": 256,
   "note": "Original application capture; recording excluded from benchmark runs."
 }

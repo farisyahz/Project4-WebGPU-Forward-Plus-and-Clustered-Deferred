@@ -332,9 +332,7 @@ setInterval(() => {
     document.getElementById('scene-info')!.textContent =
         `${controls.mode} / ${lights.numLights.toLocaleString()} lights / ${canvas.width} × ${canvas.height}`;
 }, 250);
-status.textContent = profiler.supported
-    ? 'GPU timestamps enabled. Measurements exclude light animation and browser presentation.'
-    : 'GPU timestamp queries unavailable on this adapter. Benchmarks will report CPU encoding time only.';
+status.textContent = '';
 
 // Public experiment API: browser tests and console experiments share the UI's
 // application instance rather than importing the entry module a second time.
