@@ -1,6 +1,6 @@
-import { Mat4, mat4, Vec3, vec3 } from "wgpu-matrix";
-import { toRadians } from "../math_util";
-import { device, canvas, fovYDegrees, aspectRatio } from "../renderer";
+import { Mat4, mat4, Vec3, vec3 } from 'wgpu-matrix';
+import { toRadians } from '../math_util';
+import { device, canvas, fovYDegrees, aspectRatio } from '../renderer';
 import { settings } from '../settings';
 
 class CameraUniforms {
@@ -14,10 +14,12 @@ class CameraUniforms {
     }
 
     update(view: Mat4, projection: Mat4, viewProjection: Mat4) {
+        // Matrix offsets are in float elements: four 4-by-4 matrices use 64 floats.
         this.viewProjMat = viewProjection;
         this.floatView.set(view, 16);
         this.floatView.set(mat4.inverse(projection), 32);
         this.floatView.set(mat4.inverse(viewProjection), 48);
+        // The remaining vec4s carry viewport/depth, cluster grid, and debug mode.
         this.floatView.set([canvas.width, canvas.height, Camera.nearPlane, Camera.farPlane], 64);
         this.uintView.set([settings.clusterX, settings.clusterY, settings.clusterZ, 0], 68);
         this.uintView.set([settings.debugView, 0, 0, 0], 72);
@@ -44,24 +46,30 @@ export class Camera {
 
     keys: { [key: string]: boolean } = {};
 
-    constructor () {
+    constructor() {
+        // UNIFORM binds the buffer; COPY_DST lets the CPU upload each frame's matrices.
         this.uniformsBuffer = device.createBuffer({
             label: 'camera uniforms',
             size: this.uniforms.buffer.byteLength,
             usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
         });
 
-        this.projMat = mat4.perspective(toRadians(fovYDegrees), aspectRatio, Camera.nearPlane, Camera.farPlane);
+        this.projMat = mat4.perspective(
+            toRadians(fovYDegrees),
+            aspectRatio,
+            Camera.nearPlane,
+            Camera.farPlane
+        );
 
         this.rotateCamera(0, 0); // set initial camera vectors
 
-        window.addEventListener('keydown', (event) => this.onKeyEvent(event, true));
-        window.addEventListener('keyup', (event) => this.onKeyEvent(event, false));
-        window.onblur = () => this.keys = {}; // reset keys on page exit so they don't get stuck (e.g. on alt + tab)
+        window.addEventListener('keydown', event => this.onKeyEvent(event, true));
+        window.addEventListener('keyup', event => this.onKeyEvent(event, false));
+        window.onblur = () => (this.keys = {}); // reset keys on page exit so they don't get stuck (e.g. on alt + tab)
 
         canvas.addEventListener('mousedown', () => canvas.requestPointerLock());
         canvas.addEventListener('mouseup', () => document.exitPointerLock());
-        canvas.addEventListener('mousemove', (event) => this.onMouseMove(event));
+        canvas.addEventListener('mousemove', event => this.onMouseMove(event));
     }
 
     reset() {
@@ -75,7 +83,9 @@ export class Camera {
             'Side aisle': [-7, 1.5, 3, 0, 0],
         };
         const pose = presets[name];
-        if (!pose) throw new Error(`Unknown camera preset: ${name}`);
+        if (!pose) {
+            throw new Error(`Unknown camera preset: ${name}`);
+        }
         this.cameraPos = vec3.create(pose[0], pose[1], pose[2]);
         this.yaw = pose[3];
         this.pitch = pose[4];
@@ -84,9 +94,17 @@ export class Camera {
     }
 
     private onKeyEvent(event: KeyboardEvent, down: boolean) {
-        if (!this.inputEnabled || (down && event.target instanceof HTMLElement && ['INPUT', 'SELECT', 'TEXTAREA'].includes(event.target.tagName))) return;
+        if (
+            !this.inputEnabled ||
+            (down &&
+                event.target instanceof HTMLElement &&
+                ['INPUT', 'SELECT', 'TEXTAREA'].includes(event.target.tagName))
+        ) {
+            return;
+        }
         this.keys[event.key.toLowerCase()] = down;
-        if (this.keys['alt']) { // prevent issues from alt shortcuts
+        if (this.keys['alt']) {
+            // prevent issues from alt shortcuts
             event.preventDefault();
         }
     }
@@ -114,7 +132,10 @@ export class Camera {
 
     private onMouseMove(event: MouseEvent) {
         if (this.inputEnabled && document.pointerLockElement === canvas) {
-            this.rotateCamera(event.movementX * this.sensitivity, event.movementY * this.sensitivity);
+            this.rotateCamera(
+                event.movementX * this.sensitivity,
+                event.movementY * this.sensitivity
+            );
         }
     }
 
@@ -156,13 +177,19 @@ export class Camera {
 
     onFrame(deltaTime: number) {
         this.processInput(Math.min(deltaTime, 100));
-        this.projMat = mat4.perspective(toRadians(fovYDegrees), aspectRatio, Camera.nearPlane, Camera.farPlane);
+        this.projMat = mat4.perspective(
+            toRadians(fovYDegrees),
+            aspectRatio,
+            Camera.nearPlane,
+            Camera.farPlane
+        );
 
         const lookPos = vec3.add(this.cameraPos, vec3.scale(this.cameraFront, 1));
         const viewMat = mat4.lookAt(this.cameraPos, lookPos, [0, 1, 0]);
         const viewProjMat = mat4.mul(this.projMat, viewMat);
         this.uniforms.update(viewMat, this.projMat, viewProjMat);
 
+        // Upload the host-side layout after all camera and clustering fields are set.
         device.queue.writeBuffer(this.uniformsBuffer, 0, this.uniforms.buffer);
     }
 }

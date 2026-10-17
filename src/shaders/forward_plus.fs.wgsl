@@ -11,6 +11,10 @@ struct FragmentInput {
 @fragment
 fn main(in: FragmentInput) -> @location(0) vec4f {
     let albedo = textureSample(diffuseTex, diffuseSampler, in.uv);
-    if (albedo.a < 0.5) { discard; }
+    if (albedo.a < 0.5) {
+        discard;
+    }
+
+    // The shared helper locates the cluster, sums its lights, and applies albedo.
     return vec4f(shadeCluster(in.pixel.xy, in.pos, normalize(in.nor), albedo.rgb), 1.0);
 }

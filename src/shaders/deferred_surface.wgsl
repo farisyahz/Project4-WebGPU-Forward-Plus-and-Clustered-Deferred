@@ -4,6 +4,15 @@
 
 fn loadSurface(coord: vec2i, pixel: vec2f) -> Surface {
     let world = textureLoad(positionTex, coord, 0);
-    if (world.w == 0.0) { return Surface(vec3f(0.0), vec3f(0.0), vec3f(0.0), false); }
-    return Surface(world.xyz, normalize(textureLoad(normalTex, coord, 0).xyz), textureLoad(albedoTex, coord, 0).rgb, true);
+    // The geometry pass writes W = 1; a cleared pixel has no surface to shade.
+    if (world.w == 0.0) {
+        return Surface(vec3f(0.0), vec3f(0.0), vec3f(0.0), false);
+    }
+
+    return Surface(
+        world.xyz,
+        normalize(textureLoad(normalTex, coord, 0).xyz),
+        textureLoad(albedoTex, coord, 0).rgb,
+        true
+    );
 }

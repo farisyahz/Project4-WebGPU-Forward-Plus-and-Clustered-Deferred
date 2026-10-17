@@ -10,11 +10,9 @@ University of Pennsylvania, CIS 5650, Project 4
 
 This project renders the Sponza atrium with up to 5,000 moving point lights. You can switch between naive forward, Forward+, and clustered deferred rendering to compare their output and performance. It also includes compute bloom, a packed G-buffer, compute deferred lighting, render bundles, and a Forward+ depth prepass.
 
-[GitHub Pages target](https://farisyahz.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred/)
+[Browser demo](https://farisyahz.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred/)
 
 [Feature video](docs/media/demo.mp4), [raw measurements](docs/benchmarks), and [benchmark methodology](docs/benchmark-methodology.md)
-
-The demo has not been published yet. The Pages link will work after deployment from `main`.
 
 ![Feature tour: rendering modes, cluster views, prepass, packing, compute lighting, and bloom](docs/media/demo.gif)
 
@@ -25,7 +23,8 @@ The demo has not been published yet. The Pages link will work after deployment f
 - [Performance experiments](#performance-experiments)
 - [Optimization studies](#optimization-studies)
 - [Correctness and debug views](#correctness-and-debug-views)
-- [Limits and next steps](#limits-and-next-steps)
+- [Reproduce the analysis](#reproduce-the-analysis)
+- [Limitations and future work](#limitations-and-future-work)
 - [Credits](#credits)
 
 ## Run locally
@@ -222,7 +221,7 @@ Frozen comparisons exclude UI overlays and compare the same light state/camera. 
 
 Deferred G-buffer storage introduces measurable error. At 960 × 540 and 5,000 lights, baseline deferred versus naive had mean RGB absolute error **0.19854 on a 0 to 255 scale**, with a maximum channel difference of 42 near bright lights. At 833 × 469 and 2,000 lights, packed versus baseline deferred had mean error **0.02360**, maximum 12, and 28 pixels with a channel difference above three. The tests use different references and workloads, so their error values should be read separately. Raster and compute lighting were pixel-identical in both G-buffer modes for that test.
 
-Checks also cover non-workgroup-multiple resolutions, resizing with packed compute/bloom enabled, renderer switching, numeric GUI options, timestamp-query fallback and benchmark cancellation. [Raw correctness records](docs/benchmarks/extensions-validation.json) and the [implementation log](docs/implementation-log.md) describe scope and tolerances.
+Checks also cover non-workgroup-multiple resolutions, resizing with packed compute/bloom enabled, renderer switching, numeric GUI options, timestamp-query fallback and benchmark cancellation. The [raw correctness records](docs/benchmarks/extensions-validation.json) include image-comparison results and validation checks.
 
 ## Reproduce the analysis
 
@@ -249,7 +248,7 @@ python -m pip install matplotlib
 python scripts/plot_benchmarks.py
 ```
 
-## Limits and next steps
+## Limitations and future work
 
 - The scene uses alpha cutouts; blended transparency is not implemented. Forward rendering can support it more directly in a broader renderer, but that capability is not demonstrated here.
 - Clustering counts all lights against every cluster, then repeats the intersection test for nonempty lists that fit in the pool. A finer grid can reduce shading while increasing clustering cost and storage.
@@ -258,24 +257,6 @@ python scripts/plot_benchmarks.py
 - The common composite clamps HDR output to the canvas; this project does not add a filmic tone mapper, shadows, PBR materials, SSAO or a visibility buffer.
 - Results cover one supplied scene and the selected AMD adapter. Camera changes vary the workload but are not a controlled synthetic overdraw experiment.
 - Active-cluster culling, view-space light preprocessing and a second GPU/browser comparison are useful future studies.
-
-## Deployment and submission
-
-The [deployment workflow](.github/workflows/static.yml) builds the app and publishes `dist` when changes reach `main`. It sets the repository URL prefix and copies the scene assets during the build.
-
-1. In the fork's **Settings**, open **Pages**. Under **Build and deployment**, choose **GitHub Actions** as the source. The workflow is already included, so there is no need to create another one.
-2. Open the **Actions** tab and enable workflows if GitHub asks.
-3. Push the implementation branch:
-
-   ```sh
-   git push -u origin codex/lighting-lab
-   ```
-
-4. Open a pull request in this fork with `main` as the base and `codex/lighting-lab` as the compare branch, then merge it. This is separate from the course submission PR.
-5. In **Actions**, wait for **Deploy static content to Pages** to finish. If the code was already on `main` before Pages was enabled, open that workflow and use **Run workflow** on `main`.
-6. Open the [public demo](https://farisyahz.github.io/Project4-WebGPU-Forward-Plus-and-Clustered-Deferred/). Check that Sponza loads and the renderer controls work, then update the publication note at the top of this README.
-
-Submit the course PR with the title **Project 4: Faris Rafie Syahzani**. The [submission description](docs/submission.md) is ready to use.
 
 ## Credits
 

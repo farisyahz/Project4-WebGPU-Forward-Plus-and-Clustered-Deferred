@@ -13,17 +13,36 @@ export class ForwardPlusRenderer extends renderer.Renderer {
     constructor(stage: Stage) {
         super(stage);
         this.lights.configureClustering();
+
+        // Scene bindings hold the camera, lights, cluster records, and index pool.
         const layout = renderer.device.createBindGroupLayout({
             label: 'clustered scene layout',
             entries: [
-                { binding: 0, visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT, buffer: { type: 'uniform' } },
-                { binding: 1, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
-                { binding: 2, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
-                { binding: 3, visibility: GPUShaderStage.FRAGMENT, buffer: { type: 'read-only-storage' } },
+                {
+                    binding: 0,
+                    visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT,
+                    buffer: { type: 'uniform' },
+                },
+                {
+                    binding: 1,
+                    visibility: GPUShaderStage.FRAGMENT,
+                    buffer: { type: 'read-only-storage' },
+                },
+                {
+                    binding: 2,
+                    visibility: GPUShaderStage.FRAGMENT,
+                    buffer: { type: 'read-only-storage' },
+                },
+                {
+                    binding: 3,
+                    visibility: GPUShaderStage.FRAGMENT,
+                    buffer: { type: 'read-only-storage' },
+                },
             ],
         });
         this.sceneGroup = renderer.device.createBindGroup({
-            label: 'forward+ scene', layout,
+            label: 'forward+ scene',
+            layout,
             entries: [
                 { binding: 0, resource: { buffer: this.camera.uniformsBuffer } },
                 { binding: 1, resource: { buffer: this.lights.lightSetStorageBuffer } },
@@ -31,47 +50,169 @@ export class ForwardPlusRenderer extends renderer.Renderer {
                 { binding: 3, resource: { buffer: this.lights.indexPool } },
             ],
         });
+
+        // The regular Forward+ pass shades fragments as geometry is drawn.
         this.pipeline = renderer.device.createRenderPipeline({
             label: 'forward+ pipeline',
-            layout: renderer.device.createPipelineLayout({ bindGroupLayouts: [layout, renderer.modelBindGroupLayout, renderer.materialBindGroupLayout] }),
-            vertex: { module: renderer.device.createShaderModule({ label: 'scene vertex', code: shaders.naiveVertSrc }), buffers: [renderer.vertexBufferLayout] },
-            fragment: { module: renderer.device.createShaderModule({ label: 'forward+ fragment', code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.sceneColorFormat }] },
-            depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: true, depthCompare: 'less' },
+            layout: renderer.device.createPipelineLayout({
+                bindGroupLayouts: [
+                    layout,
+                    renderer.modelBindGroupLayout,
+                    renderer.materialBindGroupLayout,
+                ],
+            }),
+            vertex: {
+                module: renderer.device.createShaderModule({
+                    label: 'scene vertex',
+                    code: shaders.naiveVertSrc,
+                }),
+                buffers: [renderer.vertexBufferLayout],
+            },
+            fragment: {
+                module: renderer.device.createShaderModule({
+                    label: 'forward+ fragment',
+                    code: shaders.forwardPlusFragSrc,
+                }),
+                targets: [{ format: renderer.sceneColorFormat }],
+            },
+            depthStencil: {
+                format: 'depth24plus-stencil8',
+                depthWriteEnabled: true,
+                depthCompare: 'less',
+            },
         });
-        const pipelineLayout = renderer.device.createPipelineLayout({ bindGroupLayouts: [layout, renderer.modelBindGroupLayout, renderer.materialBindGroupLayout] });
-        const vertex = { module: renderer.device.createShaderModule({ code: shaders.naiveVertSrc }), buffers: [renderer.vertexBufferLayout] };
-        this.prepassPipeline = renderer.device.createRenderPipeline({ label: 'alpha-tested depth prepass', layout: pipelineLayout, vertex, fragment: { module: renderer.device.createShaderModule({ code: shaders.depthPrepassSrc }), targets: [] }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: true, depthCompare: 'less' } });
+
+        // The optional prepass uses the same geometry and material alpha test.
+        const pipelineLayout = renderer.device.createPipelineLayout({
+            bindGroupLayouts: [
+                layout,
+                renderer.modelBindGroupLayout,
+                renderer.materialBindGroupLayout,
+            ],
+        });
+        const vertex = {
+            module: renderer.device.createShaderModule({ code: shaders.naiveVertSrc }),
+            buffers: [renderer.vertexBufferLayout],
+        };
+        this.prepassPipeline = renderer.device.createRenderPipeline({
+            label: 'alpha-tested depth prepass',
+            layout: pipelineLayout,
+            vertex,
+            fragment: {
+                module: renderer.device.createShaderModule({ code: shaders.depthPrepassSrc }),
+                targets: [],
+            },
+            depthStencil: {
+                format: 'depth24plus-stencil8',
+                depthWriteEnabled: true,
+                depthCompare: 'less',
+            },
+        });
+
         // Stencil claims the first visible fragment at a depth tie. Without it,
         // equal-depth coplanar surfaces can overwrite each other in this pass.
-        this.equalPipeline = renderer.device.createRenderPipeline({ label: 'forward+ visible shading', layout: pipelineLayout, vertex, fragment: { module: renderer.device.createShaderModule({ code: shaders.forwardPlusFragSrc }), targets: [{ format: renderer.sceneColorFormat }] }, depthStencil: { format: 'depth24plus-stencil8', depthWriteEnabled: false, depthCompare: 'equal', stencilFront: { compare: 'equal', passOp: 'increment-clamp' }, stencilBack: { compare: 'equal', passOp: 'increment-clamp' } } });
+        this.equalPipeline = renderer.device.createRenderPipeline({
+            label: 'forward+ visible shading',
+            layout: pipelineLayout,
+            vertex,
+            fragment: {
+                module: renderer.device.createShaderModule({ code: shaders.forwardPlusFragSrc }),
+                targets: [{ format: renderer.sceneColorFormat }],
+            },
+            depthStencil: {
+                format: 'depth24plus-stencil8',
+                depthWriteEnabled: false,
+                depthCompare: 'equal',
+                stencilFront: { compare: 'equal', passOp: 'increment-clamp' },
+                stencilBack: { compare: 'equal', passOp: 'increment-clamp' },
+            },
+        });
         this.resize();
     }
 
     private resize() {
-        if (this.depth?.width === renderer.canvas.width && this.depth?.height === renderer.canvas.height) return;
+        if (
+            this.depth?.width === renderer.canvas.width &&
+            this.depth?.height === renderer.canvas.height
+        ) {
+            return;
+        }
         this.depth?.destroy();
-        this.depth = renderer.device.createTexture({ label: 'forward+ depth', size: [renderer.canvas.width, renderer.canvas.height], format: 'depth24plus-stencil8', usage: GPUTextureUsage.RENDER_ATTACHMENT });
+        this.depth = renderer.device.createTexture({
+            label: 'forward+ depth',
+            size: [renderer.canvas.width, renderer.canvas.height],
+            format: 'depth24plus-stencil8',
+            usage: GPUTextureUsage.RENDER_ATTACHMENT,
+        });
     }
 
     override draw() {
         this.resize();
         const encoder = renderer.device.createCommandEncoder({ label: 'forward+ frame' });
+
+        // When enabled, record visibility first and reuse its depth in shading.
         if (settings.depthPrepass) {
-            const depthPass = encoder.beginRenderPass({ label: 'depth prepass', timestampWrites: renderer.profiler.timestampWrites('Depth prepass'), colorAttachments: [], depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: 'clear', depthStoreOp: 'store', stencilClearValue: 0, stencilLoadOp: 'clear', stencilStoreOp: 'store' } });
-            this.renderScene(depthPass, this.prepassPipeline, this.sceneGroup, [], 'depth24plus-stencil8');
+            const depthPass = encoder.beginRenderPass({
+                label: 'depth prepass',
+                timestampWrites: renderer.profiler.timestampWrites('Depth prepass'),
+                colorAttachments: [],
+                depthStencilAttachment: {
+                    view: this.depth.createView(),
+                    depthClearValue: 1,
+                    depthLoadOp: 'clear',
+                    depthStoreOp: 'store',
+                    stencilClearValue: 0,
+                    stencilLoadOp: 'clear',
+                    stencilStoreOp: 'store',
+                },
+            });
+            this.renderScene(
+                depthPass,
+                this.prepassPipeline,
+                this.sceneGroup,
+                [],
+                'depth24plus-stencil8'
+            );
             depthPass.end();
         }
+
+        // Both forward and deferred renderers use these same cluster lists.
         this.lights.doLightClustering(encoder);
+
         const pass = encoder.beginRenderPass({
             timestampWrites: renderer.profiler.timestampWrites('Forward+ shading'),
             label: 'forward+ shading',
-            colorAttachments: [{ view: this.colorTarget(), clearValue: [0, 0, 0, 1], loadOp: 'clear', storeOp: 'store' }],
-            depthStencilAttachment: { view: this.depth.createView(), depthClearValue: 1, depthLoadOp: settings.depthPrepass ? 'load' : 'clear', depthStoreOp: 'store', stencilClearValue: 0, stencilLoadOp: settings.depthPrepass ? 'load' : 'clear', stencilStoreOp: 'store' },
+            colorAttachments: [
+                {
+                    view: this.colorTarget(),
+                    clearValue: [0, 0, 0, 1],
+                    loadOp: 'clear',
+                    storeOp: 'store',
+                },
+            ],
+            depthStencilAttachment: {
+                view: this.depth.createView(),
+                depthClearValue: 1,
+                depthLoadOp: settings.depthPrepass ? 'load' : 'clear',
+                depthStoreOp: 'store',
+                stencilClearValue: 0,
+                stencilLoadOp: settings.depthPrepass ? 'load' : 'clear',
+                stencilStoreOp: 'store',
+            },
         });
-        this.renderScene(pass, settings.depthPrepass ? this.equalPipeline : this.pipeline, this.sceneGroup, [renderer.sceneColorFormat], 'depth24plus-stencil8');
+        this.renderScene(
+            pass,
+            settings.depthPrepass ? this.equalPipeline : this.pipeline,
+            this.sceneGroup,
+            [renderer.sceneColorFormat],
+            'depth24plus-stencil8'
+        );
         pass.end();
         this.submit(encoder);
     }
 
-    override stop() { super.stop(); this.depth.destroy(); }
+    override stop() {
+        super.stop();
+        this.depth.destroy();
+    }
 }

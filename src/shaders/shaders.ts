@@ -34,7 +34,7 @@ export const constants = {
 
     moveLightsWorkgroupSize: 128,
 
-    lightRadius: 2
+    lightRadius: 2,
 };
 
 // =================================
@@ -42,7 +42,9 @@ export const constants = {
 function evalShaderRaw(raw: string) {
     return raw.replace(/\$\{(\w+)\}/g, (_match, name: string) => {
         const value = constants[name as keyof typeof constants];
-        if (value === undefined) throw new Error(`Unknown shader constant: ${name}`);
+        if (value === undefined) {
+            throw new Error(`Unknown shader constant: ${name}`);
+        }
         return String(value);
     });
 }
@@ -57,12 +59,21 @@ export const naiveVertSrc: string = processShaderRaw(naiveVertRaw);
 export const naiveFragSrc: string = processShaderRaw(naiveFragRaw);
 
 const clusteredLightingSrc = evalShaderRaw(clusteredLightingRaw);
-export const forwardPlusFragSrc: string = processShaderRaw(clusteredLightingSrc + forwardPlusFragRaw);
+export const forwardPlusFragSrc: string = processShaderRaw(
+    clusteredLightingSrc + forwardPlusFragRaw
+);
 
 export const clusteredDeferredFragSrc: string = processShaderRaw(clusteredDeferredFragRaw);
-export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(clusteredDeferredFullscreenVertRaw);
+export const clusteredDeferredFullscreenVertSrc: string = processShaderRaw(
+    clusteredDeferredFullscreenVertRaw
+);
 export function deferredLightingSrc(compact: boolean, compute: boolean) {
-    return processShaderRaw(clusteredLightingSrc + (compact ? compactSurfaceRaw : deferredSurfaceRaw) + (compute ? deferredComputeRaw : clusteredDeferredFullscreenFragRaw));
+    // Each lighting stage shares clustering code but selects its own surface decoder.
+    return processShaderRaw(
+        clusteredLightingSrc +
+            (compact ? compactSurfaceRaw : deferredSurfaceRaw) +
+            (compute ? deferredComputeRaw : clusteredDeferredFullscreenFragRaw)
+    );
 }
 export const compactGBufferSrc = processShaderRaw(compactGBufferRaw);
 

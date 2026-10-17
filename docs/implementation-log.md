@@ -77,3 +77,10 @@ The reference student repository is used for presentation inspiration only. Impl
 - Production build tested at the full GitHub Pages repository subpath: 71 successful scene-asset responses, zero console/WebGPU errors, pixel-identical naive versus Forward+ with bundles/prepass, packed compute+bloom resizing, immediate requested resolution, and GUI cancellation.
 - A Windows file-watcher crash while an encoder held a report file exclusively was reproduced and fixed by excluding `docs/` from Vite's application watcher. Exclusive-lock regression test: server remained available.
 - GitHub Pages base path includes leading/trailing slashes; submission description is prepared. Publication remains pending; no remote push, deployment or submission PR has been performed.
+
+## Readability cleanup
+
+- Expanded pipeline descriptors, chained UI setup, render commands, and shader control flow. Conditions and loops now use explicit braces. UI styles and analysis scripts use consistent multiline formatting.
+- Added explanations for cluster bounds and allocation, shared lighting, G-buffer decoding, camera uniform offsets, bloom passes, and benchmark restoration. Existing `CHECKITOUT` comments and shader license attribution remain intact.
+- Compared 13 TypeScript syntax trees against the pre-cleanup sources, allowing formatting and single-statement braces; all matched. All 17 shader sources matched after ignoring whitespace and comments. Both Python analysis scripts retained identical syntax trees.
+- Production build passed at the Pages repository subpath. Five frozen 833-by-469 images at 500 lights matched exactly: naive, Forward+, Forward+ with prepass/bundles, baseline deferred, and packed compute deferred with bloom/bundles. Three short benchmark cases, cancellation, resizing, and timestamp-disabled CPU fallback passed with no browser or WebGPU errors.
